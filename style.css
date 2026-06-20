@@ -166,14 +166,17 @@ nav a.active::after {
 
 .click-note {
     color: #2563eb;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 800;
     font-style: italic;
     display: inline-block;
-    margin-left: 12px;
+    margin-left: -2px;
+    margin-top: -8px;
     transform: rotate(-5deg);
     animation: wiggle 2s ease-in-out infinite;
     user-select: none;
+    position: relative;
+    top: -4px;
 }
 
 @keyframes wiggle {
