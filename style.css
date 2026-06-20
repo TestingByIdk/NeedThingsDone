@@ -7,14 +7,14 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: #0f172a;
   background: #f7fbff;
+  color: #0f172a;
 }
 
 .navbar {
-  height: 82px;
+  height: 78px;
   background: white;
-  padding: 0 5.5%;
+  padding: 0 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,11 +28,11 @@ body {
 }
 
 .brand-icon {
-  font-size: 2.4rem;
+  font-size: 2.1rem;
 }
 
 .logo {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -42,22 +42,22 @@ body {
 }
 
 .brand p {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #64748b;
   margin-top: 4px;
 }
 
 nav {
   display: flex;
-  gap: 30px;
+  gap: 28px;
 }
 
 nav a {
   text-decoration: none;
   color: #0f172a;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 30px 0;
+  padding: 28px 0;
 }
 
 nav a.active {
@@ -73,10 +73,10 @@ nav a.active {
 .login-btn,
 .signup-btn {
   text-decoration: none;
-  padding: 12px 23px;
-  border-radius: 10px;
+  padding: 12px 22px;
+  border-radius: 9px;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
 .login-btn {
@@ -91,15 +91,12 @@ nav a.active {
 }
 
 .hero {
-  min-height: 610px;
-  padding: 75px 6% 80px;
+  padding: 70px 6% 55px;
   display: grid;
-  grid-template-columns: 1fr 0.95fr;
-  gap: 70px;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
   align-items: center;
-  background: linear-gradient(135deg, #eef6ff 0%, #f8fbff 58%, #ecfdf5 100%);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, #eef6ff 0%, #f8fbff 55%, #ecfdf5 100%);
 }
 
 .pill {
@@ -109,16 +106,16 @@ nav a.active {
   font-weight: 800;
   padding: 8px 15px;
   border-radius: 999px;
-  font-size: 0.86rem;
-  margin-bottom: 26px;
+  font-size: 0.85rem;
+  margin-bottom: 24px;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  line-height: 1.12;
+  font-size: 2.95rem;
+  line-height: 1.1;
   letter-spacing: -1px;
-  margin-bottom: 24px;
-  max-width: 680px;
+  margin-bottom: 22px;
+  max-width: 650px;
 }
 
 .hero h1 span {
@@ -126,27 +123,27 @@ nav a.active {
 }
 
 .hero-left p {
-  max-width: 590px;
+  max-width: 580px;
   color: #475569;
-  font-size: 1.08rem;
-  line-height: 1.65;
-  margin-bottom: 32px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
 }
 
 .hero-buttons {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .find-btn,
 .new-btn {
   text-decoration: none;
-  padding: 15px 26px;
-  border-radius: 11px;
+  padding: 14px 24px;
+  border-radius: 10px;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .find-btn {
@@ -165,47 +162,46 @@ nav a.active {
   font-style: italic;
   font-weight: 700;
   white-space: nowrap;
-  font-size: 1rem;
 }
 
 .search-card {
   background: white;
-  border-radius: 24px;
-  padding: 40px;
+  border-radius: 22px;
+  padding: 34px;
   box-shadow: 0 18px 45px rgba(37, 99, 235, 0.12);
 }
 
 .search-card h2 {
-  font-size: 1.75rem;
-  margin-bottom: 24px;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
 }
 
 .search-card input {
   width: 100%;
-  padding: 17px 18px;
+  padding: 15px 16px;
   border: 1px solid #dbe3ef;
-  border-radius: 11px;
-  margin-bottom: 16px;
-  font-size: 1rem;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
 }
 
 .search-card button {
   width: 100%;
-  padding: 17px;
+  padding: 15px;
   border: none;
-  border-radius: 11px;
+  border-radius: 10px;
   background: #2563eb;
   color: white;
   font-weight: 800;
-  font-size: 1rem;
-  margin: 6px 0 22px;
+  font-size: 0.95rem;
+  margin: 5px 0 20px;
 }
 
 .popular {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   align-items: center;
 }
 
@@ -216,12 +212,11 @@ nav a.active {
 }
 
 .wave {
-  height: 90px;
-  margin-top: -1px;
+  height: 70px;
   background:
-    radial-gradient(90% 90px at 20% 0%, rgba(96, 165, 250, 0.20), transparent 70%),
-    radial-gradient(90% 90px at 55% 0%, rgba(147, 197, 253, 0.22), transparent 70%),
-    radial-gradient(90% 90px at 90% 0%, rgba(37, 99, 235, 0.16), transparent 70%);
+    radial-gradient(70% 75px at 20% 0%, rgba(96,165,250,0.18), transparent 70%),
+    radial-gradient(70% 75px at 55% 0%, rgba(147,197,253,0.22), transparent 70%),
+    radial-gradient(70% 75px at 90% 0%, rgba(37,99,235,0.14), transparent 70%);
 }
 
 @media (max-width: 1000px) {
@@ -231,11 +226,10 @@ nav a.active {
 
   .hero {
     grid-template-columns: 1fr;
-    min-height: auto;
   }
 
   .hero h1 {
-    font-size: 2.45rem;
+    font-size: 2.4rem;
   }
 }
 ```
