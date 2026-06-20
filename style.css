@@ -165,9 +165,29 @@ nav a.active::after {
 }
 
 .click-note {
-  color: #2563eb;
-  font-style: italic;
-  font-weight: 700;
+    color: #2563eb;
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-style: italic;
+    display: inline-block;
+    margin-left: 12px;
+    transform: rotate(-5deg);
+    animation: wiggle 2s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(-8deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
 }
 
 .search-card {
