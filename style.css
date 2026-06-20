@@ -12,9 +12,9 @@ body {
 }
 
 .navbar {
-  height: 90px;
+  height: 82px;
   background: white;
-  padding: 0 60px;
+  padding: 0 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,15 +24,15 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .brand-icon {
-  font-size: 2.8rem;
+  font-size: 2.4rem;
 }
 
 .logo {
-  font-size: 1.9rem;
+  font-size: 1.65rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -42,20 +42,20 @@ body {
 }
 
 .brand p {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: #64748b;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 nav {
   display: flex;
-  gap: 40px;
+  gap: 34px;
 }
 
 nav a {
   text-decoration: none;
   color: #0f172a;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   position: relative;
 }
@@ -77,16 +77,16 @@ nav a.active::after {
 
 .nav-actions {
   display: flex;
-  gap: 14px;
+  gap: 12px;
 }
 
 .login-btn,
 .signup-btn {
   text-decoration: none;
-  padding: 13px 25px;
+  padding: 12px 23px;
   border-radius: 10px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .login-btn {
@@ -101,15 +101,15 @@ nav a.active::after {
 }
 
 .hero {
-  padding: 70px 6% 55px;
+  padding: 58px 6% 45px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 70px;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 58px;
   align-items: center;
   background: linear-gradient(
     135deg,
     #eef6ff 0%,
-    #f7fbff 55%,
+    #f8fbff 55%,
     #eefdf7 100%
   );
 }
@@ -119,18 +119,18 @@ nav a.active::after {
   background: #e8f0ff;
   color: #2563eb;
   font-weight: 800;
-  padding: 10px 18px;
+  padding: 8px 15px;
   border-radius: 999px;
-  font-size: 0.9rem;
-  margin-bottom: 28px;
+  font-size: 0.85rem;
+  margin-bottom: 22px;
 }
 
 .hero h1 {
-  font-size: 4rem;
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin-bottom: 25px;
-  max-width: 750px;
+  font-size: 3.15rem;
+  line-height: 1.08;
+  letter-spacing: -1.4px;
+  margin-bottom: 22px;
+  max-width: 720px;
 }
 
 .hero h1 span {
@@ -140,25 +140,25 @@ nav a.active::after {
 .hero-left p {
   max-width: 620px;
   color: #475569;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  margin-bottom: 30px;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin-bottom: 26px;
 }
 
 .hero-buttons {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .find-btn,
 .new-btn {
   text-decoration: none;
-  padding: 16px 28px;
-  border-radius: 12px;
+  padding: 14px 24px;
+  border-radius: 10px;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .find-btn {
@@ -176,48 +176,48 @@ nav a.active::after {
   color: #2563eb;
   font-style: italic;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .search-card {
   background: white;
-  border-radius: 28px;
-  padding: 42px;
-  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
+  border-radius: 24px;
+  padding: 34px;
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.12);
 }
 
 .search-card h2 {
-  font-size: 2rem;
-  margin-bottom: 25px;
+  font-size: 1.65rem;
+  margin-bottom: 22px;
 }
 
 .search-card input {
   width: 100%;
-  padding: 18px;
+  padding: 15px 16px;
   border: 1px solid #dce4f0;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  font-size: 1rem;
+  border-radius: 11px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
 }
 
 .search-card button {
   width: 100%;
-  padding: 18px;
+  padding: 15px;
   border: none;
-  border-radius: 12px;
+  border-radius: 11px;
   background: #2563eb;
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .popular {
   display: flex;
-  gap: 15px;
+  gap: 14px;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .popular a {
@@ -244,7 +244,7 @@ nav a.active::after {
   }
 
   .hero h1 {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 }
 ```
