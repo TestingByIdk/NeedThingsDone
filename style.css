@@ -464,3 +464,109 @@ nav a.active::after {
 }
 
 
+.business-hero {
+  padding: 70px 6% 45px;
+  text-align: center;
+  background: linear-gradient(135deg, #eef6ff 0%, #f8fbff 55%, #eefdf7 100%);
+}
+
+.business-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.business-hero p {
+  color: #475569;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.business-hero input {
+  width: 100%;
+  max-width: 650px;
+  padding: 16px;
+  border: 1px solid #dce4f0;
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+.category-section,
+.featured-businesses,
+.ai-preview {
+  padding: 45px 6%;
+}
+
+.category-section h2,
+.featured-businesses h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.category-card {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+  transition: 0.25s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+.category-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.category-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.category-card p {
+  color: #475569;
+  line-height: 1.5;
+}
+
+.empty-state,
+.ai-card {
+  background: white;
+  padding: 45px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+}
+
+.empty-icon,
+.ai-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.empty-state h3,
+.ai-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.empty-state p,
+.ai-card p {
+  color: #475569;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+@media (max-width: 900px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
