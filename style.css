@@ -56,6 +56,20 @@ nav a {
     justify-content: space-between;
     align-items: center;
     gap: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: -10%;
+    bottom: -80px;
+    width: 120%;
+    height: 160px;
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: 50% 50% 0 0;
+    z-index: -1;
 }
 
 .hero-text {
