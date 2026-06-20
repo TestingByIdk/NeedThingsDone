@@ -278,3 +278,72 @@ nav a.active::after {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* NAVIGATION */
+
+.logo {
+  font-size: 1.8rem !important;
+}
+
+.brand-icon {
+  font-size: 2.7rem !important;
+}
+
+nav a {
+  font-size: 1rem !important;
+}
+
+/* SEARCH CARD */
+
+.search-card {
+  padding: 42px !important;
+}
+
+.search-card h2 {
+  font-size: 2rem !important;
+}
+
+.search-card input {
+  padding: 18px !important;
+  font-size: 1rem !important;
+}
+
+.search-card button {
+  padding: 18px !important;
+  font-size: 1.05rem !important;
+}
+
+.popular {
+  font-size: 0.95rem !important;
+}
+
+/* STATS */
+
+.stats {
+  gap: 28px !important;
+}
+
+.stat-card {
+  padding: 28px 24px !important;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(37, 99, 235, 0.12);
+}
+
+.stat-icon {
+  min-width: 64px !important;
+  height: 64px !important;
+  font-size: 1.8rem !important;
+}
+
+.stat-card h2 {
+  font-size: 2.4rem !important;
+}
+
+.stat-card p {
+  font-size: 0.95rem !important;
+}
+
