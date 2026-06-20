@@ -9,99 +9,72 @@
 <body>
 
 <header class="navbar">
-  <div class="logo">🐙 NeedThingsDone</div>
+  <div class="brand">
+    <div class="brand-icon">🐙</div>
+    <div>
+      <div class="logo">NeedThings<span>Done</span></div>
+      <p>From need to done.</p>
+    </div>
+  </div>
+
   <nav>
-    <a href="#">Home</a>
+    <a class="active" href="#">Home</a>
     <a href="#">Businesses</a>
     <a href="#">Individuals</a>
-    <a href="#">Shop</a>
+    <a href="#">Deals</a>
     <a href="#">Community</a>
     <a href="#">News</a>
-    <a href="#">Map</a>
   </nav>
-  <a class="nav-button" href="#">Join Now</a>
+
+  <div class="nav-actions">
+    <a class="login-btn" href="#">Log In</a>
+    <a class="signup-btn" href="#">Sign Up</a>
+  </div>
 </header>
 
 <section class="hero">
-  <div class="hero-text">
-    <p class="tagline">Canada’s local help finder</p>
-    <h1>Find trusted businesses, workers, deals, and answers near you.</h1>
-    <p class="hero-desc">
-      NeedThingsDone helps Canadians discover local companies, independent workers,
-      community advice, and partnered deals all in one place.
+  <div class="hero-left">
+    <div class="pill">🍁 Canada’s local help finder</div>
+
+    <h1>
+      Find trusted businesses,<br>
+      workers, deals, and answers<br>
+      <span>near you.</span>
+    </h1>
+
+    <p>
+      NeedThingsDone helps Canadians discover local companies,
+      independent workers, community advice, and partnered deals all in one place.
     </p>
 
     <div class="hero-buttons">
-      <a href="#" class="primary-btn">Find Help</a>
-
-      <div class="new-user-wrap">
-        <a href="#" class="secondary-btn">I’m New Here</a>
-        <span class="click-arrow">← Hey click me</span>
-      </div>
+      <a class="find-btn" href="#">🔍 Find Help</a>
+      <a class="new-btn" href="#">👤 I’m New Here</a>
+      <span class="click-note">← Hey click me</span>
     </div>
   </div>
 
-  <div class="hero-card">
-    <h3>What do you need done?</h3>
-    <input type="text" placeholder="Search plumber, dog walker, roofer..." />
+  <div class="search-card">
+    <h2>Search for help near you</h2>
+
+    <input type="text" placeholder="🔍  What are you looking for?" />
+    <input type="text" placeholder="📍  Location" />
+
     <button>Search</button>
-    <p>No results? Businesses can become the first in that category.</p>
-  </div>
-</section>
 
-<section class="stats">
-  <div><h2>0</h2><p>Partnered Businesses</p></div>
-  <div><h2>0</h2><p>Individual Profiles</p></div>
-  <div><h2>0</h2><p>Site Visits</p></div>
-  <div><h2>0</h2><p>Reviews Submitted</p></div>
-</section>
-
-<section class="founder-section">
-  <div class="founder-card">
-    <div class="founder-text">
-      <p class="tagline">Who Am I?</p>
-      <h2>Hi, I’m Alex 👋</h2>
-      <p>
-        I’m building NeedThingsDone to make finding local help in Canada easier.
-        Whether someone needs a business, worker, deal, or community advice,
-        the goal is simple: help people find what they need without wasting time.
-      </p>
+    <div class="popular">
+      <strong>Popular:</strong>
+      <a href="#">Plumbing</a>
+      <a href="#">Roofing</a>
+      <a href="#">Dog Walking</a>
+      <a href="#">Computer Repair</a>
+      <a href="#">Cleaning</a>
+      <a href="#">More ›</a>
     </div>
   </div>
 </section>
 
-<section class="otto-section">
-  <div class="otto-card">
-    <div class="otto-emoji">🐙</div>
-    <div>
-      <p class="tagline">Meet Otto</p>
-      <h2>The mascot for getting things done.</h2>
-      <p>
-        Otto represents everything NeedThingsDone is about: many arms, many skills,
-        and many ways to help people find the right solution.
-      </p>
-    </div>
-  </div>
-</section>
+<div class="wave"></div>
 
-<section class="cta-section">
-  <h2>Grow your business with NeedThingsDone</h2>
-  <p>
-    Create a business page, share your links, post deals, collect reviews,
-    and get discovered by people looking for services near them.
-  </p>
-  <a href="#" class="primary-btn">Sign Up Your Business</a>
-</section>
-
-<section class="profile-section">
-  <h2>Set up your individual profile</h2>
-  <p>
-    Individuals can create a free profile, add skills, post experience,
-    build reviews, and show people what they can do.
-  </p>
-  <a href="#" class="secondary-btn">Create Free Profile</a>
-</section>
-
-<script src="script.js"></script>
 </body>
 </html>
