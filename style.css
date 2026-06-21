@@ -2645,3 +2645,74 @@ body.dark-mode .login-btn {
   border-color: #3b82f6;
 }
 
+
+
+.explore-area {
+    display: none;
+    margin: 30px 6%;
+    background: white;
+    border-radius: 28px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    animation: slideDown .35s ease;
+}
+
+.explore-area.show {
+    display: block;
+}
+
+.explore-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.explore-header span {
+    font-size: 3rem;
+}
+
+.explore-header h2 {
+    font-size: 2rem;
+}
+
+.explore-content {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.explore-item {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 18px;
+}
+
+.explore-item h4 {
+    margin-bottom: 8px;
+}
+
+.explore-btn {
+    margin-top: 16px;
+    border: none;
+    background: #16a34a;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
