@@ -29,7 +29,7 @@ const tutorialSteps = [
   },
   {
     title: "Signing Up",
-    text: "Later, users will be able to create accounts. Businesses can make profiles, individuals can show their skills, and shops can list products. Otto will help guide setup step by step."
+    text: "Users are able to create accounts. Businesses can make profiles, individuals can show their skills, and shops can list products. Otto will help guide everyone and anyone setup step by step!"
   }
 ];
 
