@@ -293,21 +293,72 @@ const exploreContent = document.getElementById("exploreContent");
 
 const categoryData = {
 
-    parts: {
-        emoji: "🔧",
-        title: "Parts",
-        items: [
-            "Computer Components",
-            "Car Parts",
-            "Power Tools",
-            "Phone Accessories",
-            "Networking Equipment",
-            "Cables & Adapters"
-        ]
-    }
+  parts: {
+    emoji: "🛠️",
+    title: "Parts",
+    items: [
+      "Computer Components",
+      "Car Parts",
+      "Power Tools",
+      "Phone Accessories",
+      "Networking Equipment",
+      "Cables & Adapters"
+    ]
+  },
+
+  crafts: {
+    emoji: "🎨",
+    title: "Arts & Crafts",
+    items: [
+      "Handmade Jewelry",
+      "Paintings",
+      "Custom Artwork",
+      "3D Prints",
+      "Woodworking",
+      "Craft Supplies"
+    ]
+  },
+
+  cafes: {
+    emoji: "☕",
+    title: "Cafés & Bakeries",
+    items: [
+      "Coffee Shops",
+      "Fresh Pastries",
+      "Cupcakes",
+      "Donuts",
+      "Bread",
+      "Local Treats"
+    ]
+  },
+
+  stores: {
+    emoji: "🏪",
+    title: "Local Stores",
+    items: [
+      "Gift Shops",
+      "Electronics",
+      "Collectibles",
+      "Pet Supplies",
+      "Outdoor Gear",
+      "Specialty Products"
+    ]
+  },
+
+  deals: {
+    emoji: "🏷️",
+    title: "Deals",
+    items: [
+      "Today's Deals",
+      "Clearance Items",
+      "Weekly Specials",
+      "Buy One Get One",
+      "Seasonal Discounts",
+      "Featured Promotions"
+    ]
+  }
 
 };
-
 document.querySelectorAll(".explore-btn").forEach(button => {
 
     button.addEventListener("click", () => {
