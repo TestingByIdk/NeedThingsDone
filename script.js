@@ -371,6 +371,14 @@ document.querySelectorAll(".explore-btn").forEach(button => {
 
     if (!data) return;
 
+    const focusedCard = document.getElementById("focusedCard");
+const cardClone = button.closest(".aisle-card").cloneNode(true);
+
+cardClone.querySelector(".explore-btn").remove();
+
+focusedCard.innerHTML = "";
+focusedCard.appendChild(cardClone);
+
     exploreEmoji.textContent = data.emoji;
     exploreTitle.textContent = data.title;
 
