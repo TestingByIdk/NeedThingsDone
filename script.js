@@ -359,40 +359,53 @@ const categoryData = {
   }
 
 };
+
+
 document.querySelectorAll(".explore-btn").forEach(button => {
 
-    button.addEventListener("click", () => {
+  button.addEventListener("click", () => {
 
-        const category = button.dataset.category;
+    const category = button.dataset.category;
 
-        const data = categoryData[category];
+    const data = categoryData[category];
 
-        exploreEmoji.textContent = data.emoji;
-        exploreTitle.textContent = data.title;
+    if (!data) return;
 
-        exploreContent.innerHTML = "";
+    exploreEmoji.textContent = data.emoji;
+    exploreTitle.textContent = data.title;
 
-        data.items.forEach(item => {
+    exploreContent.innerHTML = "";
 
-            exploreContent.innerHTML += `
-                <div class="explore-item">
-                    <h4>${item}</h4>
-                    <p>Coming soon...</p>
-                </div>
-            `;
-        });
+    data.items.forEach(item => {
 
-        exploreArea.classList.add("show");
-
-        exploreArea.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+      exploreContent.innerHTML += `
+        <div class="explore-item">
+          <h4>${item}</h4>
+          <p>Listings will appear here.</p>
+        </div>
+      `;
 
     });
 
-});
+    exploreArea.classList.add("show");
 
+    button.closest(".aisle-card").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    setTimeout(() => {
+
+      exploreArea.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }, 250);
+
+  });
+
+});
 
 
 
