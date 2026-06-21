@@ -2778,4 +2778,135 @@ body.dark-mode .login-btn {
 }
 
 
+/* SHOP EXPLORE PANEL UPGRADE */
+
+.focused-card {
+  display: none;
+}
+
+.explore-area {
+  display: none;
+  margin: 35px 6%;
+}
+
+.explore-area.show {
+  display: block;
+}
+
+.explore-panel {
+  background: white;
+  border-radius: 28px;
+  padding: 38px;
+  box-shadow: 0 15px 40px rgba(22, 163, 74, 0.12);
+}
+
+.explore-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.explore-mini {
+  color: #16a34a;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.explore-top h2 {
+  font-size: 2.3rem;
+}
+
+.close-explore {
+  border: none;
+  background: #f1f5f9;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.explore-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.filter-chip {
+  border: none;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  background: #16a34a;
+  color: white;
+}
+
+.explore-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.explore-item {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.item-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  background: #dcfce7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.item-info h4 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.item-info p {
+  color: #475569;
+  line-height: 1.45;
+}
+
+.item-price {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #16a34a;
+  white-space: nowrap;
+}
+
+body.dark-mode .explore-panel,
+body.dark-mode .explore-item {
+  background: #1e293b;
+  color: white;
+}
+
+body.dark-mode .explore-item {
+  border: 1px solid #334155;
+}
+
+body.dark-mode .item-info p {
+  color: #cbd5e1;
+}
+
 
