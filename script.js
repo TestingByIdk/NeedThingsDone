@@ -29,12 +29,12 @@ const tutorialSteps = [
   },
   {
     title: "Signing Up",
-    text: "Users are able to create accounts. Businesses can make profiles, individuals can show their skills, and shops can list products. Otto will help guide everyone and anyone setup step by step!"
+    text: "Later, users will be able to create accounts. Businesses can make profiles, individuals can show their skills, and shops can list products. Otto will help guide setup step by step."
   },
   {
-  title: "Have Fun Exploring!",
-  text: "Lastly, make sure to have fun exploring NeedThingsDone. Discover local businesses, meet talented individuals, find great deals, ask questions, and see what your community has to offer. I'll be around to help whenever you need me! That's an Otto promise!🐙"
-}
+    title: "Have Fun Exploring!",
+    text: "Lastly, make sure to have fun exploring NeedThingsDone. Discover local businesses, meet talented individuals, find great deals, ask questions, and see what your community has to offer. I'll be around to help whenever you need me! 🐙"
+  }
 ];
 
 let currentStep = 0;
@@ -50,15 +50,22 @@ const tutorialTitle = document.getElementById("tutorialTitle");
 const tutorialText = document.getElementById("tutorialText");
 
 function updateTutorial() {
+  if (!tutorialStep || !tutorialTitle || !tutorialText) return;
+
   tutorialStep.textContent = `Step ${currentStep + 1} of ${tutorialSteps.length}`;
   tutorialTitle.textContent = tutorialSteps[currentStep].title;
   tutorialText.textContent = tutorialSteps[currentStep].text;
 
-  prevTutorial.style.visibility = currentStep === 0 ? "hidden" : "visible";
-  nextTutorial.textContent = currentStep === tutorialSteps.length - 1 ? "Finish" : "Next";
+  if (prevTutorial) {
+    prevTutorial.style.visibility = currentStep === 0 ? "hidden" : "visible";
+  }
+
+  if (nextTutorial) {
+    nextTutorial.textContent = currentStep === tutorialSteps.length - 1 ? "Finish" : "Next";
+  }
 }
 
-if (openTutorial) {
+if (openTutorial && tutorialOverlay) {
   openTutorial.addEventListener("click", function(event) {
     event.preventDefault();
     currentStep = 0;
@@ -67,13 +74,13 @@ if (openTutorial) {
   });
 }
 
-if (closeTutorial) {
+if (closeTutorial && tutorialOverlay) {
   closeTutorial.addEventListener("click", function() {
     tutorialOverlay.classList.remove("show");
   });
 }
 
-if (nextTutorial) {
+if (nextTutorial && tutorialOverlay) {
   nextTutorial.addEventListener("click", function() {
     if (currentStep < tutorialSteps.length - 1) {
       currentStep++;
@@ -101,6 +108,7 @@ if (tutorialOverlay) {
   });
 }
 
+// ABOUT ALEX / OTTO POPUPS
 
 const openAlex = document.getElementById("openAlex");
 const openOtto = document.getElementById("openOtto");
@@ -178,7 +186,7 @@ He simply appears whenever things need to get done.
 </button>
 `;
 
-if (openAlex) {
+if (openAlex && aboutOverlay && aboutContent) {
   openAlex.addEventListener("click", function(e) {
     e.preventDefault();
     aboutContent.innerHTML = alexPopup;
@@ -186,25 +194,23 @@ if (openAlex) {
   });
 }
 
-if (openOtto) {
+if (openOtto && aboutOverlay && aboutContent) {
   openOtto.addEventListener("click", function(e) {
     e.preventDefault();
     aboutContent.innerHTML = ottoPopup;
     aboutOverlay.classList.add("show");
 
-    setTimeout(() => {
-      const wisdomBtn = document.getElementById("acceptWisdom");
+    const wisdomBtn = document.getElementById("acceptWisdom");
 
-      if (wisdomBtn) {
-        wisdomBtn.addEventListener("click", function() {
-          aboutOverlay.classList.remove("show");
-        });
-      }
-    }, 50);
+    if (wisdomBtn) {
+      wisdomBtn.addEventListener("click", function() {
+        aboutOverlay.classList.remove("show");
+      });
+    }
   });
 }
 
-if (closeAbout) {
+if (closeAbout && aboutOverlay) {
   closeAbout.addEventListener("click", function() {
     aboutOverlay.classList.remove("show");
   });
@@ -217,4 +223,3 @@ if (aboutOverlay) {
     }
   });
 }
-
