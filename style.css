@@ -2507,3 +2507,93 @@ body.dark-mode .outline-btn,
 body.dark-mode .login-btn {
   background: #1e293b;
 }
+
+/* POLISHED DARK MODE FIXES */
+
+body.dark-mode section,
+body.dark-mode .features-section,
+body.dark-mode .category-section,
+body.dark-mode .featured-businesses,
+body.dark-mode .ai-preview,
+body.dark-mode .skill-section,
+body.dark-mode .profile-builder,
+body.dark-mode .otto-individuals,
+body.dark-mode .shop-aisles,
+body.dark-mode .product-shelf,
+body.dark-mode .forum-layout,
+body.dark-mode .weekly-layout,
+body.dark-mode .map-demo-layout {
+  background: #0f172a;
+}
+
+body.dark-mode .feature-item {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 28px;
+  padding: 42px 30px;
+}
+
+body.dark-mode .category-card,
+body.dark-mode .empty-state,
+body.dark-mode .ai-card,
+body.dark-mode .skill-card,
+body.dark-mode .skill-search-card,
+body.dark-mode .profile-builder-card,
+body.dark-mode .otto-individuals-card,
+body.dark-mode .aisle-card,
+body.dark-mode .market-search,
+body.dark-mode .empty-product-shelf,
+body.dark-mode .seller-strip,
+body.dark-mode .forum-sidebar,
+body.dark-mode .forum-search-bar,
+body.dark-mode .forum-sort button,
+body.dark-mode .forum-post,
+body.dark-mode .weekly-main-card,
+body.dark-mode .weekly-card,
+body.dark-mode .weekly-sidebar,
+body.dark-mode .map-filters,
+body.dark-mode .map-results,
+body.dark-mode .map-topbar,
+body.dark-mode .map-result-card,
+body.dark-mode .location-box,
+body.dark-mode .pin-popup {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+body.dark-mode .profile-builder-card,
+body.dark-mode .empty-product-shelf {
+  background: linear-gradient(135deg, #1e293b, #111827);
+}
+
+body.dark-mode .fake-map {
+  background:
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, #111827, #1e293b, #0f172a);
+}
+
+body.dark-mode .map-label,
+body.dark-mode .weekly-list p,
+body.dark-mode .forum-otto-box,
+body.dark-mode .weekly-note,
+body.dark-mode .vote-box {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode a,
+body.dark-mode .popular a,
+body.dark-mode .pin-popup a {
+  color: #60a5fa;
+}
+
+body.dark-mode .footer-links a,
+body.dark-mode .post-meta,
+body.dark-mode .map-result-card span,
+body.dark-mode .pin-popup span {
+  color: #cbd5e1;
+}
+
+
