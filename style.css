@@ -2597,3 +2597,51 @@ body.dark-mode .pin-popup span {
 }
 
 
+/* DARK MODE BUTTON FIXES */
+
+body.dark-mode .find-btn,
+body.dark-mode .signup-btn,
+body.dark-mode .shop-main-btn,
+body.dark-mode .individual-main-btn,
+body.dark-mode .community-main-btn,
+body.dark-mode .forum-post-btn,
+body.dark-mode .news-btn,
+body.dark-mode .green-btn {
+  color: white !important;
+  font-weight: 900;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.22);
+}
+
+body.dark-mode .green-btn {
+  background: #16a34a;
+}
+
+body.dark-mode .find-btn,
+body.dark-mode .signup-btn {
+  background: #2563eb;
+}
+
+body.dark-mode .individual-main-btn {
+  background: #7c3aed;
+}
+
+body.dark-mode .shop-main-btn {
+  background: #16a34a;
+}
+
+body.dark-mode .community-main-btn,
+body.dark-mode .forum-post-btn {
+  background: #f97316;
+}
+
+body.dark-mode .news-btn {
+  background: #e11d48;
+}
+
+body.dark-mode .new-btn,
+body.dark-mode .outline-btn,
+body.dark-mode .login-btn {
+  color: #93c5fd !important;
+  border-color: #3b82f6;
+}
+
