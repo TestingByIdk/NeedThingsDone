@@ -286,4 +286,63 @@ if (themeToggle) {
 }
 
 
+const exploreArea = document.getElementById("exploreArea");
+const exploreTitle = document.getElementById("exploreTitle");
+const exploreEmoji = document.getElementById("exploreEmoji");
+const exploreContent = document.getElementById("exploreContent");
+
+const categoryData = {
+
+    parts: {
+        emoji: "🔧",
+        title: "Parts",
+        items: [
+            "Computer Components",
+            "Car Parts",
+            "Power Tools",
+            "Phone Accessories",
+            "Networking Equipment",
+            "Cables & Adapters"
+        ]
+    }
+
+};
+
+document.querySelectorAll(".explore-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const category = button.dataset.category;
+
+        const data = categoryData[category];
+
+        exploreEmoji.textContent = data.emoji;
+        exploreTitle.textContent = data.title;
+
+        exploreContent.innerHTML = "";
+
+        data.items.forEach(item => {
+
+            exploreContent.innerHTML += `
+                <div class="explore-item">
+                    <h4>${item}</h4>
+                    <p>Coming soon...</p>
+                </div>
+            `;
+        });
+
+        exploreArea.classList.add("show");
+
+        exploreArea.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+});
+
+
+
+
 
