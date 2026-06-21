@@ -2413,39 +2413,81 @@ nav a.active::after {
 
 /* DARK MODE */
 
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
 body.dark-mode {
-    background: #0f172a;
-    color: white;
+  background: #0f172a;
+  color: #f8fafc;
 }
 
 body.dark-mode .navbar,
 body.dark-mode .search-card,
-body.dark-mode .info-card,
 body.dark-mode .stat-card,
+body.dark-mode .info-card,
 body.dark-mode .feature-item,
 body.dark-mode .business-cta,
 body.dark-mode .individual-cta,
-body.dark-mode .about-popup,
-body.dark-mode .tutorial-box {
-    background: #1e293b;
-    color: white;
+body.dark-mode .tutorial-box,
+body.dark-mode .about-popup {
+  background: #1e293b;
+  color: #f8fafc;
 }
 
-body.dark-mode p {
-    color: #cbd5e1;
+body.dark-mode .hero,
+body.dark-mode .business-hero,
+body.dark-mode .individuals-hero,
+body.dark-mode .shop-market-hero,
+body.dark-mode .forum-hero,
+body.dark-mode .weekly-hero,
+body.dark-mode .map-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #111827 100%);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode nav a {
+  color: #f8fafc;
+}
+
+body.dark-mode p,
+body.dark-mode .hero-left p,
+body.dark-mode .popular,
+body.dark-mode .post-meta {
+  color: #cbd5e1;
 }
 
 body.dark-mode input {
-    background: #334155;
-    color: white;
-    border-color: #475569;
+  background: #334155;
+  color: #f8fafc;
+  border-color: #475569;
 }
 
-body.dark-mode nav a {
-    color: white;
+body.dark-mode input::placeholder {
+  color: #94a3b8;
 }
 
 body.dark-mode .theme-toggle {
-    background: #334155;
+  background: #334155;
+  color: white;
 }
 
+body.dark-mode .new-btn,
+body.dark-mode .outline-btn,
+body.dark-mode .login-btn {
+  background: #1e293b;
+}
