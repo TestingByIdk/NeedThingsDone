@@ -290,130 +290,100 @@ const exploreArea = document.getElementById("exploreArea");
 const exploreTitle = document.getElementById("exploreTitle");
 const exploreEmoji = document.getElementById("exploreEmoji");
 const exploreContent = document.getElementById("exploreContent");
+const exploreFilters = document.getElementById("exploreFilters");
+const closeExplore = document.getElementById("closeExplore");
 
 const categoryData = {
+  cafes: {
+    emoji: "☕",
+    title: "Cafés & Bakeries",
+    filters: ["All", "Coffee", "Pastries", "Cupcakes", "Bread"],
+    items: [
+      { name: "Vanilla Latte", detail: "Smooth espresso with steamed milk.", price: "$4.99", type: "Coffee", image: "☕" },
+      { name: "Butter Croissant", detail: "Fresh baked pastry from a local bakery.", price: "$3.50", type: "Pastries", image: "🥐" },
+      { name: "Chocolate Cupcake", detail: "Soft cupcake with chocolate frosting.", price: "$2.75", type: "Cupcakes", image: "🧁" },
+      { name: "Sourdough Loaf", detail: "Fresh local bread, baked daily.", price: "$6.00", type: "Bread", image: "🍞" }
+    ]
+  },
 
   parts: {
     emoji: "🛠️",
     title: "Parts",
+    filters: ["All", "Computer", "Auto", "Tools", "Cables"],
     items: [
-      "Computer Components",
-      "Car Parts",
-      "Power Tools",
-      "Phone Accessories",
-      "Networking Equipment",
-      "Cables & Adapters"
-    ]
-  },
-
-  crafts: {
-    emoji: "🎨",
-    title: "Arts & Crafts",
-    items: [
-      "Handmade Jewelry",
-      "Paintings",
-      "Custom Artwork",
-      "3D Prints",
-      "Woodworking",
-      "Craft Supplies"
-    ]
-  },
-
-  cafes: {
-    emoji: "☕",
-    title: "Cafés & Bakeries",
-    items: [
-      "Coffee Shops",
-      "Fresh Pastries",
-      "Cupcakes",
-      "Donuts",
-      "Bread",
-      "Local Treats"
-    ]
-  },
-
-  stores: {
-    emoji: "🏪",
-    title: "Local Stores",
-    items: [
-      "Gift Shops",
-      "Electronics",
-      "Collectibles",
-      "Pet Supplies",
-      "Outdoor Gear",
-      "Specialty Products"
-    ]
-  },
-
-  deals: {
-    emoji: "🏷️",
-    title: "Deals",
-    items: [
-      "Today's Deals",
-      "Clearance Items",
-      "Weekly Specials",
-      "Buy One Get One",
-      "Seasonal Discounts",
-      "Featured Promotions"
+      { name: "HDMI Cable", detail: "6ft cable for monitors and TVs.", price: "$9.99", type: "Cables", image: "🔌" },
+      { name: "SSD Drive", detail: "Fast storage upgrade for computers.", price: "$49.99", type: "Computer", image: "💾" },
+      { name: "Socket Set", detail: "Basic repair tool kit.", price: "$29.99", type: "Tools", image: "🔧" },
+      { name: "Oil Filter", detail: "Replacement filter for vehicle maintenance.", price: "$12.99", type: "Auto", image: "🚗" }
     ]
   }
-
 };
 
+function renderExploreItems(data, filter = "All") {
+  exploreContent.innerHTML = "";
+
+  data.items
+    .filter(item => filter === "All" || item.type === filter)
+    .forEach(item => {
+      exploreContent.innerHTML += `
+        <div class="explore-item">
+          <div class="item-img">${item.image}</div>
+
+          <div class="item-info">
+            <h4>${item.name}</h4>
+            <p>${item.detail}</p>
+          </div>
+
+          <div class="item-price">${item.price}</div>
+        </div>
+      `;
+    });
+}
 
 document.querySelectorAll(".explore-btn").forEach(button => {
-
   button.addEventListener("click", () => {
-
     const category = button.dataset.category;
-
     const data = categoryData[category];
 
     if (!data) return;
 
-    const focusedCard = document.getElementById("focusedCard");
-const cardClone = button.closest(".aisle-card").cloneNode(true);
-
-cardClone.querySelector(".explore-btn").remove();
-
-focusedCard.innerHTML = "";
-focusedCard.appendChild(cardClone);
-
     exploreEmoji.textContent = data.emoji;
     exploreTitle.textContent = data.title;
 
-    exploreContent.innerHTML = "";
+    exploreFilters.innerHTML = "";
 
-    data.items.forEach(item => {
-
-      exploreContent.innerHTML += `
-        <div class="explore-item">
-          <h4>${item}</h4>
-          <p>Listings will appear here.</p>
-        </div>
+    data.filters.forEach(filter => {
+      exploreFilters.innerHTML += `
+        <button class="filter-chip ${filter === "All" ? "active" : ""}" data-filter="${filter}">
+          ${filter}
+        </button>
       `;
-
     });
+
+    renderExploreItems(data);
 
     exploreArea.classList.add("show");
 
-    button.closest(".aisle-card").scrollIntoView({
+    exploreArea.scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
 
-    setTimeout(() => {
-
-      exploreArea.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    document.querySelectorAll(".filter-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        renderExploreItems(data, chip.dataset.filter);
       });
-
-    }, 250);
-
+    });
   });
-
 });
+
+if (closeExplore) {
+  closeExplore.addEventListener("click", () => {
+    exploreArea.classList.remove("show");
+  });
+}
 
 
 
