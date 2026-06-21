@@ -1142,4 +1142,15 @@ nav a.active::after {
   }
 }
 
+.business-pill {
+  display: inline-block;
+  background: #e8f0ff;
+  color: #2563eb;
+  font-weight: 800;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin-bottom: 22px;
+}
+
 
