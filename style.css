@@ -436,25 +436,41 @@ nav a.active::after {
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 35px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(10px);
+}
+
+.feature-item:hover {
+    transform: translateY(-6px);
+    border-color: #3b82f6;
+    box-shadow:
+        0 0 0 1px rgba(59,130,246,0.3),
+        0 15px 35px rgba(59,130,246,0.15);
 }
 
 .feature-icon {
-  font-size: 2.6rem;
-  margin-bottom: 14px;
+    font-size: 3rem;
+    margin-bottom: 18px;
 }
 
 .feature-item h3 {
-  font-size: 1rem;
-  margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .feature-item p {
-  color: #475569;
-  line-height: 1.5;
-  font-size: 0.9rem;
+    line-height: 1.6;
 }
 
 @media (max-width: 1000px) {
