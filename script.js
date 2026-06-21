@@ -30,7 +30,11 @@ const tutorialSteps = [
   {
     title: "Signing Up",
     text: "Users are able to create accounts. Businesses can make profiles, individuals can show their skills, and shops can list products. Otto will help guide everyone and anyone setup step by step!"
-  }
+  },
+  {
+  title: "Have Fun Exploring!",
+  text: "Lastly, make sure to have fun exploring NeedThingsDone. Discover local businesses, meet talented individuals, find great deals, ask questions, and see what your community has to offer. I'll be around to help whenever you need me! That's an Otto promise!🐙"
+}
 ];
 
 let currentStep = 0;
