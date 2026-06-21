@@ -100,3 +100,121 @@ if (tutorialOverlay) {
     }
   });
 }
+
+
+const openAlex = document.getElementById("openAlex");
+const openOtto = document.getElementById("openOtto");
+const aboutOverlay = document.getElementById("aboutOverlay");
+const aboutContent = document.getElementById("aboutContent");
+const closeAbout = document.getElementById("closeAbout");
+
+const alexPopup = `
+<h2>About Alex 👋</h2>
+
+<p>Creator of NeedThingsDone.</p>
+
+<p>
+I started this project because I thought finding trustworthy businesses,
+individuals, and community recommendations should be easier.
+</p>
+
+<p>
+My goal is to build a place where Canadians can discover local businesses,
+support skilled individuals, find deals, ask questions, and connect with
+their communities.
+</p>
+
+<p>That's all.</p>
+
+<p>Now enjoy this very important documentation:</p>
+
+<a
+  href="https://youtu.be/PvHU3dV-WNA?si=TJ5d_yaPR2xcgxh5"
+  target="_blank"
+  class="otto-link"
+>
+🐱 View Important Documentation
+</a>
+`;
+
+const ottoPopup = `
+<h2>About Otto 🐙</h2>
+
+<p>Otto is an octopus.</p>
+
+<p>
+Nobody knows where he came from.
+Nobody knows where he goes.
+</p>
+
+<p>
+He simply appears whenever things need to get done.
+</p>
+
+<hr>
+
+<p><strong>Favorite Food:</strong> Fish</p>
+<p><strong>Favorite Hobby:</strong> Helping people</p>
+<p><strong>Current Occupation:</strong> Professional Octopus</p>
+<p><strong>Favorite Activity:</strong> Organizing chaos</p>
+<p><strong>Number of Tentacles:</strong> 8</p>
+
+<hr>
+
+<p><strong>🐙 Otto Fact #1</strong></p>
+<p>Otto has never paid taxes.</p>
+
+<p><strong>🐙 Otto Fact #2</strong></p>
+<p>Otto refuses to explain why.</p>
+
+<p><strong>🐙 Otto Fact #3</strong></p>
+<p>Otto claims he invented the internet. Nobody believes him.</p>
+
+<p><strong>🐙 Otto Fact #4</strong></p>
+<p>Otto once completed a task before it was assigned.</p>
+
+<button class="otto-close-btn" id="acceptWisdom">
+🐙 Accept Otto's Wisdom
+</button>
+`;
+
+if (openAlex) {
+  openAlex.addEventListener("click", function(e) {
+    e.preventDefault();
+    aboutContent.innerHTML = alexPopup;
+    aboutOverlay.classList.add("show");
+  });
+}
+
+if (openOtto) {
+  openOtto.addEventListener("click", function(e) {
+    e.preventDefault();
+    aboutContent.innerHTML = ottoPopup;
+    aboutOverlay.classList.add("show");
+
+    setTimeout(() => {
+      const wisdomBtn = document.getElementById("acceptWisdom");
+
+      if (wisdomBtn) {
+        wisdomBtn.addEventListener("click", function() {
+          aboutOverlay.classList.remove("show");
+        });
+      }
+    }, 50);
+  });
+}
+
+if (closeAbout) {
+  closeAbout.addEventListener("click", function() {
+    aboutOverlay.classList.remove("show");
+  });
+}
+
+if (aboutOverlay) {
+  aboutOverlay.addEventListener("click", function(e) {
+    if (e.target === aboutOverlay) {
+      aboutOverlay.classList.remove("show");
+    }
+  });
+}
+
