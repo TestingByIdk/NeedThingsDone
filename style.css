@@ -2761,4 +2761,21 @@ body.dark-mode .login-btn {
 }
 
 
+.focused-card {
+  max-width: 360px;
+  margin: 0 auto 24px;
+}
+
+.focused-card .aisle-card {
+  transform: scale(1.03);
+  border-color: #16a34a;
+}
+
+.explore-panel {
+  background: white;
+  border-radius: 28px;
+  padding: 40px;
+}
+
+
 
