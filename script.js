@@ -119,22 +119,35 @@ const closeAbout = document.getElementById("closeAbout");
 const alexPopup = `
 <h2>About Alex 👋</h2>
 
-<p>Creator of NeedThingsDone.</p>
-
 <p>
-I started this project because I thought finding trustworthy businesses,
-individuals, and community recommendations should be easier.
+Hi, I'm Alex, the creator of NeedThingsDone.
 </p>
 
 <p>
-My goal is to build a place where Canadians can discover local businesses,
-support skilled individuals, find deals, ask questions, and connect with
-their communities.
+I started this project because I believe finding trustworthy businesses,
+skilled individuals, and helpful local information should be simple.
 </p>
 
-<p>That's all.</p>
+<p>
+My goal is to build a platform where people can discover opportunities,
+support local communities, and find the help they need without jumping
+between dozens of different websites.
+</p>
 
-<p>Now enjoy this very important documentation:</p>
+<p>
+NeedThingsDone is still growing, but every feature is being built with
+that goal in mind.
+</p>
+
+<hr>
+
+<p>
+Thank you for checking out the project.
+</p>
+
+<p>
+As a reward, I have included some extremely important documentation.
+</p>
 
 <a
   href="https://youtu.be/PvHU3dV-WNA?si=TJ5d_yaPR2xcgxh5"
@@ -148,14 +161,18 @@ their communities.
 const ottoPopup = `
 <h2>About Otto 🐙</h2>
 
-<p>Otto is an octopus.</p>
-
 <p>
-Nobody knows where he came from.
-Nobody knows where he goes.
+Otto is the official mascot of NeedThingsDone.
 </p>
 
 <p>
+While most platforms have support agents, help centers, and complicated guides,
+NeedThingsDone has an octopus.
+</p>
+
+<p>
+Nobody knows where Otto came from.
+Nobody knows where he goes.
 He simply appears whenever things need to get done.
 </p>
 
@@ -170,16 +187,32 @@ He simply appears whenever things need to get done.
 <hr>
 
 <p><strong>🐙 Otto Fact #1</strong></p>
-<p>Otto has never paid taxes.</p>
+<p>
+Otto has never paid taxes.
+</p>
 
 <p><strong>🐙 Otto Fact #2</strong></p>
-<p>Otto refuses to explain why.</p>
+<p>
+When questioned about Fact #1, Otto declined to comment.
+</p>
 
 <p><strong>🐙 Otto Fact #3</strong></p>
-<p>Otto claims he invented the internet. Nobody believes him.</p>
+<p>
+Otto claims he invented the internet.
+Historians remain unconvinced.
+</p>
 
 <p><strong>🐙 Otto Fact #4</strong></p>
-<p>Otto once completed a task before it was assigned.</p>
+<p>
+Otto once completed a task before it was assigned.
+This achievement remains under investigation.
+</p>
+
+<p><strong>🐙 Otto's Mission</strong></p>
+<p>
+Help people find trusted businesses, talented individuals,
+great deals, useful information, and the right path forward.
+</p>
 
 <button class="otto-close-btn" id="acceptWisdom">
 🐙 Accept Otto's Wisdom
