@@ -316,6 +316,42 @@ const categoryData = {
       { name: "Socket Set", detail: "Basic repair tool kit.", price: "$29.99", type: "Tools", image: "🔧" },
       { name: "Oil Filter", detail: "Replacement filter for vehicle maintenance.", price: "$12.99", type: "Auto", image: "🚗" }
     ]
+  },
+
+  crafts: {
+    emoji: "🎨",
+    title: "Arts & Crafts",
+    filters: ["All", "Jewelry", "Artwork", "Woodwork", "Decor"],
+    items: [
+      { name: "Handmade Bracelet", detail: "Locally made bracelet with custom colours.", price: "$12.00", type: "Jewelry", image: "📿" },
+      { name: "Canvas Painting", detail: "Original artwork from a local creator.", price: "$45.00", type: "Artwork", image: "🖼️" },
+      { name: "Wooden Key Holder", detail: "Handmade woodwork for home organization.", price: "$25.00", type: "Woodwork", image: "🪵" },
+      { name: "Mini Desk Plant Pot", detail: "Cute handmade decor for desks and shelves.", price: "$10.00", type: "Decor", image: "🪴" }
+    ]
+  },
+
+  stores: {
+    emoji: "🏪",
+    title: "Local Stores",
+    filters: ["All", "Gifts", "Electronics", "Pets", "Outdoor"],
+    items: [
+      { name: "Local Gift Basket", detail: "A mix of small locally sourced items.", price: "$35.00", type: "Gifts", image: "🎁" },
+      { name: "Phone Charger", detail: "Fast charging cable from a local shop.", price: "$14.99", type: "Electronics", image: "🔋" },
+      { name: "Dog Toy Pack", detail: "Small bundle of toys for playful pets.", price: "$18.00", type: "Pets", image: "🐶" },
+      { name: "Camping Mug", detail: "Durable mug for outdoor adventures.", price: "$11.50", type: "Outdoor", image: "🏕️" }
+    ]
+  },
+
+  deals: {
+    emoji: "🏷️",
+    title: "Deals",
+    filters: ["All", "Food", "Services", "Products", "Limited"],
+    items: [
+      { name: "10% Off Pastries", detail: "Weekly bakery deal from a local café.", price: "10% off", type: "Food", image: "🥐" },
+      { name: "Oil Change Special", detail: "Limited service deal from a local auto shop.", price: "$59.99", type: "Services", image: "🚗" },
+      { name: "Buy 2 Get 1 Craft Item", detail: "Deal on selected handmade products.", price: "BOGO", type: "Products", image: "🎨" },
+      { name: "Weekend Flash Deal", detail: "Short-time local shop promotion.", price: "Limited", type: "Limited", image: "⚡" }
+    ]
   }
 };
 
