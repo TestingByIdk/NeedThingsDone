@@ -512,12 +512,17 @@ nav a.active::after {
   background: white;
   padding: 28px;
   border-radius: 20px;
+  border: 2px solid transparent;
   box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
-  transition: 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .category-card:hover {
   transform: translateY(-4px);
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.10),
+    0 15px 35px rgba(37, 99, 235, 0.18);
 }
 
 .category-icon {
