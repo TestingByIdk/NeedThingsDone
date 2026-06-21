@@ -2411,3 +2411,41 @@ nav a.active::after {
 }
 
 
+/* DARK MODE */
+
+body.dark-mode {
+    background: #0f172a;
+    color: white;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .search-card,
+body.dark-mode .info-card,
+body.dark-mode .stat-card,
+body.dark-mode .feature-item,
+body.dark-mode .business-cta,
+body.dark-mode .individual-cta,
+body.dark-mode .about-popup,
+body.dark-mode .tutorial-box {
+    background: #1e293b;
+    color: white;
+}
+
+body.dark-mode p {
+    color: #cbd5e1;
+}
+
+body.dark-mode input {
+    background: #334155;
+    color: white;
+    border-color: #475569;
+}
+
+body.dark-mode nav a {
+    color: white;
+}
+
+body.dark-mode .theme-toggle {
+    background: #334155;
+}
+
