@@ -3029,10 +3029,12 @@ body.dark-mode .item-info p {
     transition: all .3s ease;
 }
 
-.step.active {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: white;
+/* Current Step */
+
+.step.active{
+    background:#ff9f1a;
+    border-color:#ff9f1a;
+    color:white;
 }
 
 .welcome-container {
