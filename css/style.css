@@ -2909,4 +2909,73 @@ body.dark-mode .item-info p {
   color: #cbd5e1;
 }
 
+/* ONBOARDING */
+
+.onboarding-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef6ff, #ffffff, #fff7ed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.onboarding-card {
+  background: white;
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+  border-radius: 32px;
+  padding: 46px;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.12);
+}
+
+.onboarding-otto {
+  font-size: 5rem;
+  margin-bottom: 10px;
+}
+
+.onboarding-step {
+  color: #2563eb;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.onboarding-card h1 {
+  font-size: 2.6rem;
+  margin-bottom: 16px;
+}
+
+.onboarding-card p {
+  color: #475569;
+  line-height: 1.6;
+}
+
+.onboarding-actions {
+  display: grid;
+  gap: 14px;
+  margin: 30px 0 20px;
+}
+
+.onboarding-btn {
+  text-decoration: none;
+  padding: 16px 22px;
+  border-radius: 14px;
+  font-weight: 900;
+}
+
+.onboarding-btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.onboarding-btn.secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.onboarding-note {
+  font-size: 0.9rem;
+}
+
 
