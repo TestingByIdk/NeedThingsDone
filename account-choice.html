@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Account Choice - NeedThingsDone</title>
+  <title>Account - NeedThingsDone</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,19 +28,19 @@
   <div class="otto-big">🐙</div>
 
   <h1>Do you already have an account?</h1>
-
   <p class="subtitle">Otto can help either way.</p>
 
-  <p class="description">
-    Log in if you already have a NeedThingsDone account. You can add an Individual,
-    Shop, or Business profile later from your account.
-  </p>
-
   <div class="welcome-buttons">
-    <a href="login.html" class="secondary-btn">Log In</a>
-    <a href="signup.html" class="primary-btn">Create Account →</a>
+    <button class="secondary-btn" id="showLogin">Yes, log in</button>
+    <button class="primary-btn" id="showSignup">No, create account</button>
   </div>
+
+  <div class="auth-form-box" id="authFormBox"></div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="backend/supabase.js"></script>
+<script src="js/auth.js"></script>
 
 </body>
 </html>
