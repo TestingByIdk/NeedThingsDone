@@ -3037,6 +3037,12 @@ body.dark-mode .item-info p {
     color:white;
 }
 
+.step.done{
+    background:#2563eb;
+    border-color:#2563eb;
+    color:white;
+}
+
 .welcome-container {
   min-height: 100vh;
   padding: 120px 6% 60px;
