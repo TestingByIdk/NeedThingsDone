@@ -70,4 +70,51 @@ if (showLogin && showSignup && authFormBox) {
 setupPasswordTools();
 `;
 
+function setupPasswordTools() {
+  const passwordInput = document.getElementById("signupPassword");
+  const strengthBar = document.getElementById("strengthBar");
+  const strengthText = document.getElementById("strengthText");
+
+  document.querySelectorAll(".show-pass").forEach(button => {
+    button.addEventListener("click", function () {
+      const input = document.getElementById(button.dataset.target);
+
+      if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "Hide";
+      } else {
+        input.type = "password";
+        button.textContent = "Show";
+      }
+    });
+  });
+
+  if (passwordInput) {
+    passwordInput.addEventListener("input", function () {
+      const value = passwordInput.value;
+      let score = 0;
+
+      if (value.length >= 8) score++;
+      if (/[A-Z]/.test(value)) score++;
+      if (/[0-9]/.test(value)) score++;
+      if (/[^A-Za-z0-9]/.test(value)) score++;
+
+      strengthBar.className = "";
+      strengthBar.style.width = `${score * 25}%`;
+
+      if (score <= 1) {
+        strengthBar.classList.add("weak");
+        strengthText.textContent = "Weak password";
+      } else if (score === 2 || score === 3) {
+        strengthBar.classList.add("okay");
+        strengthText.textContent = "Okay password";
+      } else {
+        strengthBar.classList.add("strong");
+        strengthText.textContent = "Strong password";
+      }
+    });
+  }
+}
+
+
 
