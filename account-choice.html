@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Account - NeedThingsDone</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="css/style.css" />
 
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
+  <main class="ntd-onboarding">
 
-<div class="progress-bar">
-  <div class="progress-line">
-    <div class="progress-fill" style="width:14%;"></div>
-  </div>
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-orange"></div>
+    <div class="onboarding-bg bg-green"></div>
 
-  <div class="progress-steps">
-    <div class="step done">1</div>
-    <div class="step active">2</div>
-    <div class="step">3</div>
-    <div class="step">4</div>
-    <div class="step">5</div>
-    <div class="step">6</div>
-    <div class="step">7</div>
-    <div class="step">8</div>
-  </div>
-</div>
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 14%;"></div>
+      </div>
 
-<section class="welcome-container account-choice-page">
-  <div class="bg-blob blob-one"></div>
-  <div class="bg-blob blob-two"></div>
-  <div class="bg-blob blob-three"></div>
-  <div class="otto-big">🐙</div>
-  <div class="otto-speech" id="ottoSpeech">
-  First, let’s get your account ready.
-</div>
+      <div class="progress-steps">
+        <div class="step done">1</div>
+        <div class="step active">2</div>
+        <div class="step">3</div>
+        <div class="step">4</div>
+        <div class="step">5</div>
+        <div class="step">6</div>
+        <div class="step">7</div>
+        <div class="step">8</div>
+      </div>
+    </div>
 
-  <h1>Do you already have an account?</h1>
-  <p class="subtitle">Otto can help either way.</p>
+    <section class="onboarding-card-wrap">
 
-  <div class="welcome-buttons">
-    <button class="secondary-btn" id="showLogin">Yes, log in</button>
-    <button class="primary-btn" id="showSignup">No, create account</button>
-  </div>
+      <div class="otto-area">
+        <div class="otto-big">🐙</div>
 
-  <div class="auth-form-box" id="authFormBox"></div>
-</section>
+        <p class="otto-text" id="ottoSpeech">
+          First, let’s get your account ready.
+        </p>
+      </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="backend/supabase.js"></script>
-<script src="js/auth.js"></script>
+      <h1>Do you already have an account?</h1>
 
+      <p class="onboarding-desc">
+        Log in to continue, or create a new account so Otto can help build your profile.
+      </p>
+
+      <div class="choice-buttons">
+        <button class="choice-btn secondary-btn" id="showLogin">
+          Yes, log in
+        </button>
+
+        <button class="choice-btn primary-btn" id="showSignup">
+          No, create account
+        </button>
+      </div>
+
+      <div class="auth-form-box" id="authFormBox"></div>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="backend/supabase.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

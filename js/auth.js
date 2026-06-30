@@ -1,6 +1,7 @@
 const showLogin = document.getElementById("showLogin");
 const showSignup = document.getElementById("showSignup");
 const authFormBox = document.getElementById("authFormBox");
+const ottoSpeech = document.getElementById("ottoSpeech");
 
 if (showLogin && showSignup && authFormBox) {
   showLogin.addEventListener("click", showLoginForm);
@@ -8,11 +9,11 @@ if (showLogin && showSignup && authFormBox) {
 }
 
 function showLoginForm() {
-
   setOttoSpeech("Welcome back! Log in and we’ll continue where you left off.");
-setActiveChoice(showLogin);
+  setActiveChoice(showLogin);
+
   authFormBox.innerHTML = `
-    <div class="auth-mini-box pop-in">
+    <div class="auth-mini-box">
       <h2>Log in</h2>
 
       <input id="loginEmail" type="email" placeholder="Email">
@@ -24,8 +25,8 @@ setActiveChoice(showLogin);
         </button>
       </div>
 
-      <button id="loginBtn">Log In</button>
-      <p id="loginMessage"></p>
+      <button id="loginBtn" class="auth-submit">Log In</button>
+      <p id="loginMessage" class="auth-message"></p>
     </div>
   `;
 
@@ -35,11 +36,11 @@ setActiveChoice(showLogin);
 }
 
 function showSignupForm() {
-
   setOttoSpeech("Nice! Let’s create your NeedThingsDone account.");
-setActiveChoice(showSignup);
+  setActiveChoice(showSignup);
+
   authFormBox.innerHTML = `
-    <div class="auth-mini-box pop-in">
+    <div class="auth-mini-box">
       <h2>Create your account</h2>
 
       <input id="signupEmail" type="email" placeholder="Email">
@@ -58,8 +59,8 @@ setActiveChoice(showSignup);
         </button>
       </div>
 
-      <button id="signupBtn">Create Account</button>
-      <p id="signupMessage"></p>
+      <button id="signupBtn" class="auth-submit">Create Account</button>
+      <p id="signupMessage" class="auth-message"></p>
     </div>
   `;
 
@@ -78,19 +79,16 @@ function setupPasswordEyes() {
   document.querySelectorAll(".show-pass").forEach(button => {
     button.addEventListener("click", function () {
       const input = document.getElementById(button.dataset.target);
-
       if (!input) return;
 
-      if (input.type === "password") {
-        input.type = "text";
-        button.innerHTML = `<i data-lucide="eye-off"></i>`;
-        button.classList.add("active");
-      } else {
-        input.type = "password";
-        button.innerHTML = `<i data-lucide="eye"></i>`;
-        button.classList.remove("active");
-      }
+      const isHidden = input.type === "password";
 
+      input.type = isHidden ? "text" : "password";
+      button.innerHTML = isHidden
+        ? `<i data-lucide="eye-off"></i>`
+        : `<i data-lucide="eye"></i>`;
+
+      button.classList.toggle("active", isHidden);
       refreshIcons();
     });
   });
@@ -98,7 +96,6 @@ function setupPasswordEyes() {
 
 function setupLogin() {
   const loginBtn = document.getElementById("loginBtn");
-
   if (!loginBtn) return;
 
   loginBtn.addEventListener("click", async function () {
@@ -128,7 +125,6 @@ function setupLogin() {
 
 function setupSignup() {
   const signupBtn = document.getElementById("signupBtn");
-
   if (!signupBtn) return;
 
   signupBtn.addEventListener("click", async function () {
@@ -173,21 +169,19 @@ function setupSignup() {
 }
 
 function setOttoSpeech(text) {
-  const ottoSpeech = document.getElementById("ottoSpeech");
-
   if (!ottoSpeech) return;
 
   ottoSpeech.textContent = text;
-  ottoSpeech.classList.remove("pop-in");
+  ottoSpeech.classList.remove("otto-change");
 
   void ottoSpeech.offsetWidth;
 
-  ottoSpeech.classList.add("pop-in");
+  ottoSpeech.classList.add("otto-change");
 }
 
 function setActiveChoice(activeButton) {
-  if (showLogin) showLogin.classList.remove("active-choice");
-  if (showSignup) showSignup.classList.remove("active-choice");
+  showLogin.classList.remove("active-choice");
+  showSignup.classList.remove("active-choice");
 
   activeButton.classList.add("active-choice");
 }
