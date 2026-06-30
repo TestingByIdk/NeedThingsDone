@@ -3116,4 +3116,40 @@ body.dark-mode .item-info p {
   border: 2px solid #dbeafe;
 }
 
+.auth-form-box {
+  margin-top: 28px;
+  width: min(420px, 92%);
+}
+
+.auth-mini-box {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.1);
+}
+
+.auth-mini-box h2 {
+  margin-bottom: 18px;
+}
+
+.auth-mini-box input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.auth-mini-box button {
+  width: 100%;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+
 
