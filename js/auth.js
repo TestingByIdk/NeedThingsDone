@@ -41,17 +41,33 @@ if (showLogin && showSignup && authFormBox) {
   });
 
   showSignup.addEventListener("click", function () {
-    authFormBox.innerHTML = `
-      <div class="auth-mini-box">
-        <h2>Create your account</h2>
-        <input id="signupEmail" type="email" placeholder="Email">
-        <input id="signupPassword" type="password" placeholder="Password">
-        <input id="signupConfirm" type="password" placeholder="Confirm Password">
-        <button id="signupBtn">Create Account</button>
-        <p id="signupMessage"></p>
-      </div>
-    `;
-  });
-}
+   authFormBox.innerHTML = `
+  <div class="auth-mini-box pop-in">
+    <h2>Create your account</h2>
+
+    <input id="signupEmail" type="email" placeholder="Email">
+
+    <div class="password-row">
+      <input id="signupPassword" type="password" placeholder="Password">
+      <button type="button" class="show-pass" data-target="signupPassword">Show</button>
+    </div>
+
+    <div class="password-strength">
+      <div id="strengthBar"></div>
+    </div>
+    <p id="strengthText" class="strength-text">Password strength</p>
+
+    <div class="password-row">
+      <input id="signupConfirm" type="password" placeholder="Confirm Password">
+      <button type="button" class="show-pass" data-target="signupConfirm">Show</button>
+    </div>
+
+    <button id="signupBtn">Create Account</button>
+    <p id="signupMessage"></p>
+  </div>
+`;
+
+setupPasswordTools();
+`;
 
 
