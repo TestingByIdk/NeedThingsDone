@@ -78,10 +78,10 @@ function setupPasswordTools() {
 
       if (input.type === "password") {
         input.type = "text";
-        button.textContent = "Hide";
+        button.classList.add("active");
       } else {
         input.type = "password";
-        button.textContent = "Show";
+        button.classList.remove("active");
       }
     });
   });
