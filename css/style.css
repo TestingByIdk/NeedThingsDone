@@ -3222,5 +3222,40 @@ body.dark-mode .item-info p {
   color: #64748b;
 }
 
+.show-pass {
+  width: 52px;
+  border-radius: 14px;
+  border: 1px solid #dbeafe;
+  background: #f8fafc;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.show-pass.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.35);
+}
+
+.account-choice-page {
+  min-height: 100vh;
+  padding-top: 95px;
+  justify-content: flex-start;
+}
+
+.account-choice-page .otto-big {
+  font-size: 4.5rem;
+  margin-bottom: 4px;
+}
+
+.account-choice-page h1 {
+  font-size: 2.8rem;
+}
+
+.account-choice-page .auth-form-box {
+  margin-top: 18px;
+}
+
+
 
 
