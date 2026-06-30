@@ -50,13 +50,7 @@ function showSignupForm() {
       <div class="password-row">
         <input id="signupPassword" type="password" placeholder="Password">
         <button type="button" class="show-pass" data-target="signupPassword">Show</button>
-      </div>
-
-      <div class="password-strength">
-        <div id="strengthBar"></div>
-      </div>
-
-      <p id="strengthText" class="strength-text">Password strength</p>
+      </div>   
 
       <div class="password-row">
         <input id="signupConfirm" type="password" placeholder="Confirm Password">
@@ -91,43 +85,6 @@ function setupPasswordTools() {
       }
     });
   });
-
-  const passwordInput = document.getElementById("signupPassword");
-  const strengthBar = document.getElementById("strengthBar");
-  const strengthText = document.getElementById("strengthText");
-
-  if (!passwordInput || !strengthBar || !strengthText) return;
-
-  passwordInput.addEventListener("input", function () {
-    const value = passwordInput.value;
-    let score = 0;
-
-    if (value.length >= 8) score++;
-    if (/[A-Z]/.test(value)) score++;
-    if (/[0-9]/.test(value)) score++;
-    if (/[^A-Za-z0-9]/.test(value)) score++;
-
-    strengthBar.className = "";
-    strengthBar.style.width = `${score * 25}%`;
-
-    if (value.length === 0) {
-      strengthBar.style.width = "0%";
-      strengthText.textContent = "Password strength";
-      return;
-    }
-
-    if (score <= 1) {
-      strengthBar.classList.add("weak");
-      strengthText.textContent = "Weak password";
-    } else if (score === 2 || score === 3) {
-      strengthBar.classList.add("okay");
-      strengthText.textContent = "Okay password";
-    } else {
-      strengthBar.classList.add("strong");
-      strengthText.textContent = "Strong password";
-    }
-  });
-}
 
 // LOGIN
 
