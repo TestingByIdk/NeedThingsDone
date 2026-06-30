@@ -69,6 +69,8 @@ if (showLogin && showSignup && authFormBox) {
 
 setupPasswordTools();
 
+  });
+}
 
 function setupPasswordTools() {
   const passwordInput = document.getElementById("signupPassword");
