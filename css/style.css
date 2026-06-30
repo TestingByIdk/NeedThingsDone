@@ -3151,5 +3151,76 @@ body.dark-mode .item-info p {
   cursor: pointer;
 }
 
+.welcome-container {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 85% 75%, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(135deg, #eef6ff, #ffffff, #fff7ed);
+}
+
+.pop-in {
+  animation: popIn 0.28s ease;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.password-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.show-pass {
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid #dbeafe;
+  background: #f8fafc;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.password-strength {
+  width: 100%;
+  height: 9px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+#strengthBar {
+  height: 100%;
+  width: 0%;
+  transition: 0.25s ease;
+}
+
+#strengthBar.weak {
+  background: #ef4444;
+}
+
+#strengthBar.okay {
+  background: #f59e0b;
+}
+
+#strengthBar.strong {
+  background: #16a34a;
+}
+
+.strength-text {
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  color: #64748b;
+}
+
 
 
