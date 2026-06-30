@@ -8,6 +8,9 @@ if (showLogin && showSignup && authFormBox) {
 }
 
 function showLoginForm() {
+
+  setOttoSpeech("Welcome back! Log in and we’ll continue where you left off.");
+setActiveChoice(showLogin);
   authFormBox.innerHTML = `
     <div class="auth-mini-box pop-in">
       <h2>Log in</h2>
@@ -16,7 +19,9 @@ function showLoginForm() {
 
       <div class="password-row">
         <input id="loginPassword" type="password" placeholder="Password">
-        <button type="button" class="show-pass" data-target="loginPassword">👁</button>
+        <button type="button" class="show-pass" data-target="loginPassword">
+          <i data-lucide="eye"></i>
+        </button>
       </div>
 
       <button id="loginBtn">Log In</button>
@@ -24,11 +29,15 @@ function showLoginForm() {
     </div>
   `;
 
+  refreshIcons();
   setupPasswordEyes();
   setupLogin();
 }
 
 function showSignupForm() {
+
+  setOttoSpeech("Nice! Let’s create your NeedThingsDone account.");
+setActiveChoice(showSignup);
   authFormBox.innerHTML = `
     <div class="auth-mini-box pop-in">
       <h2>Create your account</h2>
@@ -37,12 +46,16 @@ function showSignupForm() {
 
       <div class="password-row">
         <input id="signupPassword" type="password" placeholder="Password">
-        <button type="button" class="show-pass" data-target="signupPassword">👁</button>
+        <button type="button" class="show-pass" data-target="signupPassword">
+          <i data-lucide="eye"></i>
+        </button>
       </div>
 
       <div class="password-row">
         <input id="signupConfirm" type="password" placeholder="Confirm Password">
-        <button type="button" class="show-pass" data-target="signupConfirm">👁</button>
+        <button type="button" class="show-pass" data-target="signupConfirm">
+          <i data-lucide="eye"></i>
+        </button>
       </div>
 
       <button id="signupBtn">Create Account</button>
@@ -50,8 +63,15 @@ function showSignupForm() {
     </div>
   `;
 
+  refreshIcons();
   setupPasswordEyes();
   setupSignup();
+}
+
+function refreshIcons() {
+  if (window.lucide) {
+    lucide.createIcons();
+  }
 }
 
 function setupPasswordEyes() {
@@ -61,8 +81,17 @@ function setupPasswordEyes() {
 
       if (!input) return;
 
-      input.type = input.type === "password" ? "text" : "password";
-      button.classList.toggle("active");
+      if (input.type === "password") {
+        input.type = "text";
+        button.innerHTML = `<i data-lucide="eye-off"></i>`;
+        button.classList.add("active");
+      } else {
+        input.type = "password";
+        button.innerHTML = `<i data-lucide="eye"></i>`;
+        button.classList.remove("active");
+      }
+
+      refreshIcons();
     });
   });
 }
@@ -79,7 +108,7 @@ function setupLogin() {
 
     message.textContent = "Logging in...";
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
+    const { error } = await supabaseClient.auth.signInWithPassword({
       email,
       password
     });
@@ -125,7 +154,7 @@ function setupSignup() {
 
     message.textContent = "Creating account...";
 
-    const { data, error } = await supabaseClient.auth.signUp({
+    const { error } = await supabaseClient.auth.signUp({
       email,
       password
     });
@@ -141,4 +170,24 @@ function setupSignup() {
       window.location.href = "choose-profile.html";
     }, 1000);
   });
+}
+
+function setOttoSpeech(text) {
+  const ottoSpeech = document.getElementById("ottoSpeech");
+
+  if (!ottoSpeech) return;
+
+  ottoSpeech.textContent = text;
+  ottoSpeech.classList.remove("pop-in");
+
+  void ottoSpeech.offsetWidth;
+
+  ottoSpeech.classList.add("pop-in");
+}
+
+function setActiveChoice(activeButton) {
+  if (showLogin) showLogin.classList.remove("active-choice");
+  if (showSignup) showSignup.classList.remove("active-choice");
+
+  activeButton.classList.add("active-choice");
 }
