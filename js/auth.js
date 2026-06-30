@@ -1,20 +1,11 @@
-// ACCOUNT CHOICE PAGE
-
 const showLogin = document.getElementById("showLogin");
 const showSignup = document.getElementById("showSignup");
 const authFormBox = document.getElementById("authFormBox");
 
 if (showLogin && showSignup && authFormBox) {
-  showLogin.addEventListener("click", function () {
-    showLoginForm();
-  });
-
-  showSignup.addEventListener("click", function () {
-    showSignupForm();
-  });
+  showLogin.addEventListener("click", showLoginForm);
+  showSignup.addEventListener("click", showSignupForm);
 }
-
-// SHOW LOGIN FORM
 
 function showLoginForm() {
   authFormBox.innerHTML = `
@@ -25,20 +16,17 @@ function showLoginForm() {
 
       <div class="password-row">
         <input id="loginPassword" type="password" placeholder="Password">
-        <button type="button" class="show-pass" data-target="loginPassword">Show</button>
+        <button type="button" class="show-pass" data-target="loginPassword">👁</button>
       </div>
 
       <button id="loginBtn">Log In</button>
-
       <p id="loginMessage"></p>
     </div>
   `;
 
-  setupPasswordTools();
+  setupPasswordEyes();
   setupLogin();
 }
-
-// SHOW SIGNUP FORM
 
 function showSignupForm() {
   authFormBox.innerHTML = `
@@ -49,44 +37,35 @@ function showSignupForm() {
 
       <div class="password-row">
         <input id="signupPassword" type="password" placeholder="Password">
-        <button type="button" class="show-pass" data-target="signupPassword">Show</button>
-      </div>   
+        <button type="button" class="show-pass" data-target="signupPassword">👁</button>
+      </div>
 
       <div class="password-row">
         <input id="signupConfirm" type="password" placeholder="Confirm Password">
-        <button type="button" class="show-pass" data-target="signupConfirm">Show</button>
+        <button type="button" class="show-pass" data-target="signupConfirm">👁</button>
       </div>
 
       <button id="signupBtn">Create Account</button>
-
       <p id="signupMessage"></p>
     </div>
   `;
 
-  setupPasswordTools();
+  setupPasswordEyes();
   setupSignup();
 }
 
-// PASSWORD TOOLS
-
-function setupPasswordTools() {
+function setupPasswordEyes() {
   document.querySelectorAll(".show-pass").forEach(button => {
     button.addEventListener("click", function () {
       const input = document.getElementById(button.dataset.target);
 
       if (!input) return;
 
-      if (input.type === "password") {
-        input.type = "text";
-        button.classList.add("active");
-      } else {
-        input.type = "password";
-        button.classList.remove("active");
-      }
+      input.type = input.type === "password" ? "text" : "password";
+      button.classList.toggle("active");
     });
   });
-
-// LOGIN
+}
 
 function setupLogin() {
   const loginBtn = document.getElementById("loginBtn");
@@ -111,15 +90,12 @@ function setupLogin() {
     }
 
     message.textContent = "Logged in! Moving to Step 3...";
-    console.log("Logged in:", data);
 
     setTimeout(() => {
       window.location.href = "choose-profile.html";
     }, 800);
   });
 }
-
-// SIGNUP
 
 function setupSignup() {
   const signupBtn = document.getElementById("signupBtn");
@@ -160,7 +136,6 @@ function setupSignup() {
     }
 
     message.textContent = "Account created! Moving to Step 3...";
-    console.log("Signed up:", data);
 
     setTimeout(() => {
       window.location.href = "choose-profile.html";
