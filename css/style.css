@@ -4041,5 +4041,371 @@ body.dark-mode .item-info p {
     font-weight:700;
 }
 
+.otto-img{
+    width:110px;
+    height:110px;
+    object-fit:contain;
+    display:block;
+    margin:auto;
+}
+
+.otto-img{
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,.15));
+}
+
+/* ===== OTTO ===== */
+
+.otto{
+    display:block;
+    height:auto;
+    object-fit:contain;
+}
+
+.otto-large{
+    width:110px;
+
+    animation:ottoFloat 5s ease-in-out infinite;
+
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,.15));
+}
+
+.otto-medium{
+    width:70px;
+}
+
+.otto-small{
+    width:40px;
+}
+
+.otto-inline{
+    width:22px;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+@keyframes ottoFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+.otto {
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+.otto-large { width: 110px; }
+.otto-medium { width: 70px; }
+.otto-small { width: 40px; }
+
+.otto-inline {
+  width: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ===== OTTO REPAIR PATCH ===== */
+
+.otto,
+.otto-large,
+.otto-medium,
+.otto-small,
+.otto-inline {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Big Otto areas */
+.otto-big,
+.tutorial-otto,
+.auth-otto,
+.ai-icon,
+.seller-icon,
+.otto-individuals-card,
+.forum-otto-box,
+.weekly-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Regular Otto sizes */
+.otto-large {
+  width: 110px;
+  display: block;
+  margin: 0 auto;
+}
+
+.otto-medium {
+  width: 70px;
+  display: block;
+  margin: 0 auto;
+}
+
+.otto-small {
+  width: 42px;
+  display: block;
+  margin: 0 auto;
+}
+
+.otto-inline {
+  width: 26px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Navbar logo fix */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon .otto-small {
+  width: 52px;
+}
+
+.brand .logo {
+  line-height: 1;
+}
+
+.brand p {
+  margin-top: 6px;
+}
+
+/* Meet Otto card fix */
+.otto-card .otto,
+.otto-card .otto-large {
+  margin: 0 auto 18px;
+}
+
+/* Step 3 Otto fix */
+.profile-select-wrap .otto-big {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-select-wrap .otto-large {
+  margin: 0 auto;
+}
+
+/* Weekly / news fixes */
+.weekly-main-card h2 .otto-inline,
+.news-pill .otto-inline {
+  vertical-align: middle;
+}
+
+/* Community Otto tip fix */
+.forum-otto-box {
+  flex-direction: column;
+  text-align: center;
+}
+
+.weekly-note {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* ===== OTTO FINAL FIXES ===== */
+
+/* Keep Otto from stretching cards/sections */
+.seller-icon,
+.auth-otto,
+.ai-icon,
+.tutorial-otto,
+.weekly-note > img,
+.forum-otto-box > img,
+.otto-individuals-card > img {
+  width: auto;
+  height: auto;
+}
+
+/* Fix big empty Otto boxes */
+.otto-individuals-card {
+  min-height: unset;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.otto-individuals-card .otto-medium {
+  width: 90px;
+}
+
+/* Why Join / business page Otto */
+.ai-icon .otto-medium,
+.seller-icon .otto-small {
+  width: 76px;
+}
+
+/* Shop card Otto */
+.seller-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Community Otto tip */
+.forum-otto-box .otto-small {
+  width: 58px;
+  margin-bottom: 14px;
+}
+
+/* News inline Otto */
+.weekly-main-card h2 .otto-inline,
+.news-pill .otto-inline {
+  width: 26px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Navbar consistency */
+.navbar .brand-icon .otto-small {
+  width: 58px;
+}
+
+.navbar .brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .brand > div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar .brand p {
+  margin: 4px 0 0;
+}
+
+.profile-select-wrap .otto-big {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-select-wrap .otto-large {
+  margin: 0 auto;
+}
+
+/* ===== FINAL OTTO OVERRIDE ===== */
+
+img.otto {
+  display: block !important;
+  height: auto !important;
+  object-fit: contain !important;
+  font-size: 0 !important;
+  margin: 0 auto !important;
+}
+
+img.otto-large {
+  width: 110px !important;
+}
+
+img.otto-medium {
+  width: 72px !important;
+}
+
+img.otto-small {
+  width: 42px !important;
+}
+
+img.otto-inline {
+  width: 24px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 8px !important;
+}
+
+/* Navbar */
+.brand-icon {
+  width: 54px !important;
+  height: 54px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.brand-icon img.otto {
+  width: 54px !important;
+}
+
+/* Stop Otto from stretching big sections */
+.otto-big,
+.auth-otto,
+.tutorial-otto,
+.ai-icon,
+.seller-icon,
+.forum-otto-box,
+.weekly-note {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Individuals page broken white box */
+.otto-individuals-card {
+  padding: 36px !important;
+  text-align: center !important;
+}
+
+.otto-individuals-card img.otto {
+  margin-bottom: 18px !important;
+}
+
+/* Shop seller icon */
+.seller-icon {
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 50% !important;
+}
+
+.seller-icon img.otto {
+  width: 64px !important;
+}
+
+/* Forum / community */
+.forum-otto-box {
+  flex-direction: column !important;
+}
+
+.forum-otto-box img.otto {
+  margin-bottom: 12px !important;
+}
+
+/* News */
+.weekly-note {
+  flex-direction: column !important;
+}
+
+.news-pill img.otto,
+.weekly-main-card h2 img.otto {
+  display: inline-block !important;
+}
 
 
