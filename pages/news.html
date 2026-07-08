@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>News - NeedThingsDone</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
 <header class="navbar">
   <div class="brand">
     <div class="brand-icon">
-      <img src="assets/images/otto.png" class="otto otto-small" alt="Otto">
+      <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
     </div>
     <div>
       <div class="logo">NeedThings<span>Done</span></div>
@@ -20,7 +20,7 @@
   </div>
 
   <nav>
-    <a href="index.html">Home</a>
+    <a href="../index.html">Home</a>
     <a href="businesses.html">Businesses</a>
     <a href="individuals.html">Individuals</a>
     <a href="shop.html">Shop</a>
@@ -31,14 +31,14 @@
 
   <div class="nav-actions">
     <button id="themeToggle" class="theme-toggle">🌙</button>
-    <a class="login-btn" href="login.html">Log In</a>
-    <a class="signup-btn" href="welcome.html">Sign Up</a>
+    <a class="login-btn" href="../onboarding/account-choice.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
   </div>
 </header>
 
 <section class="weekly-hero">
   <div class="news-pill">
-    <img src="assets/images/otto.png" class="otto otto-inline" alt="Otto">
+    <img src="../assets/images/otto.png" class="otto otto-inline" alt="Otto">
     NeedThingsDone Weekly
 </div>
   <h1>Your weekly local update, written by Otto.</h1>
@@ -55,7 +55,7 @@
     <article class="weekly-main-card">
       <div class="weekly-date">Coming Soon</div>
       <h2>
-  <img src="assets/images/otto.png" class="otto otto-inline" alt="Otto">
+  <img src="../assets/images/otto.png" class="otto otto-inline" alt="Otto">
   This Week on NeedThingsDone
     </h2>
       <p>
@@ -125,7 +125,7 @@
     <a href="#">🔧 Helpful Reminders</a>
 
     <div class="weekly-note">
-  <img src="assets/images/otto.png" class="otto otto-small" alt="Otto">
+  <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
   <h4>Otto Says</h4>
   <p>
         “Need something done? The best recommendations often come from people nearby.”
@@ -135,7 +135,8 @@
 
 </section>
 
-<script src="js/script.js"></script>
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
 
 </body>
 </html>

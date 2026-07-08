@@ -1,3 +1,6 @@
+const NTD_ASSETS = window.NTD_ASSETS || "assets/images";
+const OTTO_INLINE = `<img src="${NTD_ASSETS}/otto.png" class="otto otto-inline" alt="Otto">`;
+
 const tutorialSteps = [
   {
     title: "Welcome to NeedThingsDone!",
@@ -159,7 +162,7 @@ As a reward, I have included some extremely important documentation.
 `;
 
 const ottoPopup = `
-<h2>About Otto <img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"></h2>
+<h2>About Otto ${OTTO_INLINE}</h2>
 
 <p>
 Otto is the official mascot of NeedThingsDone.
@@ -186,36 +189,36 @@ He simply appears whenever things need to get done.
 
 <hr>
 
-<p><strong><img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Otto Fact #1</strong></p>
+<p><strong>${OTTO_INLINE} Otto Fact #1</strong></p>
 <p>
 Otto has never paid taxes.
 </p>
 
-<p><strong><img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Otto Fact #2</strong></p>
+<p><strong>${OTTO_INLINE} Otto Fact #2</strong></p>
 <p>
 When questioned about Fact #1, Otto declined to comment.
 </p>
 
-<p><strong><img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Otto Fact #3</strong></p>
+<p><strong>${OTTO_INLINE} Otto Fact #3</strong></p>
 <p>
 Otto claims he invented the internet.
 Historians remain unconvinced.
 </p>
 
-<p><strong><img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Otto Fact #4</strong></p>
+<p><strong>${OTTO_INLINE} Otto Fact #4</strong></p>
 <p>
 Otto once completed a task before it was assigned.
 This achievement remains under investigation.
 </p>
 
-<p><strong><img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Otto's Mission</strong></p>
+<p><strong>${OTTO_INLINE} Otto's Mission</strong></p>
 <p>
 Help people find trusted businesses, talented individuals,
 great deals, useful information, and the right path forward.
 </p>
 
 <button class="otto-close-btn" id="acceptWisdom">
-<img src="assets/images/otto.png" class="otto otto-inline" alt="Otto"> Accept Otto's Wisdom
+${OTTO_INLINE} Accept Otto's Wisdom
 </button>
 `;
 
