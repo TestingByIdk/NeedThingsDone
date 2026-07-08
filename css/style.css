@@ -4135,12 +4135,52 @@ img.otto-inline {
 }
 
 /* Individuals Otto card */
-.otto-individuals-card {
-  background: white !important;
-  border-radius: 22px !important;
-  padding: 38px !important;
-  text-align: center !important;
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.08) !important;
+.otto-individuals-card{
+
+    max-width:950px;
+    margin:auto;
+
+    background:white;
+    border-radius:28px;
+
+    padding:42px 48px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(37,99,235,.08);
+
+}
+
+.otto-individuals-card img{
+
+    width:95px;
+    margin-bottom:18px;
+
+}
+
+.otto-individuals-card h2{
+
+    font-size:2.3rem;
+    margin-bottom:18px;
+
+}
+
+.otto-individuals-card p{
+
+    max-width:720px;
+    margin:auto;
+
+    font-size:1.08rem;
+    line-height:1.75;
+
+    color:#475569;
+
+}
+
+.otto-individuals-card .primary-btn{
+
+    margin-top:28px;
+
 }
 
 .otto-individuals-card img.otto-medium,
@@ -4388,3 +4428,90 @@ img.otto-inline {
     text-align: center;
   }
 }
+
+/* QUICK POLISH FIXES */
+
+/* 1. Show slogan under logo */
+.brand {
+  align-items: center;
+}
+
+.brand p {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* 2. Business Otto box */
+.ai-card {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 38px 50px;
+
+    background: #fff;
+    border: 1px solid #e7eefb;
+    border-radius: 26px;
+
+    box-shadow: 0 15px 40px rgba(37,99,235,.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ai-icon {
+    margin-bottom: 18px;
+}
+
+.ai-icon img {
+    width: 90px;
+}
+
+.ai-card h2 {
+    margin: 0;
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ai-card p {
+    margin-top: 16px;
+    max-width: 720px;
+
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #475569;
+}
+
+/* 4. Shop seller strip polish */
+.seller-strip {
+  padding: 42px 48px;
+}
+
+.seller-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seller-strip h2 {
+  font-size: 1.9rem;
+  line-height: 1.2;
+}
+
+.seller-strip p {
+  font-size: 1.05rem;
+  color: #334155;
+}
+
+/* Make Otto centered inside circles */
+.seller-icon img.otto,
+.ai-icon img.otto,
+.otto-individuals-card img.otto {
+  margin: 0 auto;
+  display: block;
+}
+
