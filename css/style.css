@@ -331,11 +331,6 @@ nav a.active::after {
   text-align: center;
 }
 
-.otto {
-  font-size: 6rem;
-  margin: 10px 0 12px;
-}
-
 .business-cta,
 .individual-cta {
   margin: 0 6% 22px;
@@ -759,11 +754,6 @@ nav a.active::after {
   padding: 38px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(124, 58, 237, 0.08);
-}
-
-.otto-small {
-  font-size: 4rem;
-  margin-bottom: 12px;
 }
 
 .otto-individuals-card h2 {
@@ -4041,297 +4031,292 @@ body.dark-mode .item-info p {
     font-weight:700;
 }
 
-.otto-img{
-    width:110px;
-    height:110px;
-    object-fit:contain;
-    display:block;
-    margin:auto;
-}
+/* ===== OTTO FINAL CLEAN SYSTEM ===== */
 
-.otto-img{
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,.15));
-}
-
-/* ===== OTTO ===== */
-
-.otto{
-    display:block;
-    height:auto;
-    object-fit:contain;
-}
-
-.otto-large{
-    width:110px;
-
-    animation:ottoFloat 5s ease-in-out infinite;
-
-    filter:drop-shadow(0 10px 18px rgba(0,0,0,.15));
-}
-
-.otto-medium{
-    width:70px;
-}
-
-.otto-small{
-    width:40px;
-}
-
-.otto-inline{
-    width:22px;
-    display:inline-block;
-    vertical-align:middle;
-}
-
-@keyframes ottoFloat{
-
-    0%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-10px);
-    }
-
-    100%{
-        transform:translateY(0);
-    }
-
-}
-
-.otto {
-  display: block;
-  height: auto;
-  object-fit: contain;
-}
-
-.otto-large { width: 110px; }
-.otto-medium { width: 70px; }
-.otto-small { width: 40px; }
-
-.otto-inline {
-  width: 24px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 6px;
-}
-
-/* ===== OTTO REPAIR PATCH ===== */
-
-.otto,
-.otto-large,
-.otto-medium,
-.otto-small,
-.otto-inline {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Big Otto areas */
-.otto-big,
-.tutorial-otto,
-.auth-otto,
-.ai-icon,
-.seller-icon,
-.otto-individuals-card,
-.forum-otto-box,
-.weekly-note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Regular Otto sizes */
-.otto-large {
-  width: 110px;
-  display: block;
-  margin: 0 auto;
-}
-
-.otto-medium {
-  width: 70px;
-  display: block;
-  margin: 0 auto;
-}
-
-.otto-small {
-  width: 42px;
-  display: block;
-  margin: 0 auto;
-}
-
-.otto-inline {
-  width: 26px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-
-/* Navbar logo fix */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.brand-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-icon .otto-small {
-  width: 52px;
-}
-
-.brand .logo {
-  line-height: 1;
-}
-
-.brand p {
-  margin-top: 6px;
-}
-
-/* Meet Otto card fix */
-.otto-card .otto,
-.otto-card .otto-large {
-  margin: 0 auto 18px;
-}
-
-/* Step 3 Otto fix */
-.profile-select-wrap .otto-big {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-select-wrap .otto-large {
-  margin: 0 auto;
-}
-
-/* Weekly / news fixes */
-.weekly-main-card h2 .otto-inline,
-.news-pill .otto-inline {
-  vertical-align: middle;
-}
-
-/* Community Otto tip fix */
-.forum-otto-box {
-  flex-direction: column;
-  text-align: center;
-}
-
-.weekly-note {
-  flex-direction: column;
-  text-align: center;
-}
-
-/* ===== OTTO FINAL FIXES ===== */
-
-/* Keep Otto from stretching cards/sections */
-.seller-icon,
-.auth-otto,
-.ai-icon,
-.tutorial-otto,
-.weekly-note > img,
-.forum-otto-box > img,
-.otto-individuals-card > img {
-  width: auto;
-  height: auto;
-}
-
-/* Fix big empty Otto boxes */
-.otto-individuals-card {
-  min-height: unset;
-  padding: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.otto-individuals-card .otto-medium {
-  width: 90px;
-}
-
-/* Why Join / business page Otto */
-.ai-icon .otto-medium,
-.seller-icon .otto-small {
-  width: 76px;
-}
-
-/* Shop card Otto */
-.seller-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Community Otto tip */
-.forum-otto-box .otto-small {
-  width: 58px;
-  margin-bottom: 14px;
-}
-
-/* News inline Otto */
-.weekly-main-card h2 .otto-inline,
-.news-pill .otto-inline {
-  width: 26px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-
-/* Navbar consistency */
-.navbar .brand-icon .otto-small {
-  width: 58px;
-}
-
-.navbar .brand {
-  display: flex;
-  align-items: center;
-}
-
-.navbar .brand > div:last-child {
-  display: flex;
-  flex-direction: column;
-}
-
-.navbar .brand p {
-  margin: 4px 0 0;
-}
-
-.profile-select-wrap .otto-big {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.profile-select-wrap .otto-large {
-  margin: 0 auto;
-}
-
-/* ===== FINAL OTTO OVERRIDE ===== */
-
+/* Base Otto image classes - use only on <img> tags */
 img.otto {
   display: block !important;
   height: auto !important;
   object-fit: contain !important;
+  max-width: 100% !important;
   font-size: 0 !important;
-  margin: 0 auto !important;
 }
 
 img.otto-large {
   width: 110px !important;
+  margin: 0 auto !important;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.15));
 }
 
 img.otto-medium {
   width: 72px !important;
+  margin: 0 auto !important;
 }
 
 img.otto-small {
   width: 42px !important;
+  margin: 0 auto !important;
+}
+
+img.otto-inline {
+  width: 24px !important;
+  height: auto !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0 8px 0 0 !important;
+}
+
+/* Navbar */
+.navbar {
+  min-height: 82px;
+  height: auto;
+}
+
+.brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.brand-icon {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  font-size: 0 !important;
+}
+
+.brand-icon img.otto-small {
+  width: 58px !important;
+}
+
+.brand p {
+  margin: 4px 0 0 !important;
+}
+
+/* Large onboarding Otto */
+.otto-big,
+.otto-area,
+.auth-otto,
+.tutorial-otto,
+.ai-icon,
+.seller-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.otto-big img.otto-large,
+.otto-area img.otto-large {
+  width: 110px !important;
+}
+
+/* Meet Otto card */
+.otto-card {
+  text-align: center !important;
+}
+
+.otto-card img.otto-large,
+.otto-card img.otto-medium {
+  margin: 0 auto 18px !important;
+}
+
+/* Business / AI Otto card */
+.ai-icon {
+  margin-bottom: 14px !important;
+  font-size: 0 !important;
+}
+
+.ai-icon img.otto-medium {
+  width: 88px !important;
+}
+
+/* Individuals Otto card */
+.otto-individuals-card {
+  background: white !important;
+  border-radius: 22px !important;
+  padding: 38px !important;
+  text-align: center !important;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.08) !important;
+}
+
+.otto-individuals-card img.otto-medium,
+.otto-individuals-card img.otto-large {
+  width: 90px !important;
+  margin: 0 auto 18px !important;
+}
+
+/* Shop seller strip */
+.seller-icon {
+  width: 96px !important;
+  height: 96px !important;
+  min-width: 96px !important;
+  border-radius: 50% !important;
+  background: #dcfce7 !important;
+  font-size: 0 !important;
+}
+
+.seller-icon img.otto-small,
+.seller-icon img.otto-medium {
+  width: 64px !important;
+}
+
+/* Tutorial Otto */
+.tutorial-otto {
+  margin-bottom: 8px !important;
+  font-size: 0 !important;
+}
+
+.tutorial-otto img.otto-medium,
+.tutorial-otto img.otto-large {
+  width: 90px !important;
+}
+
+/* Forum Otto tip */
+.forum-otto-box {
+  margin-top: 24px !important;
+  background: #fff7ed !important;
+  border-radius: 18px !important;
+  padding: 18px !important;
+  text-align: center !important;
+}
+
+.forum-otto-box img.otto-small,
+.forum-otto-box img.otto-medium {
+  width: 58px !important;
+  margin: 0 auto 12px !important;
+}
+
+/* News / weekly Otto */
+.weekly-note,
+.news-note {
+  margin-top: 22px !important;
+  background: #fff1f2 !important;
+  border-radius: 18px !important;
+  padding: 18px !important;
+  text-align: center !important;
+}
+
+.weekly-note img.otto-small,
+.news-note img.otto-small,
+.weekly-note img.otto-medium,
+.news-note img.otto-medium {
+  width: 58px !important;
+  margin: 0 auto 12px !important;
+}
+
+.news-pill img.otto-inline,
+.weekly-main-card h2 img.otto-inline {
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+
+/* ===== CLEAN GLOBAL HEADER / OTTO FIX ===== */
+
+.navbar {
+  height: 86px;
+  background: white;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0;
+}
+
+.brand-icon img,
+.brand-icon img.otto,
+.brand-icon img.otto-small {
+  width: 58px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 !important;
+}
+
+.logo {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.logo span {
+  color: #2563eb;
+}
+
+.brand p {
+  display: none !important;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-shrink: 1;
+}
+
+nav a {
+  white-space: nowrap;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+/* Otto image system */
+img.otto,
+.otto-img {
+  display: block !important;
+  height: auto !important;
+  object-fit: contain !important;
+  max-width: 100% !important;
+}
+
+img.otto-large,
+.otto-img {
+  width: 110px !important;
+  margin: 0 auto !important;
+}
+
+img.otto-medium {
+  width: 72px !important;
+  margin: 0 auto !important;
+}
+
+img.otto-small {
+  width: 42px !important;
+  margin: 0 auto !important;
 }
 
 img.otto-inline {
@@ -4341,71 +4326,65 @@ img.otto-inline {
   margin-right: 8px !important;
 }
 
-/* Navbar */
-.brand-icon {
-  width: 54px !important;
-  height: 54px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-shrink: 0 !important;
-}
-
-.brand-icon img.otto {
-  width: 54px !important;
-}
-
-/* Stop Otto from stretching big sections */
 .otto-big,
 .auth-otto,
 .tutorial-otto,
 .ai-icon,
-.seller-icon,
-.forum-otto-box,
-.weekly-note {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Individuals page broken white box */
-.otto-individuals-card {
-  padding: 36px !important;
-  text-align: center !important;
-}
-
-.otto-individuals-card img.otto {
-  margin-bottom: 18px !important;
-}
-
-/* Shop seller icon */
 .seller-icon {
-  width: 96px !important;
-  height: 96px !important;
-  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.seller-icon img.otto {
+.otto-card .otto,
+.otto-card img.otto-large {
+  margin: 0 auto 18px !important;
+}
+
+.seller-icon {
+  width: 96px;
+  height: 96px;
+  min-width: 96px;
+  border-radius: 50%;
+  background: #dcfce7;
+}
+
+.seller-icon img.otto-small {
   width: 64px !important;
 }
 
-/* Forum / community */
-.forum-otto-box {
-  flex-direction: column !important;
+.forum-otto-box img.otto-small,
+.weekly-note img.otto-small,
+.news-note img.otto-small {
+  width: 58px !important;
+  margin: 0 auto 12px !important;
 }
 
-.forum-otto-box img.otto {
-  margin-bottom: 12px !important;
+/* responsive nav */
+@media (max-width: 1100px) {
+  .navbar {
+    height: auto;
+    padding: 16px 5%;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-top: 8px;
+  }
 }
 
-/* News */
-.weekly-note {
-  flex-direction: column !important;
+@media (max-width: 700px) {
+  .nav-actions {
+    width: 100%;
+  }
+
+  .login-btn,
+  .signup-btn {
+    flex: 1;
+    text-align: center;
+  }
 }
-
-.news-pill img.otto,
-.weekly-main-card h2 img.otto {
-  display: inline-block !important;
-}
-
-
