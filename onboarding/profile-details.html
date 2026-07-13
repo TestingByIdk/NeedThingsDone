@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profile Details - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <main class="ntd-onboarding profile-details-page">
+
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-green"></div>
+
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 57%;"></div>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step done">1</div>
+        <div class="step done">2</div>
+        <div class="step done">3</div>
+        <div class="step done">4</div>
+        <div class="step active">5</div>
+        <div class="step">6</div>
+        <div class="step">7</div>
+        <div class="step">8</div>
+      </div>
+    </div>
+
+    <section class="details-wrap">
+
+      <div class="otto-big">
+        <img
+          src="../assets/images/otto.png"
+          class="otto otto-large"
+          alt="Otto"
+        >
+      </div>
+
+      <p class="otto-text" id="detailsOttoText">
+        Let’s add the information people need to recognize you.
+      </p>
+
+      <h1 id="detailsHeading">Tell us about yourself</h1>
+
+      <p class="onboarding-desc">
+        You can edit all of this later from your account.
+      </p>
+
+      <form class="details-card" id="profileDetailsForm">
+
+        <div class="form-grid">
+
+          <div class="form-field full-field">
+            <label for="displayName" id="displayNameLabel">Display name</label>
+            <input
+              id="displayName"
+              type="text"
+              placeholder="Your name"
+              required
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="city">City</label>
+            <input
+              id="city"
+              type="text"
+              placeholder="Ottawa"
+              required
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="province">Province</label>
+            <select id="province" required>
+              <option value="">Select province</option>
+              <option value="Ontario">Ontario</option>
+              <option value="Quebec">Quebec</option>
+              <option value="British Columbia">British Columbia</option>
+              <option value="Alberta">Alberta</option>
+              <option value="Manitoba">Manitoba</option>
+              <option value="Saskatchewan">Saskatchewan</option>
+              <option value="Nova Scotia">Nova Scotia</option>
+              <option value="New Brunswick">New Brunswick</option>
+              <option value="Newfoundland and Labrador">
+                Newfoundland and Labrador
+              </option>
+              <option value="Prince Edward Island">
+                Prince Edward Island
+              </option>
+              <option value="Northwest Territories">
+                Northwest Territories
+              </option>
+              <option value="Yukon">Yukon</option>
+              <option value="Nunavut">Nunavut</option>
+            </select>
+          </div>
+
+          <div class="form-field full-field">
+            <label for="shortDescription">Short description</label>
+            <textarea
+              id="shortDescription"
+              maxlength="220"
+              placeholder="Briefly explain what you offer..."
+              required
+            ></textarea>
+
+            <div class="character-count">
+              <span id="descriptionCount">0</span>/220
+            </div>
+          </div>
+
+        </div>
+
+        <p class="form-message" id="detailsMessage"></p>
+
+        <div class="details-actions">
+          <a href="profile-preview.html" class="secondary-btn">
+            ← Back
+          </a>
+
+          <button type="submit" class="primary-btn">
+            Continue →
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+  </main>
+
+  <script src="../js/profile-details.js"></script>
+</body>
+</html>

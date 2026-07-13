@@ -1,1 +1,43 @@
-/* Onboarding and account-flow styles. */
+/* STEP 4 BACKGROUND FIX — DOES NOT MOVE THE LAYOUT */
+
+.profile-preview-page {
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(37, 99, 235, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(22, 163, 74, 0.10),
+      transparent 22%
+    ),
+    linear-gradient(
+      135deg,
+      #eef6ff,
+      #ffffff 58%,
+      #fffaf5
+    ) !important;
+}
+
+/* Remove the moving orange blob on Step 4 only */
+.profile-preview-page .bg-orange {
+  display: none !important;
+}
+
+/* Ensure the preview surfaces are fully opaque */
+.profile-preview-page .preview-card {
+  background: #ffffff !important;
+}
+
+.profile-preview-page #previewList li {
+  background: #f8fbff !important;
+}
+
+/* Center the line under the heading */
+.profile-preview-page .onboarding-desc {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
