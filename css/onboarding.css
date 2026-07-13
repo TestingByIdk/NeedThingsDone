@@ -34,10 +34,10 @@
   background: #f8fbff !important;
 }
 
-/* Center the line under the heading */
-.profile-preview-page .onboarding-desc {
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto 38px;
-  text-align: center;
+.profile-details-page .onboarding-desc {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: center !important;
 }

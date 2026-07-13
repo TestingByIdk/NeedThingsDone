@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Choose Services - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <main class="ntd-onboarding profile-services-page">
+
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-green"></div>
+
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 71%;"></div>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step done">1</div>
+        <div class="step done">2</div>
+        <div class="step done">3</div>
+        <div class="step done">4</div>
+        <div class="step done">5</div>
+        <div class="step active">6</div>
+        <div class="step">7</div>
+        <div class="step">8</div>
+      </div>
+    </div>
+
+    <section class="services-wrap">
+
+      <div class="otto-big">
+        <img
+          src="../assets/images/otto.png"
+          class="otto otto-large"
+          alt="Otto"
+        >
+      </div>
+
+      <p class="otto-text" id="servicesOttoText">
+        Choose the things that best describe what you offer.
+      </p>
+
+      <h1 id="servicesHeading">Choose your skills</h1>
+
+      <p class="onboarding-desc services-description">
+        Pick up to six. These help people find your profile in searches.
+      </p>
+
+      <div class="services-card">
+
+        <div class="services-toolbar">
+          <div class="service-search-wrap">
+            <span aria-hidden="true">🔍</span>
+
+            <input
+              id="serviceSearch"
+              type="search"
+              placeholder="Search skills..."
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="selection-counter">
+            <strong id="selectedCount">0</strong>
+            <span>/ 6 selected</span>
+          </div>
+        </div>
+
+        <div
+          class="service-options"
+          id="serviceOptions"
+          aria-live="polite"
+        ></div>
+
+        <div class="custom-service-area">
+          <div>
+            <h2>Can’t find the right option?</h2>
+            <p>Add your own skill, service, or category.</p>
+          </div>
+
+          <div class="custom-service-controls">
+            <div class="custom-input-wrap">
+              <input
+                id="customService"
+                type="text"
+                maxlength="40"
+                placeholder="Enter a custom option"
+                autocomplete="off"
+              >
+
+              <div class="custom-count">
+                <span id="customCount">0</span>/40
+              </div>
+            </div>
+
+            <button
+              id="addCustomService"
+              type="button"
+              class="secondary-btn add-custom-btn"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+
+        <p class="form-message" id="servicesMessage" aria-live="polite"></p>
+
+        <div class="details-actions services-actions">
+          <a href="profile-details.html" class="secondary-btn">
+            ← Back
+          </a>
+
+          <button
+            id="continueServices"
+            type="button"
+            class="primary-btn"
+            disabled
+          >
+            Continue →
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <script src="../js/profile-services.js"></script>
+</body>
+</html>

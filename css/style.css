@@ -240,3 +240,422 @@
   }
 }
 
+/* ==================================
+   STEP 6 — SERVICES AND SKILLS
+================================== */
+
+.profile-services-page {
+  min-height: 100vh;
+}
+
+.services-wrap {
+  width: min(1040px, 92vw);
+  margin: 34px auto 80px;
+  text-align: center;
+}
+
+.services-wrap h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+}
+
+.services-description {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.services-card {
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid #e5edfa;
+  border-radius: 30px;
+  text-align: left;
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.11);
+}
+
+.services-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.service-search-wrap {
+  width: 100%;
+  max-width: 570px;
+  min-height: 54px;
+  padding: 0 17px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: #f8fbff;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  transition: 0.2s ease;
+}
+
+.service-search-wrap:focus-within {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.service-search-wrap input {
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #0f172a;
+  font: inherit;
+}
+
+.selection-counter {
+  min-width: 135px;
+  padding: 12px 16px;
+  background: #eef4ff;
+  color: #475569;
+  border-radius: 14px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.selection-counter strong {
+  color: #2563eb;
+  font-size: 1.2rem;
+}
+
+.service-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.service-option {
+  min-height: 64px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  background: #f8fbff;
+  color: #0f172a;
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.service-option:hover {
+  transform: translateY(-2px);
+  border-color: #93b4fa;
+  background: #f2f7ff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.service-check {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid #bfdbfe;
+  border-radius: 50%;
+  color: transparent;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.service-option.selected {
+  border-color: #2563eb;
+  background: #eef4ff;
+  box-shadow: 0 9px 24px rgba(37, 99, 235, 0.12);
+}
+
+.service-option.selected .service-check {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.custom-service-area {
+  margin-top: 28px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 0.9fr);
+  align-items: center;
+  gap: 24px;
+  background: linear-gradient(135deg, #f8fbff, #f5f3ff);
+  border: 1px solid #e0e7ff;
+  border-radius: 20px;
+}
+
+.custom-service-area h2 {
+  margin-bottom: 5px;
+  font-size: 1.15rem;
+}
+
+.custom-service-area p {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.custom-service-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.custom-service-row input {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+  outline: none;
+}
+
+.custom-service-row input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.add-custom-btn {
+  border: 1px solid #2563eb;
+  cursor: pointer;
+}
+
+.services-actions {
+  margin-top: 14px;
+}
+
+.services-actions button {
+  border: none;
+  cursor: pointer;
+}
+
+.services-actions button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.no-service-results {
+  grid-column: 1 / -1;
+  padding: 42px 20px;
+  border: 1px dashed #bfdbfe;
+  border-radius: 18px;
+  text-align: center;
+  background: #f8fbff;
+}
+
+.no-service-results span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.no-service-results h2 {
+  margin-bottom: 7px;
+  font-size: 1.3rem;
+}
+
+.no-service-results p {
+  color: #64748b;
+}
+
+.form-message.success {
+  color: #15803d;
+}
+
+@media (max-width: 850px) {
+  .service-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-service-area {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .services-card {
+    padding: 22px;
+  }
+
+  .services-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .service-search-wrap {
+    max-width: none;
+  }
+
+  .selection-counter {
+    width: 100%;
+  }
+
+  .service-options {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-service-row {
+    grid-template-columns: 1fr;
+  }
+
+  .add-custom-btn {
+    width: 100%;
+  }
+
+  .services-actions {
+    flex-direction: column;
+  }
+
+  .services-actions a,
+  .services-actions button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* STEP 6 — CUSTOM INPUT, POPULAR BADGES, AND VALIDATION UI */
+
+.custom-service-controls {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+}
+
+.custom-input-wrap {
+  min-width: 0;
+}
+
+.custom-input-wrap input {
+  width: 100%;
+}
+
+.custom-count {
+  margin-top: 7px;
+  padding-right: 4px;
+  text-align: right;
+  color: #64748b;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.custom-count.near-limit {
+  color: #d97706;
+  font-weight: 800;
+}
+
+.service-name {
+  min-width: 0;
+}
+
+.popular-service-badge {
+  margin-left: auto;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.service-option.selected .popular-service-badge {
+  background: #ffffff;
+  color: #1d4ed8;
+}
+
+@media (max-width: 620px) {
+  .custom-service-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .popular-service-badge {
+    font-size: 0.64rem;
+  }
+}
+
+/* STEP 6 — CUSTOM OPTION CLEANUP */
+
+.custom-service-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.custom-input-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.custom-input-wrap input {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 72px 14px 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.custom-input-wrap input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.custom-count {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  color: #64748b;
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.custom-count.near-limit {
+  color: #d97706;
+  font-weight: 800;
+}
+
+.add-custom-btn {
+  min-height: 54px;
+  padding: 0 24px;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .custom-service-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .add-custom-btn {
+    width: 100%;
+  }
+}
