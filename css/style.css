@@ -659,3 +659,264 @@
     width: 100%;
   }
 }
+
+/* ==================================
+   STEP 7 — EXTRA PROFILE DETAILS
+================================== */
+
+.profile-extra-page{
+    min-height:100vh;
+}
+
+.extra-wrap{
+    width:min(980px,92vw);
+    margin:40px auto 80px;
+    position:relative;
+    z-index:2;
+}
+
+.extra-card{
+    margin-top:40px;
+    background:#fff;
+    border-radius:30px;
+    padding:40px;
+    box-shadow:0 20px 60px rgba(33,76,175,.08);
+}
+
+.extra-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-bottom:30px;
+}
+
+.form-field{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.full-field{
+    grid-column:1 / -1;
+}
+
+.form-field label{
+    font-weight:700;
+    color:#10213d;
+    font-size:15px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+    width:100%;
+    padding:16px 18px;
+    border:2px solid #dfe9ff;
+    border-radius:16px;
+    font-size:16px;
+    transition:.2s;
+    font-family:inherit;
+    background:#fff;
+}
+
+.form-field textarea{
+    resize:vertical;
+    min-height:150px;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+    border-color:#3366ee;
+    outline:none;
+    box-shadow:0 0 0 5px rgba(51,102,238,.12);
+}
+
+.character-count{
+    margin-top:8px;
+    text-align:right;
+    color:#6b7893;
+    font-size:14px;
+}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.section-label{
+    color:#3366ee;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.section-heading h2{
+    font-size:30px;
+    color:#0f172a;
+}
+
+.optional-pill{
+    padding:8px 14px;
+    background:#eef5ff;
+    border-radius:999px;
+    color:#3366ee;
+    font-weight:700;
+    font-size:14px;
+}
+
+.contact-section{
+    margin-top:45px;
+}
+
+.contact-options{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-top:25px;
+}
+
+.choice-toggle{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    cursor:pointer;
+}
+
+.choice-toggle input{
+    display:none;
+}
+
+.choice-toggle-box{
+    width:24px;
+    height:24px;
+    border-radius:8px;
+    border:2px solid #c7d9ff;
+    background:#fff;
+    transition:.2s;
+    flex-shrink:0;
+    margin-top:3px;
+}
+
+.choice-toggle input:checked + .choice-toggle-box{
+    background:#3366ee;
+    border-color:#3366ee;
+    position:relative;
+}
+
+.choice-toggle input:checked + .choice-toggle-box::after{
+    content:"✓";
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:700;
+}
+
+.choice-toggle strong{
+    display:block;
+    color:#13213d;
+    margin-bottom:4px;
+}
+
+.choice-toggle small{
+    color:#6b7893;
+    line-height:1.5;
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.price-row span{
+    font-size:22px;
+    font-weight:700;
+    color:#3366ee;
+}
+
+.price-row input{
+    flex:1;
+}
+
+.price-row select{
+    width:220px;
+}
+
+.extra-actions{
+    margin-top:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.form-message{
+    margin-top:25px;
+    font-weight:600;
+    color:#1f7a3d;
+}
+
+.form-message.error{
+    color:#d63031;
+}
+
+.extra-description{
+    text-align:center;
+    max-width:650px;
+    margin:15px auto 0;
+}
+
+#extraHeading{
+    text-align:center;
+    margin-top:15px;
+    font-size:clamp(2.6rem,5vw,4rem);
+}
+
+#extraOttoText{
+    text-align:center;
+    color:#3366ee;
+    font-weight:700;
+    font-size:1.3rem;
+}
+
+.otto-big{
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+@media (max-width:900px){
+
+    .extra-grid{
+        grid-template-columns:1fr;
+    }
+
+    .price-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .price-row select{
+        width:100%;
+    }
+
+    .section-heading{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .extra-actions{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .extra-actions a,
+    .extra-actions button{
+        width:100%;
+    }
+}
