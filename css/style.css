@@ -920,3 +920,53 @@
         width:100%;
     }
 }
+
+/* STEP 7 — FIELD EXPLANATIONS AND DOCUMENT LINK */
+
+.field-help {
+  margin: -2px 0 2px;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.field-optional {
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.document-link-field {
+  padding: 22px;
+  background: linear-gradient(135deg, #f8fbff, #f5f3ff);
+  border: 1px solid #dbeafe;
+  border-radius: 20px;
+}
+
+.accepted-document-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.accepted-document-types span {
+  padding: 7px 11px;
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.link-warning {
+  margin-top: 3px;
+  padding: 10px 13px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  color: #9a3412;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}

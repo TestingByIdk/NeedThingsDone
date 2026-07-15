@@ -65,69 +65,72 @@ const pageSettings = {
         </select>
       </div>
 
-      <div class="form-field">
-        <label for="availability">Availability</label>
-
-        <select id="availability" required>
-          <option value="">Select availability</option>
-          <option value="Weekdays">Weekdays</option>
-          <option value="Evenings">Evenings</option>
-          <option value="Weekends">Weekends</option>
-          <option value="Flexible">Flexible</option>
-          <option value="By appointment">By appointment</option>
-        </select>
-      </div>
-
-      <div class="form-field">
-        <label for="serviceArea">Service area</label>
-
-        <select id="serviceArea" required>
-          <option value="">Select service area</option>
-          <option value="5 km">Within 5 km</option>
-          <option value="10 km">Within 10 km</option>
-          <option value="25 km">Within 25 km</option>
-          <option value="City-wide">City-wide</option>
-          <option value="Remote">Remote services</option>
-        </select>
-      </div>
-
-      <div class="form-field">
-        <label for="languages">Languages</label>
-
-        <input
-          id="languages"
-          type="text"
-          maxlength="80"
-          placeholder="English, French"
-        >
-      </div>
-
       <div class="form-field full-field">
-        <label>Starting price</label>
 
-        <div class="price-row">
-          <span>$</span>
+  <label>Starting price</label>
 
-          <input
-            id="startingPrice"
-            type="number"
-            min="0"
-            max="100000"
-            step="0.01"
-            placeholder="25"
-          >
+  <div class="price-row">
 
-          <select id="priceType">
-            <option value="per hour">Per hour</option>
-            <option value="per job">Per job</option>
-            <option value="starting at">Starting at</option>
-            <option value="contact for price">
-              Contact for price
-            </option>
-          </select>
-        </div>
-      </div>
-    `
+    <span>$</span>
+
+    <input
+      id="startingPrice"
+      type="number"
+      min="0"
+      max="100000"
+      step="0.01"
+      placeholder="25"
+    >
+
+    <select id="priceType">
+      <option value="per hour">Per hour</option>
+      <option value="per job">Per job</option>
+      <option value="starting at">Starting at</option>
+      <option value="contact for price">
+        Contact for price
+      </option>
+    </select>
+
+  </div>
+
+</div>
+
+<div class="form-field full-field document-link-field">
+
+    <label for="documentLink">
+        Resume, portfolio or flyer
+        <span class="field-optional">(Optional)</span>
+    </label>
+
+    <p class="field-help">
+        Upload your resume, portfolio, or promotional flyer somewhere online
+        (Google Drive, Dropbox, OneDrive, etc.) and paste the public link here.
+
+        NeedThingsDone will automatically show a preview on your public profile.
+    </p>
+
+    <input
+        id="documentLink"
+        type="url"
+        placeholder="https://drive.google.com/..."
+    >
+
+    <div class="accepted-document-types">
+        <span>📄 Resume PDF</span>
+        <span>🎨 Portfolio</span>
+        <span>📢 Flyer</span>
+        <span>📋 Brochure</span>
+    </div>
+
+    <p class="link-warning">
+        Make sure anyone with the link can view the document.
+    </p>
+
+</div>
+
+</div>
+            `
+    
   },
 
   shop: {
@@ -384,6 +387,36 @@ const selectedSettings =
 extraHeading.textContent = selectedSettings.heading;
 extraOttoText.textContent = selectedSettings.otto;
 dynamicFields.innerHTML = selectedSettings.fields;
+const websiteLabel =
+    document.getElementById("websiteLabel");
+
+const websiteHelp =
+    document.getElementById("websiteHelp");
+
+if(profileType==="individual"){
+
+    websiteLabel.textContent =
+        "Personal website or social profile";
+
+    websiteHelp.textContent =
+        "Optional. Add your portfolio, LinkedIn, website, or another public profile. Use the Resume/Flyer section above if you want a document preview.";
+
+}else if(profileType==="shop"){
+
+    websiteLabel.textContent =
+        "Shop website";
+
+    websiteHelp.textContent =
+        "Recommended. Add your Shopify store, menu, online catalogue, or shop page.";
+
+}else{
+
+    websiteLabel.textContent =
+        "Business website";
+
+    websiteHelp.textContent =
+        "Recommended. Add your official website or Google Business page.";
+}
 
 const longDescription =
   document.getElementById("longDescription");
@@ -419,6 +452,20 @@ extraDetailsForm.addEventListener("submit", event => {
     );
     return;
   }
+
+  if(
+    extraDetails.documentLink &&
+    !isValidWebsite(extraDetails.documentLink)
+){
+
+    showMessage(
+        "Please enter a valid public resume or flyer URL.",
+        true
+    );
+
+    return;
+
+}
 
   if (
     extraDetails.website &&
