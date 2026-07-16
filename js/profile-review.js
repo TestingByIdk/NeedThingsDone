@@ -16,68 +16,47 @@ const workStyle =
 const extraDetails =
   readStoredObject("ntdProfileExtraDetails");
 
-const reviewAvatar =
-  document.getElementById("reviewAvatar");
+const elements = {
+  reviewAvatar: document.getElementById("reviewAvatar"),
+  reviewType: document.getElementById("reviewType"),
+  reviewName: document.getElementById("reviewName"),
+  reviewLocation: document.getElementById("reviewLocation"),
+  reviewAbout: document.getElementById("reviewAbout"),
+  reviewServices: document.getElementById("reviewServices"),
+  reviewDetails: document.getElementById("reviewDetails"),
+  reviewContact: document.getElementById("reviewContact"),
 
-const reviewType =
-  document.getElementById("reviewType");
+  reviewDocumentSection:
+    document.getElementById("reviewDocumentSection"),
 
-const reviewName =
-  document.getElementById("reviewName");
+  reviewDocumentLink:
+    document.getElementById("reviewDocumentLink"),
 
-const reviewLocation =
-  document.getElementById("reviewLocation");
+  strengthScore: document.getElementById("strengthScore"),
+  strengthLabel: document.getElementById("strengthLabel"),
+  strengthFill: document.getElementById("strengthFill"),
 
-const reviewAbout =
-  document.getElementById("reviewAbout");
+  strengthSuggestions:
+    document.getElementById("strengthSuggestions"),
 
-const reviewServices =
-  document.getElementById("reviewServices");
+  publishProfile: document.getElementById("publishProfile"),
+  reviewMessage: document.getElementById("reviewMessage"),
 
-const reviewDetails =
-  document.getElementById("reviewDetails");
+  reviewProfileTags:
+    document.getElementById("reviewProfileTags"),
 
-const reviewContact =
-  document.getElementById("reviewContact");
+  reviewWorkStyleSection:
+    document.getElementById("reviewWorkStyleSection"),
 
-const reviewDocumentSection =
-  document.getElementById("reviewDocumentSection");
+  reviewWorkStyleIcon:
+    document.getElementById("reviewWorkStyleIcon"),
 
-const reviewDocumentLink =
-  document.getElementById("reviewDocumentLink");
+  reviewWorkStyleName:
+    document.getElementById("reviewWorkStyleName"),
 
-const strengthScore =
-  document.getElementById("strengthScore");
-
-const strengthLabel =
-  document.getElementById("strengthLabel");
-
-const strengthFill =
-  document.getElementById("strengthFill");
-
-const strengthSuggestions =
-  document.getElementById("strengthSuggestions");
-
-const publishProfile =
-  document.getElementById("publishProfile");
-
-const reviewMessage =
-  document.getElementById("reviewMessage");
-
-const reviewProfileTags =
-  document.getElementById("reviewProfileTags");
-
-const reviewWorkStyleSection =
-  document.getElementById("reviewWorkStyleSection");
-
-const reviewWorkStyleIcon =
-  document.getElementById("reviewWorkStyleIcon");
-
-const reviewWorkStyleName =
-  document.getElementById("reviewWorkStyleName");
-
-const reviewWorkStyleDescription =
-  document.getElementById("reviewWorkStyleDescription");
+  reviewWorkStyleDescription:
+    document.getElementById("reviewWorkStyleDescription")
+};
 
 const typeSettings = {
   individual: {
@@ -104,82 +83,28 @@ const typeSettings = {
 const currentType =
   typeSettings[profileType] || typeSettings.individual;
 
-renderProfile();
-renderProfileTags();
-renderWorkStyle();
-renderStrength();
+initializeReviewPage();
 
-function renderProfileTags() {
-  reviewProfileTags.innerHTML = "";
+function initializeReviewPage() {
+  renderProfile();
+  renderProfileTags();
+  renderWorkStyle();
+  renderStrength();
 
-  if (profileTags.length === 0) {
-    reviewProfileTags.hidden = true;
-    return;
-  }
-
-  reviewProfileTags.hidden = false;
-
-  profileTags.forEach(tag => {
-    const item = document.createElement("span");
-
-    item.textContent = tag;
-
-    /*
-      These are self-selected tags, so they do not get
-      a verification checkmark yet.
-    */
-    reviewProfileTags.appendChild(item);
-  });
-}
-
-function renderWorkStyle() {
-  if (!workStyle.name) {
-    reviewWorkStyleSection.hidden = true;
-    return;
-  }
-
-  reviewWorkStyleSection.hidden = false;
-
-  reviewWorkStyleIcon.textContent =
-    workStyle.icon || "🧩";
-
-  reviewWorkStyleName.textContent =
-    workStyle.name;
-
-  reviewWorkStyleDescription.textContent =
-    workStyle.description || "";
-}
-
-publishProfile.addEventListener("click", () => {
-  const completeProfile = {
-  type: profileType,
-  details: profileDetails,
-  services: profileServices,
-  profileTags,
-  workStyle,
-  extraDetails
-};
-
-  localStorage.setItem(
-    "ntdCompletedProfile",
-    JSON.stringify(completeProfile)
+  elements.publishProfile.addEventListener(
+    "click",
+    publishCompletedProfile
   );
-
-  reviewMessage.textContent =
-    "Profile saved locally. Database publishing will be connected next.";
-
-  reviewMessage.classList.remove("error");
-  reviewMessage.classList.add("success");
-
-  publishProfile.disabled = true;
-  publishProfile.textContent = "Profile Ready ✓";
-});
+}
 
 function renderProfile() {
-  reviewAvatar.textContent = currentType.icon;
-  reviewType.textContent = currentType.label;
+  elements.reviewAvatar.textContent =
+    currentType.icon;
 
-  reviewName.textContent =
+  elements.reviewType.textContent =
+    currentType.label;
+
+  elements.reviewName.textContent =
     profileDetails.displayName ||
     `${currentType.label} profile`;
 
@@ -188,12 +113,12 @@ function renderProfile() {
     profileDetails.province
   ].filter(Boolean);
 
-  reviewLocation.textContent =
+  elements.reviewLocation.textContent =
     locationParts.length > 0
       ? `📍 ${locationParts.join(", ")}`
       : "📍 Location not added";
 
-  reviewAbout.textContent =
+  elements.reviewAbout.textContent =
     extraDetails.longDescription ||
     profileDetails.shortDescription ||
     "No description added yet.";
@@ -204,138 +129,244 @@ function renderProfile() {
   renderDocument();
 }
 
+function renderProfileTags() {
+  const container =
+    elements.reviewProfileTags;
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (profileTags.length === 0) {
+    container.hidden = true;
+    return;
+  }
+
+  container.hidden = false;
+
+  profileTags.forEach(tag => {
+    const item =
+      document.createElement("span");
+
+    item.textContent = tag;
+
+    container.appendChild(item);
+  });
+}
+
+function renderWorkStyle() {
+  const section =
+    elements.reviewWorkStyleSection;
+
+  if (!section) {
+    return;
+  }
+
+  if (!workStyle.name) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+
+  elements.reviewWorkStyleIcon.textContent =
+    workStyle.icon || "🧩";
+
+  elements.reviewWorkStyleName.textContent =
+    workStyle.name;
+
+  elements.reviewWorkStyleDescription.textContent =
+    workStyle.description || "";
+}
+
 function renderServices() {
-  reviewServices.innerHTML = "";
+  const container =
+    elements.reviewServices;
+
+  container.innerHTML = "";
 
   if (profileServices.length === 0) {
-    reviewServices.innerHTML =
-      `<p class="review-empty-text">No services selected.</p>`;
+    container.innerHTML = `
+      <p class="review-empty-text">
+        No services selected.
+      </p>
+    `;
 
     return;
   }
 
   profileServices.forEach(service => {
-    const tag = document.createElement("span");
+    const tag =
+      document.createElement("span");
 
     tag.textContent = service;
-    reviewServices.appendChild(tag);
+
+    container.appendChild(tag);
   });
 }
 
 function renderDetails() {
-  const details = getDisplayDetails();
+  const container =
+    elements.reviewDetails;
 
-  reviewDetails.innerHTML = "";
+  const details =
+    getDisplayDetails();
 
-  details.forEach(detail => {
-    if (!detail.value) return;
+  container.innerHTML = "";
 
-    const item = document.createElement("div");
+  details
+    .filter(detail => detail.value)
+    .forEach(detail => {
+      const item =
+        document.createElement("div");
 
-    item.className = "review-detail-item";
+      item.className =
+        "review-detail-item";
 
-    item.innerHTML = `
-      <span>${escapeHTML(detail.label)}</span>
-      <strong>${escapeHTML(String(detail.value))}</strong>
+      item.innerHTML = `
+        <span>
+          ${escapeHTML(detail.label)}
+        </span>
+
+        <strong>
+          ${escapeHTML(String(detail.value))}
+        </strong>
+      `;
+
+      container.appendChild(item);
+    });
+
+  if (!container.children.length) {
+    container.innerHTML = `
+      <p class="review-empty-text">
+        No extra details added.
+      </p>
     `;
-
-    reviewDetails.appendChild(item);
-  });
-
-  if (!reviewDetails.children.length) {
-    reviewDetails.innerHTML =
-      `<p class="review-empty-text">No extra details added.</p>`;
   }
 }
 
 function getDisplayDetails() {
   if (profileType === "individual") {
-    const price =
-      extraDetails.priceType === "contact for price"
-        ? "Contact for price"
-        : extraDetails.startingPrice
-          ? `$${extraDetails.startingPrice} ${extraDetails.priceType || ""}`
-          : "";
-
-    return [
-      {
-        label: "Experience",
-        value: extraDetails.experience
-      },
-      {
-        label: "Availability",
-        value: extraDetails.availability
-      },
-      {
-        label: "Service area",
-        value: extraDetails.serviceArea
-      },
-      {
-        label: "Languages",
-        value: extraDetails.languages
-      },
-      {
-        label: "Starting price",
-        value: price
-      }
-    ];
+    return getIndividualDetails();
   }
 
   if (profileType === "shop") {
-    return [
-      {
-        label: "Store type",
-        value: extraDetails.storeType
-      },
-      {
-        label: "Order options",
-        value: extraDetails.orderOptions
-      },
-      {
-        label: "Store hours",
-        value: extraDetails.shopHours
-      },
-      {
-        label: "Price range",
-        value: extraDetails.priceRange
-      }
-    ];
+    return getShopDetails();
   }
 
   if (profileType === "large-business") {
-    return [
-      {
-        label: "Locations",
-        value: extraDetails.locationCount
-      },
-      {
-        label: "Years in business",
-        value: extraDetails.yearsInBusiness
-      },
-      {
-        label: "General hours",
-        value: extraDetails.businessHours
-      },
-      {
-        label: "Coverage area",
-        value: extraDetails.coverageArea
-      }
-    ];
+    return getLargeBusinessDetails();
   }
 
+  return getBusinessDetails();
+}
+
+function getIndividualDetails() {
+  const price =
+    extraDetails.priceType ===
+    "contact for price"
+      ? "Contact for price"
+      : extraDetails.startingPrice
+        ? `$${extraDetails.startingPrice} ${
+            extraDetails.priceType || ""
+          }`.trim()
+        : "";
+
+  return [
+    {
+      label: "Experience",
+      value: extraDetails.experience
+    },
+
+    {
+      label: "Availability",
+      value: extraDetails.availability
+    },
+
+    {
+      label: "Service area",
+      value: extraDetails.serviceArea
+    },
+
+    {
+      label: "Languages",
+      value: extraDetails.languages
+    },
+
+    {
+      label: "Starting price",
+      value: price
+    }
+  ];
+}
+
+function getShopDetails() {
+  return [
+    {
+      label: "Store type",
+      value: extraDetails.storeType
+    },
+
+    {
+      label: "Order options",
+      value: extraDetails.orderOptions
+    },
+
+    {
+      label: "Store hours",
+      value: extraDetails.shopHours
+    },
+
+    {
+      label: "Price range",
+      value: extraDetails.priceRange
+    }
+  ];
+}
+
+function getLargeBusinessDetails() {
+  return [
+    {
+      label: "Locations",
+      value: extraDetails.locationCount
+    },
+
+    {
+      label: "Years in business",
+      value: extraDetails.yearsInBusiness
+    },
+
+    {
+      label: "General hours",
+      value: extraDetails.businessHours
+    },
+
+    {
+      label: "Coverage area",
+      value: extraDetails.coverageArea
+    }
+  ];
+}
+
+function getBusinessDetails() {
   return [
     {
       label: "Years in business",
       value: extraDetails.yearsInBusiness
     },
+
     {
       label: "Business hours",
       value: extraDetails.businessHours
     },
+
     {
       label: "Service area",
       value: extraDetails.serviceArea
     },
+
     {
       label: "Emergency service",
       value: extraDetails.emergencyService
@@ -344,19 +375,56 @@ function getDisplayDetails() {
 }
 
 function renderContact() {
-  reviewContact.innerHTML = "";
+  const container =
+    elements.reviewContact;
 
-  const contactItems = [];
+  const contactItems =
+    getContactItems();
+
+  container.innerHTML = "";
+
+  if (contactItems.length === 0) {
+    container.innerHTML = `
+      <p class="review-empty-text">
+        No public contact options selected.
+      </p>
+    `;
+
+    return;
+  }
+
+  contactItems.forEach(contact => {
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "review-contact-item";
+
+    item.innerHTML = `
+      <span>${contact.icon}</span>
+
+      <p>
+        ${escapeHTML(contact.label)}
+      </p>
+    `;
+
+    container.appendChild(item);
+  });
+}
+
+function getContactItems() {
+  const items = [];
 
   if (extraDetails.allowMessages) {
-    contactItems.push({
+    items.push({
       icon: "💬",
-      label: "NeedThingsDone messages enabled"
+      label:
+        "NeedThingsDone messages enabled"
     });
   }
 
   if (extraDetails.contactEmail) {
-    contactItems.push({
+    items.push({
       icon: "✉️",
       label: extraDetails.contactEmail
     });
@@ -366,38 +434,20 @@ function renderContact() {
     extraDetails.contactPhone &&
     extraDetails.showPhone
   ) {
-    contactItems.push({
+    items.push({
       icon: "📞",
       label: extraDetails.contactPhone
     });
   }
 
   if (extraDetails.website) {
-    contactItems.push({
+    items.push({
       icon: "🌐",
       label: extraDetails.website
     });
   }
 
-  if (contactItems.length === 0) {
-    reviewContact.innerHTML =
-      `<p class="review-empty-text">No public contact options selected.</p>`;
-
-    return;
-  }
-
-  contactItems.forEach(contact => {
-    const item = document.createElement("div");
-
-    item.className = "review-contact-item";
-
-    item.innerHTML = `
-      <span>${contact.icon}</span>
-      <p>${escapeHTML(contact.label)}</p>
-    `;
-
-    reviewContact.appendChild(item);
-  });
+  return items;
 }
 
 function renderDocument() {
@@ -405,22 +455,48 @@ function renderDocument() {
     profileType !== "individual" ||
     !extraDetails.documentLink
   ) {
-    reviewDocumentSection.hidden = true;
+    elements.reviewDocumentSection.hidden =
+      true;
+
     return;
   }
 
-  reviewDocumentSection.hidden = false;
-  reviewDocumentLink.href = extraDetails.documentLink;
+  elements.reviewDocumentSection.hidden =
+    false;
+
+  elements.reviewDocumentLink.href =
+    extraDetails.documentLink;
 }
 
 function renderStrength() {
+  const result =
+    calculateProfileStrength();
+
+  elements.strengthScore.textContent =
+    `${result.score}%`;
+
+  elements.strengthFill.style.width =
+    `${result.score}%`;
+
+  elements.strengthLabel.textContent =
+    getStrengthLabel(result.score);
+
+  renderStrengthSuggestions(
+    result.suggestions
+  );
+}
+
+function calculateProfileStrength() {
   let score = 0;
+
   const suggestions = [];
 
   if (profileDetails.displayName) {
-    score += 15;
+    score += 12;
   } else {
-    suggestions.push("Add a profile name.");
+    suggestions.push(
+      "Add a profile name."
+    );
   }
 
   if (
@@ -429,28 +505,60 @@ function renderStrength() {
   ) {
     score += 10;
   } else {
-    suggestions.push("Add your complete location.");
+    suggestions.push(
+      "Add your complete location."
+    );
   }
 
   if (profileServices.length >= 3) {
-    score += 20;
-  } else if (profileServices.length > 0) {
-    score += 10;
-    suggestions.push("Add a few more skills or services.");
+    score += 18;
+  } else if (
+    profileServices.length > 0
+  ) {
+    score += 9;
+
+    suggestions.push(
+      "Add a few more skills or services."
+    );
   } else {
-    suggestions.push("Choose at least one skill or service.");
+    suggestions.push(
+      "Choose at least one skill or service."
+    );
+  }
+
+  if (profileTags.length >= 3) {
+    score += 12;
+  } else if (
+    profileTags.length > 0
+  ) {
+    score += 6;
+
+    suggestions.push(
+      "Choose a few more profile tags."
+    );
+  } else {
+    suggestions.push(
+      "Complete Otto’s tag questions."
+    );
   }
 
   if (
     extraDetails.longDescription &&
     extraDetails.longDescription.length >= 100
   ) {
-    score += 25;
-  } else if (extraDetails.longDescription) {
-    score += 12;
-    suggestions.push("Write a slightly longer introduction.");
+    score += 23;
+  } else if (
+    extraDetails.longDescription
+  ) {
+    score += 11;
+
+    suggestions.push(
+      "Write a slightly longer introduction."
+    );
   } else {
-    suggestions.push("Add an About section.");
+    suggestions.push(
+      "Add an About section."
+    );
   }
 
   if (
@@ -459,16 +567,18 @@ function renderStrength() {
     extraDetails.contactPhone ||
     extraDetails.website
   ) {
-    score += 15;
+    score += 13;
   } else {
-    suggestions.push("Add a contact option.");
+    suggestions.push(
+      "Add a contact option."
+    );
   }
 
   if (
     extraDetails.documentLink ||
     extraDetails.website
   ) {
-    score += 15;
+    score += 12;
   } else {
     suggestions.push(
       profileType === "individual"
@@ -477,25 +587,38 @@ function renderStrength() {
     );
   }
 
-  score = Math.min(score, 100);
+  return {
+    score: Math.min(score, 100),
+    suggestions
+  };
+}
 
-  strengthScore.textContent = `${score}%`;
-  strengthFill.style.width = `${score}%`;
-
+function getStrengthLabel(score) {
   if (score >= 85) {
-    strengthLabel.textContent = "Excellent";
-  } else if (score >= 65) {
-    strengthLabel.textContent = "Looking good";
-  } else if (score >= 40) {
-    strengthLabel.textContent = "Good start";
-  } else {
-    strengthLabel.textContent = "Needs more details";
+    return "Excellent";
   }
 
-  strengthSuggestions.innerHTML = "";
+  if (score >= 65) {
+    return "Looking good";
+  }
+
+  if (score >= 40) {
+    return "Good start";
+  }
+
+  return "Needs more details";
+}
+
+function renderStrengthSuggestions(
+  suggestions
+) {
+  const container =
+    elements.strengthSuggestions;
+
+  container.innerHTML = "";
 
   if (suggestions.length === 0) {
-    strengthSuggestions.innerHTML = `
+    container.innerHTML = `
       <p class="strength-complete">
         ✓ Your profile looks ready.
       </p>
@@ -504,42 +627,102 @@ function renderStrength() {
     return;
   }
 
-  suggestions.slice(0, 3).forEach(suggestion => {
-    const item = document.createElement("p");
+  suggestions
+    .slice(0, 3)
+    .forEach(suggestion => {
+      const item =
+        document.createElement("p");
 
-    item.textContent = `• ${suggestion}`;
-    strengthSuggestions.appendChild(item);
-  });
+      item.textContent =
+        `• ${suggestion}`;
+
+      container.appendChild(item);
+    });
+}
+
+function publishCompletedProfile() {
+  const completeProfile = {
+    type: profileType,
+    details: profileDetails,
+    services: profileServices,
+    profileTags,
+    workStyle,
+    extraDetails
+  };
+
+  localStorage.setItem(
+    "ntdCompletedProfile",
+    JSON.stringify(completeProfile)
+  );
+
+  elements.reviewMessage.textContent =
+    "Profile saved locally. Database publishing will be connected next.";
+
+  elements.reviewMessage.classList.remove(
+    "error"
+  );
+
+  elements.reviewMessage.classList.add(
+    "success"
+  );
+
+  elements.publishProfile.disabled =
+    true;
+
+  elements.publishProfile.textContent =
+    "Profile Ready ✓";
 }
 
 function readStoredObject(key) {
   try {
-    return JSON.parse(localStorage.getItem(key)) || {};
-  } catch {
+    return (
+      JSON.parse(
+        localStorage.getItem(key)
+      ) || {}
+    );
+  } catch (error) {
+    console.error(
+      `Could not read stored object: ${key}`,
+      error
+    );
+
     return {};
   }
 }
 
 function readStoredArray(key) {
   try {
-    const value = JSON.parse(localStorage.getItem(key));
+    const value =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
 
-    return Array.isArray(value) ? value : [];
-  } catch {
+    return Array.isArray(value)
+      ? value
+      : [];
+  } catch (error) {
+    console.error(
+      `Could not read stored array: ${key}`,
+      error
+    );
+
     return [];
   }
 }
 
 function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => {
-    const replacements = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    };
+  return String(value).replace(
+    /[&<>"']/g,
+    character => {
+      const replacements = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      };
 
-    return replacements[character];
-  });
+      return replacements[character];
+    }
+  );
 }

@@ -1,47 +1,20 @@
-NEEDTHINGSDONE — MEET OTTO (NEW STEP 8)
+NEEDTHINGSDONE — INDIVIDUAL SEARCH RESULTS
 
-Copy these NEW files into your organized project:
+Copy:
+- pages/individual-search.html
+- js/individual-search.js
+- css/individual-search.css
 
-- onboarding/meet-otto.html
-- js/meet-otto.js
-- css/meet-otto.css
+Open pages/individual-search.html with Live Server.
 
-Then open:
+Desktop:
+- Amazon-style filters on the left.
+- Main Filters button collapses/reopens the sidebar.
+- Every filter category can open/close independently.
 
-js/profile-extra-details.js
+Mobile:
+- Filters become a slide-out drawer.
+- Tapping the overlay or X closes it.
 
-Find:
-
-window.location.href = "profile-review.html";
-
-Replace it with:
-
-window.location.href = "meet-otto.html";
-
-The new page already sends users to profile-review.html when they save their tags.
-
-WHAT IT INCLUDES
-
-- Five Otto personality/work-style questions
-- A different Otto reaction for each answer
-- Live tag recommendations
-- Eight possible work-style results
-- Up to six final profile tags
-- Custom tags with a 24-character limit
-- Inappropriate-word filtering
-- Saves these localStorage values:
-  - ntdProfileTags
-  - ntdWorkStyle
-  - ntdOttoAnswers
-
-NEXT TEST
-
-1. Finish Step 7.
-2. Click Review Profile.
-3. The new Meet Otto page should open.
-4. Answer all five questions.
-5. Choose up to six tags.
-6. Click Save Tags & Review Profile.
-7. The existing Review Profile page should open.
-
-After this test, the next change is displaying ntdProfileTags directly below the profile name on Review Profile.
+The page currently uses sample data in individual-search.js.
+Later, replace the profiles array with database results.
