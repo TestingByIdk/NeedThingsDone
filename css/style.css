@@ -970,3 +970,446 @@
   font-size: 0.84rem;
   line-height: 1.5;
 }
+
+/* ==================================
+   STEP 8 — PROFILE REVIEW
+================================== */
+
+.profile-review-page {
+  min-height: 100vh;
+}
+
+.review-wrap {
+  width: min(1180px, 94vw);
+  margin: 36px auto 80px;
+  text-align: center;
+}
+
+.review-wrap > h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.review-description {
+  max-width: 720px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.review-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 26px;
+  align-items: start;
+  text-align: left;
+}
+
+.public-profile-preview,
+.profile-strength-card,
+.publish-note {
+  background: #ffffff;
+  border: 1px solid #e5edfa;
+  border-radius: 28px;
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.1);
+}
+
+.public-profile-preview {
+  overflow: hidden;
+}
+
+.profile-preview-header {
+  padding: 34px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(124, 58, 237, 0.11),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #eef4ff, #ffffff);
+}
+
+.profile-avatar {
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border-radius: 26px;
+  background: #ffffff;
+  font-size: 2.7rem;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12);
+}
+
+.profile-type-label,
+.review-mini-label {
+  margin-bottom: 5px;
+  color: #2563eb;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.profile-heading-content h2 {
+  margin-bottom: 7px;
+  font-size: 2rem;
+}
+
+.profile-location {
+  color: #64748b;
+}
+
+.new-profile-badge {
+  align-self: start;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.75rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.profile-preview-section {
+  padding: 28px 34px;
+  border-top: 1px solid #edf2fa;
+}
+
+.preview-section-heading {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.preview-section-heading h3 {
+  font-size: 1.25rem;
+}
+
+.preview-section-heading a {
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.profile-preview-section > p {
+  color: #475569;
+  line-height: 1.75;
+}
+
+.review-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.review-tags span {
+  padding: 9px 13px;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #1e3a8a;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.review-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.review-detail-item {
+  padding: 15px;
+  border: 1px solid #e1eaf8;
+  border-radius: 15px;
+  background: #f8fbff;
+}
+
+.review-detail-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: #64748b;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.review-detail-item strong {
+  color: #0f172a;
+}
+
+.review-contact-list {
+  display: grid;
+  gap: 11px;
+}
+
+.review-contact-item {
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.review-contact-item p {
+  min-width: 0;
+  color: #334155;
+  overflow-wrap: anywhere;
+}
+
+.document-preview-card {
+  padding: 18px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f8fbff, #f5f3ff);
+}
+
+.document-preview-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #ffffff;
+  font-size: 1.8rem;
+}
+
+.document-preview-card h4 {
+  margin-bottom: 4px;
+}
+
+.document-preview-card p {
+  margin-bottom: 8px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.document-preview-card a {
+  color: #2563eb;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.review-sidebar {
+  display: grid;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+}
+
+.profile-strength-card,
+.publish-note {
+  padding: 25px;
+}
+
+.strength-heading {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.strength-heading strong {
+  color: #2563eb;
+  font-size: 2.2rem;
+}
+
+.strength-heading span {
+  color: #475569;
+  font-weight: 800;
+}
+
+.strength-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7eef9;
+}
+
+.strength-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transition: width 0.5s ease;
+}
+
+.strength-suggestions {
+  margin-top: 18px;
+  display: grid;
+  gap: 9px;
+}
+
+.strength-suggestions p {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.strength-complete {
+  color: #15803d !important;
+  font-weight: 800;
+}
+
+.publish-note h3 {
+  margin-bottom: 11px;
+}
+
+.publish-note p {
+  margin-bottom: 12px;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.review-empty-text {
+  color: #94a3b8 !important;
+  font-style: italic;
+}
+
+.review-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.review-actions button {
+  border: none;
+  cursor: pointer;
+}
+
+.publish-profile-btn:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+@media (max-width: 950px) {
+  .review-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .review-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 650px) {
+  .profile-preview-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin: auto;
+  }
+
+  .new-profile-badge {
+    justify-self: center;
+  }
+
+  .review-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-actions {
+    flex-direction: column;
+  }
+
+  .review-actions a,
+  .review-actions button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==================================
+   REVIEW PAGE — PROFILE TAGS
+================================== */
+
+.review-profile-tags {
+  margin: 9px 0 11px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.review-profile-tags span {
+  padding: 6px 10px;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #1e3a8a;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+/*
+  Future verified tags can use this class.
+  Do not add it to self-selected tags.
+*/
+.review-profile-tags span.verified-tag {
+  border-color: #86efac;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.review-profile-tags span.verified-tag::before {
+  content: "✓";
+  margin-right: 5px;
+  font-weight: 900;
+}
+
+/* Otto work-style result */
+
+.review-work-style {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      #f8fbff,
+      #f5f3ff
+    );
+}
+
+.review-work-style > span {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #ffffff;
+  font-size: 2rem;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+}
+
+.review-work-style h4 {
+  margin: 0 0 5px;
+  color: #0f172a;
+  font-size: 1.15rem;
+}
+
+.review-work-style p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}

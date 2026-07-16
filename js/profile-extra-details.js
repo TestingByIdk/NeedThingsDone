@@ -483,7 +483,7 @@ extraDetailsForm.addEventListener("submit", event => {
     JSON.stringify(extraDetails)
   );
 
-  window.location.href = "profile-review.html";
+  window.location.href = "meet-otto.html";
 });
 
 function collectFormValues() {

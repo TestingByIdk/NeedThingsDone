@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Otto - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/meet-otto.css">
+</head>
+<body>
+  <main class="ntd-onboarding meet-otto-page">
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-green"></div>
+
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 89%;"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="step done">1</div><div class="step done">2</div>
+        <div class="step done">3</div><div class="step done">4</div>
+        <div class="step done">5</div><div class="step done">6</div>
+        <div class="step done">7</div><div class="step active">8</div>
+        <div class="step">9</div>
+      </div>
+    </div>
+
+    <section class="otto-quiz-wrap">
+      <div class="otto-quiz-header">
+        <img src="../assets/images/otto.png" class="otto otto-large" alt="Otto">
+        <p class="otto-quiz-kicker">A quick chat with Otto</p>
+        <h1 id="quizHeading">Let’s get to know how you work.</h1>
+        <p class="otto-quiz-intro" id="quizIntro">
+          There are no right or wrong answers. I’ll use your choices to recommend profile tags that fit your work style.
+        </p>
+      </div>
+
+      <div class="otto-quiz-layout">
+        <section class="otto-quiz-card">
+          <div id="introScreen" class="quiz-screen active">
+            <div class="quiz-welcome-icon">🐙</div>
+            <h2>Hi! I’m Otto.</h2>
+            <p>
+              Before we finish your profile, answer five quick questions.
+              I’ll listen to your choices, recommend up to six tags, and give your work style a fun name.
+            </p>
+
+            <div class="quiz-info-grid">
+              <div><strong>5</strong><span>quick questions</span></div>
+              <div><strong>6</strong><span>profile tags maximum</span></div>
+              <div><strong>1</strong><span>fun work style</span></div>
+            </div>
+
+            <button id="startQuiz" type="button" class="primary-btn quiz-main-btn">Let’s Begin →</button>
+          </div>
+
+          <div id="questionScreen" class="quiz-screen">
+            <div class="question-topline">
+              <span id="questionNumber">Question 1 of 5</span>
+              <div class="question-progress"><div id="questionProgressFill"></div></div>
+            </div>
+
+            <h2 id="questionText"></h2>
+            <div id="answerOptions" class="answer-options"></div>
+
+            <div id="ottoReaction" class="otto-reaction" hidden>
+              <img src="../assets/images/otto.png" class="otto otto-small" alt="">
+              <div>
+                <p class="reaction-label">Otto says</p>
+                <p id="reactionText"></p>
+              </div>
+            </div>
+
+            <button id="nextQuestion" type="button" class="primary-btn quiz-main-btn" hidden>
+              Next Question →
+            </button>
+          </div>
+
+          <div id="resultsScreen" class="quiz-screen">
+            <div class="results-celebration">✨</div>
+            <p class="results-kicker">I think I’ve got it!</p>
+            <h2>Your work style is...</h2>
+
+            <div class="work-style-card">
+              <span id="workStyleIcon">🧩</span>
+              <div>
+                <h3 id="workStyleName">Problem Solver</h3>
+                <p id="workStyleDescription"></p>
+              </div>
+            </div>
+
+            <div class="final-tags-heading">
+              <div>
+                <p class="results-kicker">Recommended profile tags</p>
+                <h3>Choose up to six</h3>
+              </div>
+              <span id="finalTagCount">0 / 6 selected</span>
+            </div>
+
+            <div id="finalTagOptions" class="final-tag-options"></div>
+
+            <div class="custom-tag-box">
+              <div>
+                <strong>Add your own tag</strong>
+                <p>Keep it short, honest, and appropriate.</p>
+              </div>
+
+              <div class="custom-tag-controls">
+                <div class="custom-tag-input-wrap">
+                  <input id="customProfileTag" type="text" maxlength="24" placeholder="Example: Calm" autocomplete="off">
+                  <span id="customTagCount">0/24</span>
+                </div>
+                <button id="addCustomTag" type="button" class="secondary-btn">Add</button>
+              </div>
+            </div>
+
+            <p id="quizMessage" class="form-message" aria-live="polite"></p>
+
+            <div class="result-actions">
+              <button id="restartQuiz" type="button" class="secondary-btn">Start Over</button>
+              <button id="saveTags" type="button" class="primary-btn">Save Tags & Review Profile →</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="recommendations-panel">
+          <div class="recommendations-heading">
+            <div>
+              <p>Current recommendations</p>
+              <h2>What Otto is noticing</h2>
+            </div>
+            <span id="recommendationCount">0</span>
+          </div>
+
+          <div id="liveRecommendations" class="live-recommendations">
+            <div class="empty-recommendations">
+              <span>🐙</span>
+              <p>Your suggested tags will appear here as you answer.</p>
+            </div>
+          </div>
+
+          <div class="recommendation-note">
+            <strong>These are self-described tags.</strong>
+            <p>
+              Later, customer reviews can confirm tags with a checkmark and show how many reviewers mentioned them.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <a href="profile-extra-details.html" class="quiz-back-link">← Back to extra details</a>
+    </section>
+  </main>
+
+  <script src="../js/meet-otto.js"></script>
+</body>
+</html>
