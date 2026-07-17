@@ -1691,3 +1691,101 @@ body.dark-mode .profile-editor-page input,body.dark-mode .profile-editor-page te
 @media(max-width:900px){.account-section-nav{top:68px}.account-section-nav-inner{width:calc(100% - 18px)}}
 
 \n\n/* ACCOUNT DATA + THEME CONSISTENCY FIX */\n.notifications-page,.reviews-page,.saved-page{min-height:calc(100vh - 130px)}\n.notifications-layout,.reviews-layout{align-items:start}\n.notification-list,.reviews-list{min-height:0!important}\n.notification-card,.review-card{min-height:0!important}\n\nbody.dark-mode .notifications-page,body.dark-mode .reviews-page,body.dark-mode .saved-page{background:#0c1628!important;color:#edf4ff!important}\nbody.dark-mode .notifications-hero,body.dark-mode .notification-summary-grid article,body.dark-mode .notifications-toolbar,body.dark-mode .notification-card,body.dark-mode .notification-preferences-card,\nbody.dark-mode .reviews-hero,body.dark-mode .review-summary-card,body.dark-mode .reviews-toolbar,body.dark-mode .review-card,body.dark-mode .review-side-card,\nbody.dark-mode .saved-hero,body.dark-mode .saved-summary-grid article,body.dark-mode .saved-tabs-shell,body.dark-mode .saved-controls,body.dark-mode .saved-card,body.dark-mode .saved-side-card{background:#111d31!important;border-color:#30415d!important;color:#edf4ff!important}\nbody.dark-mode .notification-card h2,body.dark-mode .notification-card strong,body.dark-mode .review-card h2,body.dark-mode .review-card strong,body.dark-mode .saved-card h2,body.dark-mode .saved-card strong{color:#edf4ff!important}\nbody.dark-mode .notification-card p,body.dark-mode .notification-card small,body.dark-mode .review-card p,body.dark-mode .review-card small,body.dark-mode .saved-card p,body.dark-mode .saved-card small{color:#aab8cc!important}\nbody.dark-mode .review-search-box,body.dark-mode .reviews-toolbar label,body.dark-mode .saved-search-box,body.dark-mode .saved-controls label{background:#16243a!important;border-color:#30415d!important;color:#edf4ff!important}\nbody.dark-mode .review-search-box input,body.dark-mode .reviews-toolbar select,body.dark-mode .saved-search-box input,body.dark-mode .saved-controls select{background:#0d192b!important;color:#edf4ff!important;border-color:#30415d!important}\nbody.dark-mode .saved-card .private-note,body.dark-mode .saved-private-note{background:#292412!important;border-color:#8c762e!important;color:#eadb9f!important}\nbody.dark-mode .saved-side-card li,body.dark-mode .saved-how-item{background:#16243a!important;color:#dce7f7!important}\nbody.dark-mode .account-section-nav{background:#111d31!important;border-color:#30415d!important}\nbody.dark-mode .account-section-nav a{color:#b7c5d9!important}\nbody.dark-mode .account-section-nav a.active,body.dark-mode .account-section-nav a:hover{background:#1b2d4a!important;color:#82adff!important}\n\n/* prevent broad legacy rules from bleaching text */\nbody.dark-mode .saved-card .profile-name,body.dark-mode .saved-card .profile-location,body.dark-mode .saved-card .profile-headline{color:inherit!important}\n
+/* =========================================================
+   OTTO SIZE CONSISTENCY FIX
+   Keeps the mascot visually consistent on GitHub Pages.
+   ========================================================= */
+img.otto {
+  display: block !important;
+  height: auto !important;
+  object-fit: contain !important;
+  flex: 0 0 auto !important;
+}
+
+img.otto-small {
+  width: 58px !important;
+  max-width: 58px !important;
+}
+
+img.otto-medium {
+  width: 96px !important;
+  max-width: 96px !important;
+}
+
+img.otto-large,
+.otto-img {
+  width: 150px !important;
+  max-width: 150px !important;
+}
+
+img.otto-inline {
+  width: 32px !important;
+  max-width: 32px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: -4px 5px 0 7px !important;
+}
+
+.brand-icon {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.brand-icon img.otto-small {
+  width: 58px !important;
+  max-width: 58px !important;
+}
+
+.otto-card .otto {
+  width: auto !important;
+  max-width: none !important;
+}
+
+.otto-card img.otto-large {
+  width: 150px !important;
+  max-width: 150px !important;
+  margin: 0 auto 20px !important;
+}
+
+.tutorial-otto img.otto-medium {
+  width: 96px !important;
+  max-width: 96px !important;
+  margin: 0 auto 14px !important;
+}
+
+.about-popup h2 img.otto-inline {
+  width: 34px !important;
+  max-width: 34px !important;
+}
+
+@media (max-width: 640px) {
+  img.otto-small,
+  .brand-icon img.otto-small {
+    width: 50px !important;
+    max-width: 50px !important;
+  }
+
+  .brand-icon {
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+  }
+
+  img.otto-medium,
+  .tutorial-otto img.otto-medium {
+    width: 84px !important;
+    max-width: 84px !important;
+  }
+
+  img.otto-large,
+  .otto-card img.otto-large,
+  .otto-img {
+    width: 128px !important;
+    max-width: 128px !important;
+  }
+}

@@ -367,12 +367,23 @@
       urlMode === "visitor" ||
       signupFlow?.accountType === "visitor";
 
+    if (successNextStep && visitorFlow) {
+      successNextStep.textContent = "Visitor dashboard";
+    }
+
+    const pendingEmail = () =>
+      localStorage.getItem("ntdPendingEmail") ||
+      sessionStorage.getItem("ntdPendingEmail") ||
+      readSignupFlow()?.email ||
+      "";
+
     const setSuccessState = (message) => {
       if (successMessage) successMessage.textContent = message;
       if (continueLink) {
         continueLink.href = visitorFlow ? "../pages/dashboard.html" : "choose-profile.html";
-        continueLink.textContent = visitorFlow ? "Enter NeedThingsDone →" : "Continue with Otto →";
+        continueLink.textContent = visitorFlow ? "Enter your visitor dashboard →" : "Continue with Otto →";
         continueLink.removeAttribute("aria-disabled");
+        continueLink.dataset.action = "continue";
       }
       if (successNextStep) {
         successNextStep.textContent = visitorFlow ? "Visitor dashboard" : "Otto profile setup";
@@ -381,26 +392,90 @@
 
     const setFailureState = (message) => {
       if (successMessage) successMessage.textContent = message;
+      if (successNextStep) {
+        successNextStep.textContent = visitorFlow ? "Visitor dashboard" : "Otto profile setup";
+      }
       if (continueLink) {
-        continueLink.href = visitorFlow
-          ? "login.html?returnTo=pages/dashboard.html"
-          : "login.html?returnTo=onboarding/choose-profile.html";
-        continueLink.textContent = visitorFlow
-          ? "Sign in to your visitor account →"
-          : "Sign in and continue setup →";
+        if (visitorFlow) {
+          continueLink.href = "#";
+          continueLink.textContent = "Email me a fresh secure sign-in link →";
+          continueLink.dataset.action = "resend-visitor-link";
+        } else {
+          continueLink.href = "login.html?returnTo=onboarding/choose-profile.html";
+          continueLink.textContent = "Sign in and continue setup →";
+          continueLink.dataset.action = "login";
+        }
         continueLink.removeAttribute("aria-disabled");
       }
+    };
+
+    const sendFreshVisitorLink = async () => {
+      const email = pendingEmail();
+      if (!email) {
+        window.location.href = "visitor-signup.html";
+        return;
+      }
+
+      if (continueLink) {
+        continueLink.setAttribute("aria-disabled", "true");
+        continueLink.textContent = "Sending secure link…";
+      }
+      if (successMessage) successMessage.textContent = "Sending a new password-free sign-in link to your email…";
+
+      const { error } = await client.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: absoluteUrl("success.html?mode=visitor")
+        }
+      });
+
+      if (error) {
+        setFailureState(readableError(error, "A new sign-in link could not be sent."));
+        return;
+      }
+
+      if (successMessage) {
+        successMessage.textContent = "A fresh secure sign-in link was sent. Open that email in this browser to enter your visitor dashboard.";
+      }
+      if (continueLink) {
+        continueLink.href = "visitor-signup.html";
+        continueLink.textContent = "Use a different email";
+        continueLink.dataset.action = "different-email";
+        continueLink.removeAttribute("aria-disabled");
+      }
+    };
+
+    if (continueLink) {
+      continueLink.addEventListener("click", (event) => {
+        if (continueLink.dataset.action !== "resend-visitor-link") return;
+        event.preventDefault();
+        sendFreshVisitorLink().catch((error) => {
+          console.error("Visitor sign-in link recovery failed:", error);
+          setFailureState("A new sign-in link could not be sent. Please try again.");
+        });
+      });
+    }
+
+    const waitForSession = async (timeoutMs = 6000) => {
+      const started = Date.now();
+      while (Date.now() - started < timeoutMs) {
+        const { data } = await client.auth.getSession();
+        if (data?.session) return data.session;
+        await new Promise((resolve) => setTimeout(resolve, 350));
+      }
+      return null;
     };
 
     const finishVerifiedSignup = async () => {
       if (successMessage) {
         successMessage.textContent = visitorFlow
-          ? "Confirming your email and preparing your visitor account…"
+          ? "Confirming your email and opening your visitor dashboard…"
           : "Confirming your email and preparing Otto…";
       }
       if (continueLink) {
         continueLink.textContent = visitorFlow
-          ? "Preparing your account…"
+          ? "Opening your dashboard…"
           : "Preparing your profile setup…";
         continueLink.setAttribute("aria-disabled", "true");
       }
@@ -412,7 +487,7 @@
         return;
       }
 
-      // Support PKCE links that may already have been issued before this update.
+      // Handle PKCE callback links.
       const code = url.searchParams.get("code");
       if (code) {
         const { error } = await client.auth.exchangeCodeForSession(code);
@@ -421,10 +496,10 @@
         }
       }
 
-      // Support implicit links directly when automatic URL detection has not finished yet.
+      // Handle implicit callback tokens from either the hash or query string.
       const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-      const accessToken = hash.get("access_token");
-      const refreshToken = hash.get("refresh_token");
+      const accessToken = hash.get("access_token") || url.searchParams.get("access_token");
+      const refreshToken = hash.get("refresh_token") || url.searchParams.get("refresh_token");
       if (accessToken && refreshToken) {
         const { error } = await client.auth.setSession({
           access_token: accessToken,
@@ -433,54 +508,30 @@
         if (error) console.warn("Could not restore confirmation session:", error);
       }
 
-      let { data: sessionData } = await client.auth.getSession();
-      let session = sessionData?.session || null;
-
-      // Supabase may finish detecting the URL just after the page script starts.
-      if (!session) {
-        session = await new Promise((resolve) => {
-          let settled = false;
-          const finish = (value) => {
-            if (settled) return;
-            settled = true;
-            subscription?.unsubscribe?.();
-            resolve(value || null);
-          };
-          const { data } = client.auth.onAuthStateChange((_event, nextSession) => {
-            if (nextSession) finish(nextSession);
-          });
-          const subscription = data?.subscription;
-          setTimeout(async () => {
-            const { data: retryData } = await client.auth.getSession();
-            finish(retryData?.session || null);
-          }, 1800);
-        });
-      }
+      // Give Supabase's automatic URL detection enough time to finish.
+      let session = await waitForSession();
 
       if (!session) {
-        successEmail.textContent = localStorage.getItem("ntdPendingEmail") || readSignupFlow()?.email || "Email confirmed";
+        successEmail.textContent = pendingEmail() || "Email confirmed";
         if (successDetails) successDetails.hidden = false;
         setFailureState(
           visitorFlow
-            ? "Your email is confirmed, but this browser could not restore the session. Sign in once to enter your visitor account."
-            : "Your email is confirmed, but this browser could not restore the session. Sign in once and you will continue directly to Otto — not the dashboard."
+            ? "Your email was confirmed, but this browser did not keep the secure sign-in session. Request a fresh password-free link below—no normal login is required."
+            : "Your email is confirmed, but this browser could not restore the session. Sign in once and you will continue directly to Otto—not the dashboard."
         );
         return;
       }
 
-      successEmail.textContent = session.user?.email || localStorage.getItem("ntdPendingEmail") || "Verified";
+      successEmail.textContent = session.user?.email || pendingEmail() || "Verified";
       if (successDetails) successDetails.hidden = false;
-      if (visitorFlow) {
-        setLocalAccountType("visitor");
-      }
+      if (visitorFlow) setLocalAccountType("visitor");
 
       setSuccessState(
         visitorFlow
-          ? "Your visitor account is ready. Taking you into NeedThingsDone…"
+          ? "Your visitor account is ready. Opening your dashboard now…"
           : "Your email is confirmed. Taking you directly to Otto’s profile setup…"
       );
 
-      // Remove secrets/codes from the visible address bar.
       history.replaceState(
         {},
         document.title,
@@ -494,14 +545,14 @@
         } else {
           window.location.replace("choose-profile.html");
         }
-      }, 1100);
+      }, 700);
     };
 
     finishVerifiedSignup().catch((error) => {
       console.error("Verification callback failed:", error);
       setFailureState(
         visitorFlow
-          ? "We could not finish the visitor sign-in automatically. Sign in once to continue."
+          ? "We could not finish the password-free visitor sign-in automatically. Request a fresh secure link below."
           : "We could not finish the confirmation automatically. Sign in once and you will continue directly to Otto’s setup."
       );
     });
