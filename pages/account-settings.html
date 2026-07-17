@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/account-settings.css">
+</head>
+<body>
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-icon"><img src="../assets/images/otto.png" class="otto otto-small" alt="Otto"></div>
+    <div><div class="logo">NeedThings<span>Done</span></div><p>From need to done.</p></div>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a><a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a><a href="shop.html">Shop</a>
+    <a href="community.html">Community</a><a href="news.html">News</a><a href="map.html">Map</a>
+  </nav>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
+    <a class="login-btn" href="../onboarding/account-choice.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+
+<main class="settings-page">
+  <section class="settings-hero">
+    <div>
+      <div class="settings-pill">⚙️ My account</div>
+      <h1>Account Settings</h1>
+      <p>Manage your profile, privacy, notifications, appearance, security, reputation, and saved activity.</p>
+    </div>
+    <div class="settings-user-card">
+      <div class="settings-avatar" id="headerAvatar">AP</div>
+      <div><strong id="headerName">Alex Portelance</strong><span id="headerUsername">@alex</span></div>
+      <span class="settings-status">Active</span>
+    </div>
+  </section>
+
+  <section class="settings-layout">
+    <aside class="settings-sidebar">
+      <button class="settings-nav-item active" data-section="profile">👤 Profile</button>
+      <button class="settings-nav-item" data-section="privacy">🔒 Privacy</button>
+      <button class="settings-nav-item" data-section="notifications">🔔 Notifications</button>
+      <button class="settings-nav-item" data-section="appearance">🎨 Appearance</button>
+      <button class="settings-nav-item" data-section="security">🛡 Security</button>
+      <button class="settings-nav-item" data-section="reputation">⭐ Reputation</button>
+      <button class="settings-nav-item" data-section="badges">🏆 Badges</button>
+      <button class="settings-nav-item" data-section="saved">🔖 Saved</button>
+      <button class="settings-nav-item" data-section="activity">🕒 Activity</button>
+    </aside>
+
+    <section class="settings-content">
+      <article class="settings-panel active" data-panel="profile">
+        <div class="settings-panel-header">
+          <div><h2>Profile</h2><p>Control what appears on your public profile.</p></div>
+          <span id="profileSaveState" class="settings-save-state">Saved</span>
+        </div>
+
+        <form id="profileForm" class="settings-form">
+          <div class="settings-profile-media">
+            <div class="settings-avatar large" id="largeAvatar">AP</div>
+            <div>
+              <label class="settings-primary-button">Change profile photo
+                <input id="avatarUpload" type="file" accept="image/*" hidden>
+              </label>
+              <button id="removeAvatar" class="settings-text-button" type="button">Remove photo</button>
+              <p>JPG or PNG. Maximum 3 MB.</p>
+            </div>
+          </div>
+
+          <div class="settings-form-grid">
+            <label>Display name<input id="displayName" maxlength="60" value="Alex Portelance" required></label>
+            <label>Username<div class="settings-input-prefix"><span>@</span><input id="username" maxlength="30" value="alex" required></div></label>
+            <label>City<input id="city" maxlength="80" value="Ottawa, Ontario"></label>
+            <label>Website<input id="website" type="url" placeholder="https://example.ca"></label>
+          </div>
+
+          <label>Bio
+            <textarea id="bio" maxlength="350">Building useful Canadian tools and helping people get things done.</textarea>
+            <span class="settings-character-count"><span id="bioCount">0</span>/350</span>
+          </label>
+
+          <label>Skills
+            <input id="skills" value="Website management, social media, computer repair">
+            <span class="settings-help-text">Separate skills with commas.</span>
+          </label>
+
+          <label>Availability
+            <select id="availability">
+              <option>Available now</option><option>Available this week</option>
+              <option>Limited availability</option><option>Not currently available</option>
+            </select>
+          </label>
+
+          <div class="settings-form-actions">
+            <button class="settings-secondary-button" type="reset">Reset</button>
+            <button class="settings-primary-button" type="submit">Save Profile</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="settings-panel" data-panel="privacy">
+        <div class="settings-panel-header"><div><h2>Privacy</h2><p>Choose what people can see and how they can contact you.</p></div></div>
+        <div class="settings-list">
+          <label class="settings-toggle-row"><span><strong>Public profile</strong><small>Appear in NeedThingsDone search results.</small></span><input type="checkbox" data-setting="publicProfile" checked><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Show city only</strong><small>Never display an exact address publicly.</small></span><input type="checkbox" data-setting="cityOnly" checked><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Hide email address</strong><small>Keep your email private.</small></span><input type="checkbox" data-setting="hideEmail" checked><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Hide phone number</strong><small>Only share your number when you choose.</small></span><input type="checkbox" data-setting="hidePhone" checked><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Allow direct messages</strong><small>Let individuals and shops message you.</small></span><input type="checkbox" data-setting="allowDMs" checked><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Allow profile reviews</strong><small>Let verified users review your profile.</small></span><input type="checkbox" data-setting="allowReviews" checked><span class="settings-switch"></span></label>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="notifications">
+        <div class="settings-panel-header"><div><h2>Notifications</h2><p>Choose which updates appear in-app and by email.</p></div></div>
+        <div class="settings-notification-grid">
+          <div class="settings-notification-header"><span>Notification</span><span>In-app</span><span>Email</span></div>
+          <div class="settings-notification-row"><span><strong>Messages</strong><small>New direct messages and replies.</small></span><input type="checkbox" data-setting="messagesApp" checked><input type="checkbox" data-setting="messagesEmail" checked></div>
+          <div class="settings-notification-row"><span><strong>Reviews</strong><small>New reviews and review replies.</small></span><input type="checkbox" data-setting="reviewsApp" checked><input type="checkbox" data-setting="reviewsEmail" checked></div>
+          <div class="settings-notification-row"><span><strong>Community</strong><small>Replies, mentions, and solved discussions.</small></span><input type="checkbox" data-setting="communityApp" checked><input type="checkbox" data-setting="communityEmail"></div>
+          <div class="settings-notification-row"><span><strong>Account activity</strong><small>Security changes, badges, and profile status.</small></span><input type="checkbox" data-setting="accountApp" checked><input type="checkbox" data-setting="accountEmail" checked></div>
+          <div class="settings-notification-row"><span><strong>News and updates</strong><small>Weekly site and feature announcements.</small></span><input type="checkbox" data-setting="newsApp"><input type="checkbox" data-setting="newsEmail"></div>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="appearance">
+        <div class="settings-panel-header"><div><h2>Appearance</h2><p>Adjust how NeedThingsDone looks on this device.</p></div></div>
+        <div class="settings-appearance-options">
+          <button class="settings-theme-card active" data-theme-choice="light"><span class="settings-theme-preview light-preview"></span><strong>Light</strong><small>Bright and clean.</small></button>
+          <button class="settings-theme-card" data-theme-choice="dark"><span class="settings-theme-preview dark-preview"></span><strong>Dark</strong><small>Easy on the eyes.</small></button>
+          <button class="settings-theme-card" data-theme-choice="system"><span class="settings-theme-preview system-preview"></span><strong>System</strong><small>Match your device.</small></button>
+        </div>
+        <div class="settings-list">
+          <label class="settings-toggle-row"><span><strong>Compact layout</strong><small>Reduce spacing to fit more on screen.</small></span><input id="compactMode" type="checkbox"><span class="settings-switch"></span></label>
+          <label class="settings-toggle-row"><span><strong>Larger text</strong><small>Increase text size throughout the site.</small></span><input id="largeText" type="checkbox"><span class="settings-switch"></span></label>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="security">
+        <div class="settings-panel-header"><div><h2>Security</h2><p>Protect your account and review active sign-ins.</p></div></div>
+        <div class="settings-security-card"><div><strong>Password</strong><p>Last changed 34 days ago.</p></div><button id="changePassword" class="settings-secondary-button">Change password</button></div>
+        <div class="settings-security-card"><div><strong>Email verification</strong><p>Your email address is verified.</p></div><span class="settings-verified">✓ Verified</span></div>
+        <div class="settings-security-card"><div><strong>Two-factor authentication</strong><p>Add another layer of protection.</p></div><button id="twoFactor" class="settings-secondary-button">Set up later</button></div>
+
+        <div class="settings-session-list">
+          <h3>Active sessions</h3>
+          <article><div><strong>Windows PC · Chrome</strong><p>Ottawa, Ontario · Current session</p></div><span class="settings-current-session">Current</span></article>
+          <article><div><strong>Android phone · Chrome</strong><p>Ottawa, Ontario · Last active yesterday</p></div><button class="settings-text-button signout-session">Sign out</button></article>
+        </div>
+
+        <div class="settings-danger-zone">
+          <div><h3>Danger zone</h3><p>Deactivate your profile or request account deletion.</p></div>
+          <button id="deactivateAccount" class="settings-danger-button">Deactivate account</button>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="reputation">
+        <div class="settings-panel-header"><div><h2>Reputation</h2><p>A summary of your helpful contributions.</p></div></div>
+        <div class="settings-stat-grid">
+          <article><strong>143</strong><span>Helpful replies</span></article>
+          <article><strong>2,140</strong><span>Community reputation</span></article>
+          <article><strong>67</strong><span>Reviews written</span></article>
+          <article><strong>34</strong><span>Business reviews</span></article>
+          <article><strong>1,829</strong><span>Profile views</span></article>
+          <article><strong>July 2026</strong><span>Member since</span></article>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="badges">
+        <div class="settings-panel-header"><div><h2>Badges</h2><p>Badges awarded for trusted and helpful activity.</p></div></div>
+        <div class="settings-badge-grid">
+          <article class="earned"><span>🤝</span><strong>Helpful Member</strong><small>Earned</small></article>
+          <article class="earned"><span>⭐</span><strong>Top Reviewer</strong><small>Earned</small></article>
+          <article class="earned"><span>🏘</span><strong>Community Helper</strong><small>Earned</small></article>
+          <article class="earned"><span>🚀</span><strong>Early Supporter</strong><small>Earned</small></article>
+          <article class="locked"><span>🏢</span><strong>Verified Business Owner</strong><small>Locked</small></article>
+          <article class="locked"><span>🛡</span><strong>Moderator</strong><small>Admin awarded</small></article>
+        </div>
+      </article>
+
+      <article class="settings-panel" data-panel="saved">
+        <div class="settings-panel-header"><div><h2>Saved</h2><p>Profiles, shops, discussions, and searches you saved.</p></div></div>
+        <div class="settings-saved-tabs">
+          <button class="active" data-saved-tab="all">All</button><button data-saved-tab="businesses">Businesses</button>
+          <button data-saved-tab="individuals">Individuals</button><button data-saved-tab="shops">Shops</button>
+          <button data-saved-tab="community">Community</button>
+        </div>
+        <div id="savedItems" class="settings-saved-list"></div>
+      </article>
+
+      <article class="settings-panel" data-panel="activity">
+        <div class="settings-panel-header"><div><h2>Activity</h2><p>Your latest NeedThingsDone activity.</p></div></div>
+        <div class="settings-timeline">
+          <section><h3>Today</h3><article><span>💬</span><div><strong>Replied to a discussion</strong><p>Looking for a reliable roofer in Orléans</p></div></article></section>
+          <section><h3>Yesterday</h3><article><span>⭐</span><div><strong>Reviewed Maple Bakery</strong><p>You left a 5-star review.</p></div></article></section>
+          <section><h3>2 days ago</h3><article><span>🔖</span><div><strong>Saved Ottawa Roofing</strong><p>Added to saved businesses.</p></div></article></section>
+          <section><h3>4 days ago</h3><article><span>👤</span><div><strong>Updated your profile</strong><p>Changed skills and availability.</p></div></article></section>
+        </div>
+      </article>
+    </section>
+  </section>
+</main>
+
+<div id="settingsModal" class="settings-modal" hidden>
+  <div class="settings-modal-backdrop" data-close-modal></div>
+  <section class="settings-modal-card" role="dialog" aria-modal="true">
+    <button class="settings-modal-close" data-close-modal>×</button>
+    <h2 id="modalTitle">Confirm action</h2><p id="modalText"></p>
+    <div class="settings-modal-actions">
+      <button class="settings-secondary-button" data-close-modal>Cancel</button>
+      <button id="modalConfirm" class="settings-danger-button">Confirm</button>
+    </div>
+  </section>
+</div>
+
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
+<script src="../js/account-settings.js"></script>
+</body>
+</html>

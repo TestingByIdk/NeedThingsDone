@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+
+  <title>Verify Email - NeedThingsDone</title>
+</head>
+<body class="auth-body">
+<header class="auth-topbar">
+  <a class="auth-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <span><strong>NeedThings<span>Done</span></strong><small>From need to done.</small></span>
+  </a>
+  <div class="auth-top-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a href="../index.html">Back to site</a>
+  </div>
+</header>
+
+<main class="auth-shell">
+<section class="auth-card auth-form-card auth-center-card">
+  <div class="auth-mail-icon">✉️</div>
+  <h1>Check your email</h1>
+  <p>We sent a verification link to <strong id="verifyEmailText">your email address</strong>.</p>
+  <p class="auth-help">Open the email and select the verification button to finish creating your account.</p>
+  <button id="demoVerifyButton" class="auth-primary" type="button">Demo: Verify email</button>
+  <button id="resendVerification" class="auth-secondary" type="button">Resend verification email</button>
+  <a href="login.html">Use a different account</a>
+</section>
+
+</main>
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
+<script src="../js/auth.js"></script>
+
+</body>
+</html>

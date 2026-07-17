@@ -1,0 +1,36 @@
+
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../css/admin-dashboard.css"></head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+<h2>NeedThingsDone</h2>
+<a class="active">Overview</a><a>Reports</a><a>Reviews</a><a>Profiles</a><a>Users</a><a>Businesses</a><a>Badges</a><a>Vouchers</a><a>Suggestions</a><a>Admin Log</a>
+</nav>
+<main>
+<header><h1>Admin Moderation Dashboard</h1><p>Demo frontend before backend integration.</p></header>
+<section class="stats">
+<div><h3>Open Reports</h3><strong>18</strong></div>
+<div><h3>Investigating</h3><strong>7</strong></div>
+<div><h3>Resolved Today</h3><strong>12</strong></div>
+<div><h3>Banned Users</h3><strong>3</strong></div>
+</section>
+<section>
+<h2>Report Queue</h2>
+<div id="queue"></div>
+</section>
+<div id="modal" class="hidden">
+<div class="backdrop"></div>
+<div class="card">
+<h3 id="actionTitle"></h3>
+<textarea id="reason" placeholder="Reason required..."></textarea>
+<div class="buttons">
+<button id="cancel">Cancel</button>
+<button id="confirm">Confirm</button>
+</div>
+</div>
+</div>
+</main></div>
+<script src="../js/admin-dashboard.js"></script>
+</body></html>

@@ -1,29 +1,25 @@
-NEEDTHINGSDONE — COMPLETE NOTIFICATIONS SYSTEM
+NeedThingsDone Authentication Frontend
 
-Copy:
-- pages/notifications.html
-- js/notifications.js
-- css/notifications.css
+Files included:
+onboarding/welcome.html
+onboarding/login.html
+onboarding/signup.html
+onboarding/forgot-password.html
+onboarding/reset-password.html
+onboarding/verify-email.html
+onboarding/account-choice.html
+onboarding/success.html
+css/auth.css
+js/auth.js
 
-Open:
-pages/notifications.html
+Installation:
+1. Back up any onboarding files with the same names.
+2. Copy the onboarding files into your onboarding folder.
+3. Add auth.css to css and auth.js to js.
+4. Keep your existing style.css and script.js.
 
-Included:
-- bell dropdown
-- unread counter
-- full notification page
-- All, Unread, Messages, Reviews, and Account filters
-- newest, oldest, and priority sorting
-- mark individual notification read or unread
-- mark all as read
-- clear read notifications
-- remove notification
-- priority labels
-- notification summary cards
-- email preference toggles saved in localStorage
-- direct links to messages, reviews, dashboard, and profiles
-- empty state
-- responsive layout
-
-Current notifications are demo data in js/notifications.js.
-The backend will later create real notifications and synchronize read state.
+This is a frontend demo:
+- Accounts are stored in localStorage.
+- Passwords are not secure in this demo.
+- Google/Apple sign-in, real verification email, and password reset are placeholders.
+- Replace localStorage authentication with Supabase Auth before launch.

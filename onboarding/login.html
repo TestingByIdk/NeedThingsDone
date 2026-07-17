@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+
+  <title>Log In - NeedThingsDone</title>
+</head>
+<body class="auth-body">
+<header class="auth-topbar">
+  <a class="auth-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <span><strong>NeedThings<span>Done</span></strong><small>From need to done.</small></span>
+  </a>
+  <div class="auth-top-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a href="../index.html">Back to site</a>
+  </div>
+</header>
+
+<main class="auth-shell">
+<section class="auth-card auth-form-card">
+  <div class="auth-card-heading">
+    <div class="auth-icon">👋</div>
+    <h1>Welcome back</h1>
+    <p>Log in to your NeedThingsDone account.</p>
+  </div>
+  <div id="authNotice" class="auth-notice" hidden></div>
+  <form id="loginForm" class="auth-form">
+    <label>Email address<input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.ca"></label>
+    <label>Password
+      <div class="auth-password-wrap">
+        <input id="loginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="Your password">
+        <button type="button" data-toggle-password="loginPassword">Show</button>
+      </div>
+    </label>
+    <div class="auth-row">
+      <label class="auth-check"><input id="rememberMe" type="checkbox"><span>Remember me</span></label>
+      <a href="forgot-password.html">Forgot password?</a>
+    </div>
+    <button class="auth-primary" type="submit">Log in</button>
+  </form>
+  <div class="auth-divider"><span>or</span></div>
+  <button class="auth-provider" type="button" data-demo-provider="Google">Continue with Google</button>
+  <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
+</section>
+
+</main>
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
+<script src="../js/auth.js"></script>
+
+</body>
+</html>

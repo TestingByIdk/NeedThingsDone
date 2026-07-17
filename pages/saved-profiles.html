@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Saved Profiles - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/saved-profiles.css">
+</head>
+
+<body>
+  <header class="saved-topbar">
+    <a class="saved-brand" href="../index.html">
+      <img src="../assets/images/otto.png" alt="Otto">
+
+      <div>
+        <strong>NeedThingsDone</strong>
+        <span>From need to done.</span>
+      </div>
+    </a>
+
+    <div class="saved-topbar-actions">
+      <a class="secondary-btn" href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a class="secondary-btn" href="individual-search.html">
+        Find Help
+      </a>
+    </div>
+  </header>
+
+  <main class="saved-page">
+
+    <section class="saved-hero">
+      <div>
+        <p class="saved-eyebrow">Your browsing list</p>
+        <h1>Saved and recently viewed</h1>
+
+        <p>
+          Keep useful profiles organized, add private notes, and return to
+          people or businesses you viewed earlier.
+        </p>
+      </div>
+
+      <img src="../assets/images/otto.png" alt="Otto">
+    </section>
+
+    <section class="saved-summary-grid">
+      <article>
+        <span>🔖</span>
+
+        <div>
+          <small>Saved profiles</small>
+          <strong id="savedCountSummary">0</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>🕘</span>
+
+        <div>
+          <small>Recently viewed</small>
+          <strong id="recentCountSummary">0</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>📝</span>
+
+        <div>
+          <small>Private notes</small>
+          <strong id="notesCountSummary">0</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>📍</span>
+
+        <div>
+          <small>Locations</small>
+          <strong id="locationCountSummary">0</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="saved-controls">
+
+      <div class="saved-tabs">
+        <button
+          class="saved-tab active"
+          type="button"
+          data-tab="saved"
+        >
+          Saved Profiles
+        </button>
+
+        <button
+          class="saved-tab"
+          type="button"
+          data-tab="recent"
+        >
+          Recently Viewed
+        </button>
+      </div>
+
+      <div class="saved-control-actions">
+        <button
+          id="clearRecentButton"
+          class="secondary-btn"
+          type="button"
+          hidden
+        >
+          Clear Recently Viewed
+        </button>
+      </div>
+
+    </section>
+
+    <section class="saved-toolbar">
+
+      <label class="saved-search-box">
+        <span>🔍</span>
+
+        <input
+          id="savedSearchInput"
+          type="search"
+          placeholder="Search by name, service, tag, or location"
+          autocomplete="off"
+        >
+      </label>
+
+      <label>
+        <span>Profile type</span>
+
+        <select id="typeFilter">
+          <option value="all">All types</option>
+          <option value="individual">Individuals</option>
+          <option value="shop">Shops</option>
+          <option value="business">Businesses</option>
+          <option value="large-business">Multi-location</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Location</span>
+
+        <select id="locationFilter">
+          <option value="all">All locations</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Sort by</span>
+
+        <select id="sortSaved">
+          <option value="newest">Newest saved</option>
+          <option value="name">Name A–Z</option>
+          <option value="location">Location</option>
+          <option value="type">Profile type</option>
+        </select>
+      </label>
+
+    </section>
+
+    <div class="saved-layout">
+
+      <section class="saved-results-column">
+
+        <div class="saved-results-heading">
+          <div>
+            <p class="saved-eyebrow" id="resultsEyebrow">
+              Your shortlist
+            </p>
+
+            <h2 id="visibleSavedCount">
+              0 profiles
+            </h2>
+          </div>
+
+          <span class="local-data-pill">
+            Saved in this browser
+          </span>
+        </div>
+
+        <div id="savedProfilesGrid" class="saved-profiles-grid"></div>
+
+        <div id="savedEmptyState" class="saved-empty-state" hidden>
+          <img src="../assets/images/otto.png" alt="Otto">
+
+          <h2 id="savedEmptyTitle">
+            No saved profiles yet
+          </h2>
+
+          <p id="savedEmptyText">
+            Save a profile while browsing and it will appear here.
+          </p>
+
+          <a class="primary-btn" href="individual-search.html">
+            Browse Profiles
+          </a>
+        </div>
+
+      </section>
+
+      <aside class="saved-sidebar">
+
+        <section class="saved-sidebar-card">
+          <p class="saved-eyebrow">How it works</p>
+          <h2>Your private shortlist</h2>
+
+          <div class="saved-help-list">
+            <span>🔖 Save profiles for later</span>
+            <span>📝 Add notes only you can see</span>
+            <span>🕘 Return to recently viewed profiles</span>
+            <span>🔍 Filter your list quickly</span>
+          </div>
+        </section>
+
+        <section class="saved-sidebar-card">
+          <p class="saved-eyebrow">Privacy</p>
+          <h2>Notes stay private</h2>
+
+          <p>
+            Profile owners cannot see your private notes or whether you saved
+            their profile.
+          </p>
+        </section>
+
+        <section class="saved-sidebar-card otto-saved-card">
+          <img src="../assets/images/otto.png" alt="Otto">
+
+          <h2>Otto’s tip</h2>
+
+          <p>
+            Add a quick note about why you saved someone so you remember what
+            stood out later.
+          </p>
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <div class="note-modal" id="noteModal" hidden>
+    <div class="note-modal-backdrop" data-close-note></div>
+
+    <section
+      class="note-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="noteModalTitle"
+    >
+      <button
+        class="note-modal-close"
+        type="button"
+        aria-label="Close note editor"
+        data-close-note
+      >
+        ×
+      </button>
+
+      <p class="saved-eyebrow">Private note</p>
+      <h2 id="noteModalTitle">Add a note</h2>
+
+      <p class="note-profile-name" id="noteProfileName"></p>
+
+      <textarea
+        id="noteInput"
+        maxlength="500"
+        placeholder="Why did you save this profile?"
+      ></textarea>
+
+      <div class="note-modal-footer">
+        <strong id="noteCharacterCount">0/500</strong>
+
+        <div>
+          <button
+            id="deleteNoteButton"
+            class="secondary-btn"
+            type="button"
+          >
+            Delete Note
+          </button>
+
+          <button
+            class="secondary-btn"
+            type="button"
+            data-close-note
+          >
+            Cancel
+          </button>
+
+          <button
+            id="saveNoteButton"
+            class="primary-btn"
+            type="button"
+          >
+            Save Note
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div
+    class="saved-toast"
+    id="savedToast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <script src="../js/saved-profiles.js"></script>
+</body>
+</html>
