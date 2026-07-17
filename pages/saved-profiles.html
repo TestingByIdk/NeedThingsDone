@@ -3,35 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  (()=>{try{const a=JSON.parse(localStorage.getItem("ntdAccountSettingsV1")||"null")?.theme;const p=a||localStorage.getItem("ntdTheme")||localStorage.getItem("theme")||localStorage.getItem("ntdThemePreference")||"light";const d=p==="dark"||(p==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.classList.toggle("dark-mode",d);document.addEventListener("DOMContentLoaded",()=>document.body.classList.toggle("dark-mode",d));}catch{}})();
+  </script>
+
 
   <title>Saved Profiles - NeedThingsDone</title>
 
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/dashboard.css">
   <link rel="stylesheet" href="../css/saved-profiles.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
 </head>
 
 <body>
-  <header class="saved-topbar">
-    <a class="saved-brand" href="../index.html">
-      <img src="../assets/images/otto.png" alt="Otto">
-
-      <div>
-        <strong>NeedThingsDone</strong>
-        <span>From need to done.</span>
-      </div>
-    </a>
-
-    <div class="saved-topbar-actions">
-      <a class="secondary-btn" href="dashboard.html">
-        Dashboard
-      </a>
-
-      <a class="secondary-btn" href="individual-search.html">
-        Find Help
-      </a>
-    </div>
-  </header>
+  <header class="navbar account-main-navbar">
+  <div class="brand">
+    <div class="brand-icon"><img src="../assets/images/otto.png" class="otto otto-small" alt="Otto"></div>
+    <div><div class="logo">NeedThings<span>Done</span></div><p>From need to done.</p></div>
+  </div>
+  <nav aria-label="Main navigation">
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a href="shop.html">Shop</a>
+    <a href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a href="map.html">Map</a>
+  </nav>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+<nav class="account-section-nav" aria-label="Account navigation">
+  <div class="account-section-nav-inner"><a class="" href="dashboard.html"><span>🏠</span>Overview</a><a class="" href="dashboard-profile-editor.html"><span>👤</span>My Profile</a><a class="" href="messages.html"><span>💬</span>Messages</a><a class="" href="notifications.html"><span>🔔</span>Notifications</a><a class="" href="reviews.html"><span>⭐</span>Reviews</a><a class="active" href="saved-profiles.html"><span>🔖</span>Saved Items</a><a class="" href="account-settings.html"><span>⚙️</span>Account Settings</a></div>
+</nav>
 
   <main class="saved-page">
 
@@ -315,6 +323,7 @@
     aria-live="polite"
   ></div>
 
-  <script src="../js/saved-profiles.js"></script>
+  <script src="../js/script.js"></script>
+<script src="../js/saved-profiles.js"></script>
 </body>
 </html>

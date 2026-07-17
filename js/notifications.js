@@ -125,6 +125,16 @@ const el = {
 let activeFilter = "all";
 let removedNotificationIds = new Set();
 
+// Dashboard and global bell use the same notification source.
+try {
+  const existing = JSON.parse(localStorage.getItem("ntdNotificationsV1") || "null");
+  if (!Array.isArray(existing) || !existing.length) {
+    localStorage.setItem("ntdNotificationsV1", JSON.stringify(notifications));
+  }
+} catch {
+  localStorage.setItem("ntdNotificationsV1", JSON.stringify(notifications));
+}
+
 initialize();
 
 function initialize() {
@@ -146,13 +156,13 @@ function bindEvents() {
     });
   });
 
-  el.sort.addEventListener("change", renderNotificationList);
-  el.markAllRead.addEventListener("click", markEverythingRead);
-  el.markBellRead.addEventListener("click", markEverythingRead);
-  el.clearRead.addEventListener("click", clearReadNotifications);
-  el.resetFilters.addEventListener("click", showAllNotifications);
+  el.sort?.addEventListener("change", renderNotificationList);
+  el.markAllRead?.addEventListener("click", markEverythingRead);
+  el.markBellRead?.addEventListener("click", markEverythingRead);
+  el.clearRead?.addEventListener("click", clearReadNotifications);
+  el.resetFilters?.addEventListener("click", showAllNotifications);
 
-  el.openBellMenu.addEventListener("click", event => {
+  el.openBellMenu?.addEventListener("click", event => {
     event.stopPropagation();
 
     const open = el.bellMenu.hidden;
@@ -169,10 +179,9 @@ function bindEvents() {
   });
 
   document.addEventListener("click", event => {
-    if (
-      !el.bellMenu.contains(event.target) &&
-      event.target !== el.openBellMenu
-    ) {
+    if (el.bellMenu && el.openBellMenu &&
+        !el.bellMenu.contains(event.target) &&
+        event.target !== el.openBellMenu) {
       closeBellMenu();
     }
   });
@@ -377,14 +386,16 @@ function renderSummaries() {
       );
     }).length;
 
-  el.bellUnreadCount.textContent = unreadCount;
-  el.bellUnreadCount.hidden = unreadCount === 0;
+  if (el.bellUnreadCount) {
+    el.bellUnreadCount.textContent = unreadCount;
+    el.bellUnreadCount.hidden = unreadCount === 0;
+  }
 
-  el.bellMenuCount.textContent =
-    `${unreadCount} unread`;
+  if (el.bellMenuCount) el.bellMenuCount.textContent = `${unreadCount} unread`;
 }
 
 function renderBellMenu() {
+  if (!el.bellMenuList) return;
   const latest =
     notifications
       .filter(notification => {

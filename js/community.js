@@ -21,7 +21,11 @@
         {
           id: "comment-1",
           author: "Taylor R.",
-          body: "Try checking the Businesses page and compare recent local reviews before booking."
+          body: "Try checking the Businesses page and compare recent local reviews before booking.",
+          createdAt: Date.now() - 55 * 60 * 1000,
+          helpful: 4,
+          accepted: false,
+          role: "Community member"
         }
       ]
     },
@@ -39,12 +43,20 @@
         {
           id: "comment-2",
           author: "Morgan L.",
-          body: "A few local shops list custom cakes. Check their lead times before choosing."
+          body: "A few local shops list custom cakes. Check their lead times before choosing.",
+          createdAt: Date.now() - 6 * 60 * 60 * 1000,
+          helpful: 6,
+          accepted: true,
+          role: "Local guide"
         },
         {
           id: "comment-3",
           author: "Sam K.",
-          body: "Thanks! I found one and marked this solved."
+          body: "Thanks! I found one and marked this solved.",
+          createdAt: Date.now() - 5 * 60 * 60 * 1000,
+          helpful: 2,
+          accepted: false,
+          role: "Post author"
         }
       ]
     },
@@ -91,6 +103,18 @@
   let posts = loadJSON(STORAGE_KEY, starterPosts);
   let savedPosts = loadJSON(SAVED_KEY, []);
   let votes = loadJSON(VOTES_KEY, {});
+
+  // Keep older locally saved discussions compatible with the improved reply window.
+  posts = posts.map(post => ({
+    ...post,
+    comments: (post.comments || []).map((comment, index) => ({
+      createdAt: post.createdAt + ((index + 1) * 12 * 60 * 1000),
+      helpful: 0,
+      accepted: false,
+      role: comment.author === post.author ? "Post author" : "Community member",
+      ...comment
+    }))
+  }));
 
   function loadJSON(key, fallback) {
     try {
@@ -282,52 +306,99 @@
     }
   }
 
+  function commenterInitials(name) {
+    return String(name || "Member")
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(part => part.charAt(0).toUpperCase())
+      .join("");
+  }
+
+  function renderReply(post, comment) {
+    const isAuthor = comment.author === post.author;
+    const helpful = Number(comment.helpful || 0);
+
+    return `
+      <article class="community-reply ${comment.accepted ? "is-accepted" : ""}" data-comment-id="${escapeHTML(comment.id)}">
+        <div class="community-reply-avatar" aria-hidden="true">${escapeHTML(commenterInitials(comment.author))}</div>
+
+        <div class="community-reply-main">
+          <header class="community-reply-header">
+            <div>
+              <strong>${escapeHTML(comment.author)}</strong>
+              <span>${escapeHTML(comment.role || (isAuthor ? "Post author" : "Community member"))}</span>
+              ${isAuthor ? `<b class="community-author-badge">Author</b>` : ""}
+              ${comment.accepted ? `<b class="community-accepted-badge">✓ Accepted answer</b>` : ""}
+            </div>
+            <time>${timeAgo(comment.createdAt || post.createdAt)}</time>
+          </header>
+
+          <p>${escapeHTML(comment.body)}</p>
+
+          <footer class="community-reply-actions">
+            <button type="button" data-comment-action="helpful">
+              👍 Helpful <span>${helpful}</span>
+            </button>
+            <button type="button" data-comment-action="quote">↩ Reply</button>
+            <button type="button" data-comment-action="report">🚩 Report</button>
+          </footer>
+        </div>
+      </article>
+    `;
+  }
+
   function openComments(postId) {
     const post = posts.find(item => item.id === postId);
-    if (!post) return;
+    const postCard = elements.feed.querySelector(`[data-post-id="${postId}"]`);
+    if (!post || !postCard) return;
 
-    state.activePostId = postId;
-
-    const commentHTML = post.comments.length
-      ? post.comments.map(comment => `
-          <article class="community-comment">
-            <strong>${escapeHTML(comment.author)}</strong>
-            <p>${escapeHTML(comment.body)}</p>
-          </article>
-        `).join("")
-      : `<div class="community-empty-state"><h3>No replies yet</h3><p>Be the first person to help.</p></div>`;
-
-    elements.commentsContent.innerHTML = `
-      <h2 id="commentsTitle">${escapeHTML(post.title)}</h2>
-      <p>${escapeHTML(post.body)}</p>
-
-      <div>${commentHTML}</div>
-
-      <form id="commentForm" class="community-comment-form">
-        <input id="commentInput" maxlength="500" required placeholder="Write a helpful reply...">
-        <button class="community-primary-button" type="submit">Reply</button>
-      </form>
-    `;
-
-    const commentForm = document.getElementById("commentForm");
-    commentForm.addEventListener("submit", event => {
-      event.preventDefault();
-      const input = document.getElementById("commentInput");
-      const value = input.value.trim();
-      if (!value) return;
-
-      post.comments.push({
-        id: `comment-${Date.now()}`,
-        author: "You",
-        body: value
-      });
-
-      persist();
-      renderPosts();
-      openComments(postId);
+    // Only one discussion stays open at a time.
+    elements.feed.querySelectorAll('.community-inline-discussion').forEach(panel => {
+      if (panel.closest('[data-post-id]') !== postCard) panel.remove();
     });
 
-    openModal(elements.commentsModal);
+    const existing = postCard.querySelector('.community-inline-discussion');
+    if (existing) {
+      existing.remove();
+      return;
+    }
+
+    const panel = document.createElement('section');
+    panel.className = 'community-inline-discussion';
+    panel.innerHTML = `
+      <div class="community-inline-heading">
+        <div><strong>💬 ${post.comments.length} ${post.comments.length === 1 ? 'Reply' : 'Replies'}</strong><small>Replies to ${escapeHTML(post.author)}'s post</small></div>
+        <button type="button" data-inline-close aria-label="Close replies">×</button>
+      </div>
+      <div class="community-inline-replies">
+        ${post.comments.length ? post.comments.map(comment => renderReply(post, comment)).join('') : `
+          <div class="community-replies-empty"><span>💬</span><h3>No replies yet</h3><p>Be the first to add something useful.</p></div>`}
+      </div>
+      <form class="community-inline-composer">
+        <textarea maxlength="800" required placeholder="Write a helpful reply..."></textarea>
+        <div><small><span>0</span>/800</small><button class="community-primary-button" type="submit">Post Reply</button></div>
+      </form>`;
+
+    postCard.appendChild(panel);
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+
+    panel.querySelector('[data-inline-close]').addEventListener('click', () => panel.remove());
+    const form=panel.querySelector('form'), input=form.querySelector('textarea'), count=form.querySelector('small span');
+    input.addEventListener('input',()=>count.textContent=input.value.length);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const value=input.value.trim(); if(!value) return;
+      post.comments.push({id:`comment-${Date.now()}`,author:'You',body:value,createdAt:Date.now(),helpful:0,accepted:false,role:'Community member'});
+      persist(); renderPosts(); openComments(postId);
+    });
+    panel.querySelectorAll('[data-comment-action]').forEach(button => button.addEventListener('click',()=>{
+      const reply=button.closest('[data-comment-id]');
+      const comment=post.comments.find(item=>item.id===reply?.dataset.commentId); if(!comment)return;
+      if(button.dataset.commentAction==='helpful'){comment.helpful=Number(comment.helpful||0)+1;persist();renderPosts();openComments(postId)}
+      if(button.dataset.commentAction==='quote'){input.value=`@${comment.author} `;count.textContent=input.value.length;input.focus()}
+      if(button.dataset.commentAction==='report') alert('Thanks. This reply was added to the report demo.');
+    }));
   }
 
   document.querySelectorAll(".forum-topic").forEach(button => {

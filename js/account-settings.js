@@ -1,6 +1,7 @@
 (()=>{"use strict";
 const SK="ntdAccountSettingsV1",PK="ntdAccountProfileV1",SV="ntdAccountSavedItemsV1";
-const defaults={publicProfile:true,cityOnly:true,hideEmail:true,hidePhone:true,allowDMs:true,allowReviews:true,messagesApp:true,messagesEmail:true,reviewsApp:true,reviewsEmail:true,communityApp:true,communityEmail:false,accountApp:true,accountEmail:true,newsApp:false,newsEmail:false,theme:"light",compactMode:false,largeText:false};
+const inheritedTheme=localStorage.getItem("ntdTheme")||localStorage.getItem("theme")||localStorage.getItem("ntdThemePreference")||"light";
+const defaults={publicProfile:true,cityOnly:true,hideEmail:true,hidePhone:true,allowDMs:true,allowReviews:true,messagesApp:true,messagesEmail:true,reviewsApp:true,reviewsEmail:true,communityApp:true,communityEmail:false,accountApp:true,accountEmail:true,newsApp:false,newsEmail:false,theme:inheritedTheme,compactMode:false,largeText:false};
 const defaultProfile={displayName:"Alex Portelance",username:"alex",city:"Ottawa, Ontario",website:"",bio:"Building useful Canadian tools and helping people get things done.",skills:"Website management, social media, computer repair",availability:"Available now",avatar:""};
 const defaultSaved=[{id:1,type:"businesses",title:"Ottawa Roofing",detail:"Roofing · Ottawa, Ontario"},{id:2,type:"individuals",title:"Jordan M.",detail:"Computer repair · Rockland, Ontario"},{id:3,type:"shops",title:"Maple Corner Shop",detail:"Local gifts and handmade products"},{id:4,type:"community",title:"Best local bakery for a birthday cake?",detail:"Community discussion · Ottawa"}];
 const load=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??JSON.parse(JSON.stringify(f))}catch{return JSON.parse(JSON.stringify(f))}};
@@ -11,7 +12,20 @@ const initials=n=>n.trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||"
 const avatar=(el)=>{el.innerHTML=profile.avatar?`<img src="${profile.avatar}" alt="">`:initials(profile.displayName)};
 function header(){document.getElementById("headerName").textContent=profile.displayName;document.getElementById("headerUsername").textContent="@"+profile.username;avatar(document.getElementById("headerAvatar"));avatar(document.getElementById("largeAvatar"))}
 function populate(){displayName.value=profile.displayName;username.value=profile.username;city.value=profile.city;website.value=profile.website;bio.value=profile.bio;skills.value=profile.skills;availability.value=profile.availability;bioCount.textContent=bio.value.length;header()}
-function apply(){document.body.classList.toggle("settings-compact",settings.compactMode);document.body.classList.toggle("settings-large-text",settings.largeText);localStorage.setItem("ntdThemePreference",settings.theme);if(settings.theme==="system")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=settings.theme}
+function apply(){
+  document.body.classList.toggle("settings-compact",settings.compactMode);
+  document.body.classList.toggle("settings-large-text",settings.largeText);
+  localStorage.setItem("ntdThemePreference",settings.theme);
+  localStorage.setItem("ntdTheme",settings.theme);
+  localStorage.setItem("theme",settings.theme);
+  const systemDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const useDark=settings.theme==="dark"||(settings.theme==="system"&&systemDark);
+  document.body.classList.toggle("dark-mode",useDark);
+  document.documentElement.classList.toggle("dark-mode",useDark);
+  document.documentElement.dataset.theme=useDark?"dark":"light";
+  const toggle=document.getElementById("themeToggle");
+  if(toggle) toggle.textContent=useDark?"☀️":"🌙";
+}
 document.querySelectorAll(".settings-nav-item").forEach(b=>b.onclick=()=>{document.querySelectorAll(".settings-nav-item").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".settings-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===b.dataset.section))});
 profileForm.oninput=()=>{profileSaveState.textContent="Unsaved changes";profileSaveState.classList.add("unsaved")};
 profileForm.onsubmit=e=>{e.preventDefault();profile={...profile,displayName:displayName.value.trim(),username:username.value.trim().replace(/^@/,""),city:city.value.trim(),website:website.value.trim(),bio:bio.value.trim(),skills:skills.value.trim(),availability:availability.value};save();header();profileSaveState.textContent="Saved";profileSaveState.classList.remove("unsaved")};

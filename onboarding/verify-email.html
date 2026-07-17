@@ -3,10 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Verify Email - NeedThingsDone</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/auth.css">
-
-  <title>Verify Email - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
 </head>
 <body class="auth-body">
 <header class="auth-topbar">
@@ -19,22 +43,20 @@
     <a href="../index.html">Back to site</a>
   </div>
 </header>
-
 <main class="auth-shell">
 <section class="auth-card auth-form-card auth-center-card">
-  <div class="auth-mail-icon">✉️</div>
-  <h1>Check your email</h1>
-  <p>We sent a verification link to <strong id="verifyEmailText">your email address</strong>.</p>
-  <p class="auth-help">Open the email and select the verification button to finish creating your account.</p>
-  <button id="demoVerifyButton" class="auth-primary" type="button">Demo: Verify email</button>
+  <div class="auth-mail-icon">✉️</div><h1>Check your email</h1>
+  <p>We sent a confirmation link to <strong id="verifyEmailText">your email address</strong>.</p>
+  <p class="auth-help">Open it to verify your account. After verification, you will continue to Otto's profile setup.</p>
+  <div id="authNotice" class="auth-notice" hidden></div>
   <button id="resendVerification" class="auth-secondary" type="button">Resend verification email</button>
-  <a href="login.html">Use a different account</a>
+  <a class="auth-primary" href="success.html?mode=signup">I verified my email — continue</a>
+  <a href="signup.html">Use a different email</a>
 </section>
-
 </main>
-<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/auth.js"></script>
-
 </body>
 </html>

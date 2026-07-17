@@ -38,3 +38,31 @@
 body.settings-compact .settings-panel{padding:17px}body.settings-large-text{font-size:18px}
 @media(max-width:920px){.settings-hero{align-items:stretch;flex-direction:column}.settings-user-card{min-width:0}.settings-layout{grid-template-columns:1fr}.settings-sidebar{position:static;display:flex;overflow-x:auto}.settings-nav-item{width:auto;white-space:nowrap}}
 @media(max-width:680px){.settings-page{width:min(100% - 22px,1220px);padding-top:28px}.settings-panel{padding:17px}.settings-form-grid,.settings-appearance-options,.settings-stat-grid,.settings-badge-grid{grid-template-columns:1fr}.settings-notification-header,.settings-notification-row{grid-template-columns:minmax(0,1fr) 58px 58px}.settings-security-card,.settings-session-list article,.settings-danger-zone,.settings-saved-item,.settings-profile-media{align-items:flex-start;flex-direction:column}}
+
+/* FINAL ACCOUNT SETTINGS THEME REPAIR */
+body{background:var(--page-bg,#f7f9fc);color:var(--text-color,#172033)}
+body.dark-mode .settings-page{--sc:#111d31;--st:#edf4ff;--sm:#aab8cc;--sb:#30415d;--input-bg:#0d192b}
+body.dark-mode .settings-sidebar,
+body.dark-mode .settings-panel,
+body.dark-mode .settings-user-card,
+body.dark-mode .settings-stat-grid article,
+body.dark-mode .settings-badge-grid article,
+body.dark-mode .settings-saved-item,
+body.dark-mode .settings-timeline article{background:#111d31!important;color:#edf4ff!important;border-color:#30415d!important}
+body.dark-mode .settings-panel h2,
+body.dark-mode .settings-panel h3,
+body.dark-mode .settings-panel strong,
+body.dark-mode .settings-user-card strong{color:#edf4ff!important}
+body.dark-mode .settings-panel p,
+body.dark-mode .settings-panel small,
+body.dark-mode .settings-sidebar button,
+body.dark-mode .settings-user-card span{color:#aab8cc!important}
+body.dark-mode .settings-nav-item:hover,
+body.dark-mode .settings-nav-item.active{background:#1a2c49!important;color:#82adff!important}
+body.dark-mode .settings-form input,
+body.dark-mode .settings-form textarea,
+body.dark-mode .settings-form select,
+body.dark-mode .settings-input-prefix{background:#0d192b!important;color:#edf4ff!important;border-color:#30415d!important}
+body.dark-mode .settings-secondary-button,
+body.dark-mode .settings-theme-card,
+body.dark-mode .settings-saved-tabs button{color:#edf4ff!important;border-color:#30415d!important}

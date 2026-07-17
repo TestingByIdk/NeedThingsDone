@@ -3,10 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Account Ready - NeedThingsDone</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/auth.css">
-
-  <title>Account Ready - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
 </head>
 <body class="auth-body">
 <header class="auth-topbar">
@@ -19,24 +43,18 @@
     <a href="../index.html">Back to site</a>
   </div>
 </header>
-
 <main class="auth-shell">
 <section class="auth-card auth-form-card auth-center-card">
-  <div class="auth-success-icon">✓</div>
-  <h1>Your account is ready</h1>
-  <p>You are now signed in to the NeedThingsDone frontend demo.</p>
-  <div class="auth-account-summary">
-    <span>Name</span><strong id="successName">New Member</strong>
-    <span>Account type</span><strong id="successRole">Find help</strong>
-  </div>
-  <a class="auth-primary" href="account-choice.html">Continue</a>
-  <a class="auth-secondary" href="../index.html">Return home</a>
+  <div class="auth-success-icon">✓</div><h1>Your account is ready</h1>
+  <p id="successMessage">Confirming your email and preparing Otto…</p>
+  <div id="successDetails" class="auth-account-summary"><span>Email</span><strong id="successEmail">Checking…</strong><span>Next step</span><strong id="successNextStep">Otto profile setup</strong></div>
+  <a id="successContinue" class="auth-primary" href="choose-profile.html" aria-disabled="true">Preparing your profile setup…</a>
+  <a class="auth-secondary" href="../index.html">Back to site</a>
 </section>
-
 </main>
-<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/auth.js"></script>
-
 </body>
 </html>

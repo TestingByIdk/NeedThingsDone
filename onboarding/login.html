@@ -3,10 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Log In - NeedThingsDone</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/auth.css">
-
-  <title>Log In - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
 </head>
 <body class="auth-body">
 <header class="auth-topbar">
@@ -19,38 +43,25 @@
     <a href="../index.html">Back to site</a>
   </div>
 </header>
-
 <main class="auth-shell">
 <section class="auth-card auth-form-card">
-  <div class="auth-card-heading">
-    <div class="auth-icon">👋</div>
-    <h1>Welcome back</h1>
-    <p>Log in to your NeedThingsDone account.</p>
-  </div>
+  <div class="auth-card-heading"><div class="auth-icon">👋</div><h1>Welcome back</h1><p>Log in and return to the page you were viewing.</p></div>
   <div id="authNotice" class="auth-notice" hidden></div>
-  <form id="loginForm" class="auth-form">
+  <form id="loginForm" class="auth-form" novalidate>
     <label>Email address<input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.ca"></label>
-    <label>Password
-      <div class="auth-password-wrap">
-        <input id="loginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="Your password">
-        <button type="button" data-toggle-password="loginPassword">Show</button>
-      </div>
-    </label>
-    <div class="auth-row">
-      <label class="auth-check"><input id="rememberMe" type="checkbox"><span>Remember me</span></label>
-      <a href="forgot-password.html">Forgot password?</a>
-    </div>
-    <button class="auth-primary" type="submit">Log in</button>
+    <label>Password<div class="auth-password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" required minlength="8" placeholder="Your password"><button type="button" data-toggle-password="loginPassword">Show</button></div></label>
+    <div class="auth-row"><label class="auth-check"><input id="rememberMe" type="checkbox" checked><span>Keep me signed in</span></label><a href="forgot-password.html">Forgot password?</a></div>
+    <button id="loginSubmit" class="auth-primary" type="submit">Log in</button>
   </form>
   <div class="auth-divider"><span>or</span></div>
-  <button class="auth-provider" type="button" data-demo-provider="Google">Continue with Google</button>
+  <button class="auth-provider" type="button" data-oauth-provider="google">Continue with Google</button>
   <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
+  <p class="auth-switch"><a href="../index.html">← Back to NeedThingsDone</a></p>
 </section>
-
 </main>
-<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/auth.js"></script>
-
 </body>
 </html>

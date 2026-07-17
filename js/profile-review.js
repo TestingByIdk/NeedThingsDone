@@ -655,6 +655,9 @@ function publishCompletedProfile() {
     JSON.stringify(completeProfile)
   );
 
+  localStorage.removeItem("ntdSignupFlowPendingV1");
+  localStorage.removeItem("ntdPendingEmail");
+
   elements.reviewMessage.textContent =
     "Profile saved locally. Database publishing will be connected next.";
 

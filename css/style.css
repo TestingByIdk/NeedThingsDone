@@ -1413,3 +1413,281 @@
   font-size: 0.9rem;
   line-height: 1.55;
 }
+
+
+/* =========================================================
+   GLOBAL APP UI: notification bell, account menu and chat dock
+   ========================================================= */
+.ntd-global-controls{display:flex;align-items:center}
+.ntd-notification-wrap,.ntd-profile-wrap{position:relative}
+.ntd-icon-button{width:42px;height:42px;border:1px solid var(--border-color,#dfe5ee);border-radius:13px;background:var(--card-bg,#fff);color:var(--text-color,#172033);display:grid;place-items:center;cursor:pointer;position:relative;font-size:1.05rem;transition:.2s}
+.ntd-icon-button:hover{transform:translateY(-1px);border-color:#2f69d9;box-shadow:0 8px 22px #17315f16}
+.ntd-count-badge,.ntd-messenger-tab b{position:absolute;top:-6px;right:-6px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#e14850;color:#fff;border:2px solid var(--card-bg,#fff);font:800 10px/15px system-ui;text-align:center}
+.ntd-notification-panel{position:absolute;z-index:1200;top:calc(100% + 12px);right:0;width:min(390px,calc(100vw - 24px));background:var(--card-bg,#fff);color:var(--text-color,#172033);border:1px solid var(--border-color,#dfe5ee);border-radius:18px;box-shadow:0 24px 70px #13284932;overflow:hidden}
+.ntd-notification-panel>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px;border-bottom:1px solid var(--border-color,#e4e8ef)}
+.ntd-notification-panel>header strong,.ntd-notification-panel>header small{display:block}.ntd-notification-panel>header small{color:var(--muted-text,#6b7280);font-size:.77rem;margin-top:2px}.ntd-notification-panel>header button{border:0;background:transparent;color:#2f69d9;font-weight:800;cursor:pointer;font-size:.78rem}
+.ntd-notification-list{max-height:390px;overflow:auto}.ntd-notification-item{display:grid;grid-template-columns:42px 1fr;gap:11px;padding:13px 16px;text-decoration:none;color:inherit;border-bottom:1px solid var(--border-color,#edf0f4);position:relative}.ntd-notification-item:hover{background:#2f69d908}.ntd-notification-item.is-unread{background:#2f69d90d}.ntd-notification-item.is-unread:before{content:"";position:absolute;left:5px;top:50%;width:6px;height:6px;border-radius:50%;background:#2f69d9}
+.ntd-notification-icon{width:42px;height:42px;border-radius:13px;background:#2f69d913;display:grid;place-items:center}.ntd-notification-item strong,.ntd-notification-item small,.ntd-notification-item time{display:block}.ntd-notification-item strong{font-size:.88rem}.ntd-notification-item small{color:var(--muted-text,#667085);line-height:1.35;margin:3px 0}.ntd-notification-item time{font-size:.7rem;color:#2f69d9}
+.ntd-panel-footer,.ntd-messenger-footer{display:block;text-align:center;text-decoration:none;color:#2f69d9;font-weight:800;padding:12px;background:#2f69d908}.ntd-empty-state{text-align:center;padding:30px;color:var(--muted-text,#667085)}.ntd-empty-state span,.ntd-empty-state strong{display:block}.ntd-empty-state span{font-size:1.7rem}.ntd-empty-state strong{color:var(--text-color,#172033);margin:8px 0}.ntd-empty-state p{margin:0;font-size:.84rem}
+.ntd-profile-button{display:flex;align-items:center;gap:8px;border:1px solid var(--border-color,#dfe5ee);border-radius:13px;background:var(--card-bg,#fff);color:var(--text-color,#172033);padding:5px 9px 5px 5px;cursor:pointer}.ntd-profile-button>span{width:31px;height:31px;border-radius:10px;background:#2f69d9;color:#fff;display:grid;place-items:center;font-weight:900}.ntd-profile-button>strong{max-width:90px;overflow:hidden;text-overflow:ellipsis}.ntd-profile-button>small{color:var(--muted-text,#667085)}
+.ntd-profile-menu{position:absolute;z-index:1200;right:0;top:calc(100% + 10px);width:205px;padding:7px;background:var(--card-bg,#fff);border:1px solid var(--border-color,#dfe5ee);border-radius:14px;box-shadow:0 22px 58px #1328492c}.ntd-profile-menu a,.ntd-profile-menu button{display:block;width:100%;padding:10px 11px;border:0;border-radius:9px;background:transparent;text-align:left;text-decoration:none;color:var(--text-color,#172033);font:750 .86rem system-ui;cursor:pointer}.ntd-profile-menu a:hover,.ntd-profile-menu button:hover{background:#2f69d90d;color:#2f69d9}
+.ntd-messenger{position:fixed;z-index:1150;left:18px;bottom:0;width:350px;max-width:calc(100vw - 28px);font-family:inherit}
+.ntd-messenger-tab{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-width:155px;margin-left:0;padding:12px 18px;border:1px solid var(--border-color,#dfe5ee);border-bottom:0;border-radius:15px 15px 0 0;background:var(--card-bg,#fff);color:var(--text-color,#172033);box-shadow:0 -7px 26px #142b4d18;cursor:pointer}.ntd-messenger-tab span{font-size:1.08rem}.ntd-messenger-tab b{top:-8px;right:-8px}
+.ntd-messenger-window{height:475px;max-height:70vh;background:var(--card-bg,#fff);color:var(--text-color,#172033);border:1px solid var(--border-color,#dfe5ee);border-bottom:0;border-radius:16px 16px 0 0;box-shadow:0 -15px 50px #142b4d2c;overflow:hidden}
+.ntd-messenger-window>header{height:62px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-color,#e4e8ef)}.ntd-messenger-window>header strong,.ntd-messenger-window>header small{display:block}.ntd-messenger-window>header small{color:var(--muted-text,#667085);font-size:.73rem;margin-top:2px}.ntd-messenger-window>header button{width:31px;height:31px;border:0;border-radius:9px;background:#2f69d90e;color:var(--text-color,#172033);cursor:pointer;font-weight:900}
+.ntd-thread-list{height:354px;overflow:auto}.ntd-thread-row{width:100%;display:grid;grid-template-columns:45px 1fr auto;align-items:center;gap:10px;padding:12px 14px;border:0;border-bottom:1px solid var(--border-color,#edf0f4);background:transparent;color:inherit;text-align:left;cursor:pointer}.ntd-thread-row:hover{background:#2f69d908}.ntd-thread-avatar{width:45px;height:45px;border-radius:15px;background:#2f69d912;display:grid;place-items:center;font-size:1.25rem}.ntd-thread-copy{min-width:0}.ntd-thread-copy strong,.ntd-thread-copy small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ntd-thread-copy small{color:var(--muted-text,#667085);font-size:.76rem;margin-top:4px}.ntd-thread-row>b{min-width:20px;height:20px;border-radius:999px;background:#2f69d9;color:#fff;text-align:center;font:800 11px/20px system-ui}
+.ntd-chat-view{height:354px}.ntd-chat-messages{height:294px;padding:15px;overflow:auto;display:flex;flex-direction:column;gap:8px}.ntd-chat-bubble{align-self:flex-start;max-width:82%;padding:9px 11px;border-radius:14px 14px 14px 4px;background:#eef2f7;color:#263247;font-size:.84rem;line-height:1.4;overflow-wrap:anywhere}.ntd-chat-bubble.is-mine{align-self:flex-end;border-radius:14px 14px 4px 14px;background:#2f69d9;color:#fff}
+.ntd-chat-compose{height:60px;border-top:1px solid var(--border-color,#e4e8ef);padding:9px;display:flex;gap:8px}.ntd-chat-compose input{flex:1;min-width:0;border:1px solid var(--border-color,#dfe5ee);border-radius:12px;padding:0 11px;background:var(--input-bg,var(--card-bg,#fff));color:var(--text-color,#172033);font:inherit}.ntd-chat-compose button{width:42px;border:0;border-radius:12px;background:#2f69d9;color:#fff;cursor:pointer}.ntd-messenger-footer{height:58px;padding:18px 12px}
+@media(max-width:900px){.ntd-profile-button>strong,.ntd-profile-button>small{display:none}.ntd-profile-button{padding-right:5px}}
+@media(max-width:620px){.ntd-notification-panel{position:fixed;top:72px;right:12px}.ntd-messenger{left:8px;max-width:calc(100vw - 16px)}.ntd-messenger-window{height:min(475px,72vh)}.ntd-messenger-tab{min-width:145px}.ntd-global-controls{order:-1}}
+
+
+/* =========================================================
+   COMPLETE DARK MODE POLISH PASS
+   These rules intentionally live at the end of style.css so
+   they override legacy hard-coded light colours.
+   ========================================================= */
+body.dark-mode {
+  --page-bg: #0c1628;
+  --card-bg: #111d31;
+  --soft-bg: #17243a;
+  --soft-card-bg: #162338;
+  --input-bg: #0d192b;
+  --text-color: #edf4ff;
+  --muted-text: #aab8cc;
+  --border-color: #2b3b55;
+  background: #0c1628;
+  color: #edf4ff;
+}
+
+body.dark-mode,
+body.dark-mode main,
+body.dark-mode section:not(.community-modal-backdrop),
+body.dark-mode .page-shell,
+body.dark-mode .dashboard-page,
+body.dark-mode .messages-page,
+body.dark-mode .notifications-page,
+body.dark-mode .account-settings-page {
+  color: var(--text-color);
+}
+
+body.dark-mode .navbar {
+  background: rgba(15, 27, 46, .96);
+  border-bottom-color: #30415d;
+  box-shadow: 0 8px 30px rgba(0,0,0,.16);
+}
+
+body.dark-mode .navbar nav a,
+body.dark-mode .logo,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode strong,
+body.dark-mode label {
+  color: #edf4ff;
+}
+
+body.dark-mode p,
+body.dark-mode small,
+body.dark-mode .subtitle,
+body.dark-mode .muted,
+body.dark-mode .description {
+  color: #aebdd1;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #0d192b;
+  color: #edf4ff;
+  border-color: #30415d;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #7788a2;
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+  border-color: #5d94ff;
+  box-shadow: 0 0 0 4px rgba(64, 126, 245, .17);
+}
+
+body.dark-mode .card,
+body.dark-mode [class*="-card"],
+body.dark-mode [class*="-panel"],
+body.dark-mode [class*="-box"],
+body.dark-mode [class*="-widget"],
+body.dark-mode [class*="-item"],
+body.dark-mode [class*="-row"] {
+  border-color: #2b3b55;
+}
+
+body.dark-mode .ntd-icon-button,
+body.dark-mode .ntd-profile-button,
+body.dark-mode .ntd-notification-panel,
+body.dark-mode .ntd-profile-menu,
+body.dark-mode .ntd-messenger-tab,
+body.dark-mode .ntd-messenger-window {
+  background: #111d31;
+  color: #edf4ff;
+  border-color: #30415d;
+}
+
+body.dark-mode .ntd-notification-panel > header,
+body.dark-mode .ntd-messenger-window > header,
+body.dark-mode .ntd-thread-row,
+body.dark-mode .ntd-chat-compose {
+  border-color: #2b3b55;
+}
+
+body.dark-mode .ntd-notification-item,
+body.dark-mode .ntd-profile-menu a,
+body.dark-mode .ntd-profile-menu button,
+body.dark-mode .ntd-thread-row {
+  color: #edf4ff;
+}
+
+body.dark-mode .ntd-notification-item:hover,
+body.dark-mode .ntd-thread-row:hover,
+body.dark-mode .ntd-profile-menu a:hover,
+body.dark-mode .ntd-profile-menu button:hover {
+  background: rgba(82, 137, 243, .13);
+}
+
+body.dark-mode .ntd-notification-item.is-unread {
+  background: rgba(66, 126, 242, .16);
+}
+
+body.dark-mode .ntd-notification-item small,
+body.dark-mode .ntd-thread-copy small,
+body.dark-mode .ntd-messenger-window > header small,
+body.dark-mode .ntd-notification-panel > header small {
+  color: #aab8cc;
+}
+
+body.dark-mode .ntd-notification-icon,
+body.dark-mode .ntd-thread-avatar,
+body.dark-mode .ntd-messenger-window > header button {
+  background: #1a2941;
+}
+
+body.dark-mode .ntd-panel-footer,
+body.dark-mode .ntd-messenger-footer {
+  background: #16243a;
+  color: #82adff;
+}
+
+body.dark-mode .ntd-chat-bubble {
+  background: #233149;
+  color: #e8f0fc;
+}
+
+body.dark-mode .ntd-chat-bubble.is-mine {
+  background: #356fdc;
+  color: #fff;
+}
+
+body.dark-mode .ntd-chat-compose input {
+  background: #0d192b;
+  color: #edf4ff;
+  border-color: #30415d;
+}
+
+body.dark-mode .ntd-messenger-window {
+  box-shadow: 0 -18px 58px rgba(0,0,0,.42);
+}
+
+body.dark-mode .ntd-messenger-tab {
+  box-shadow: 0 -8px 28px rgba(0,0,0,.32);
+}
+
+body.dark-mode .theme-toggle {
+  background: #1b2940;
+  color: #ffd46a;
+  border-color: #30415d;
+}
+
+body.dark-mode .login-btn,
+body.dark-mode .signup-btn,
+body.dark-mode button:not(.community-primary-button):not(.ntd-chat-compose button) {
+  border-color: #30415d;
+}
+
+body.dark-mode .modal,
+body.dark-mode [role="dialog"] {
+  color: #edf4ff;
+}
+
+body.dark-mode a {
+  text-underline-offset: 3px;
+}
+
+body.dark-mode hr {
+  border-color: #2b3b55;
+}
+
+@media (max-width: 620px) {
+  body.dark-mode .ntd-notification-panel {
+    background: #111d31;
+  }
+}
+
+
+
+/* Utility page navigation shared by dashboard and saved pages */
+.ntd-utility-site-nav{display:flex;align-items:center;justify-content:center;gap:22px;flex:1;margin:0 22px}.ntd-utility-site-nav a{color:var(--text-color,#172033);text-decoration:none;font-weight:800;font-size:.86rem}.ntd-utility-site-nav a:hover{color:#2f69d9}
+@media(max-width:1150px){.ntd-utility-site-nav{gap:12px}.ntd-utility-site-nav a{font-size:.78rem}}
+@media(max-width:900px){.ntd-utility-site-nav{display:none}}
+
+/* =========================================================
+   ACCOUNT NAVIGATION + ACCOUNT PAGE THEME FIX
+   ========================================================= */
+.account-main-navbar{position:sticky;top:0;z-index:1400}
+.account-section-nav{position:sticky;top:76px;z-index:1250;background:color-mix(in srgb,var(--card-bg,#fff) 96%,transparent);border-bottom:1px solid var(--border-color,#e1e7ef);backdrop-filter:blur(16px);overflow-x:auto;scrollbar-width:thin}
+.account-section-nav-inner{width:min(1480px,calc(100% - 28px));margin:auto;display:flex;align-items:center;gap:6px;padding:9px 0;min-width:max-content}
+.account-section-nav a{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:10px;color:var(--muted-text,#657084);font-size:.84rem;font-weight:800;text-decoration:none;white-space:nowrap;transition:.16s ease}
+.account-section-nav a:hover{background:rgba(47,105,217,.09);color:#2f69d9}
+.account-section-nav a.active{background:rgba(47,105,217,.13);color:#2f69d9}
+.account-section-nav a span{font-size:.94rem}
+body.dark-mode .account-section-nav{background:rgba(14,25,43,.96);border-color:#2b3b55}
+body.dark-mode .account-section-nav a{color:#b8c7da}
+body.dark-mode .account-section-nav a:hover,body.dark-mode .account-section-nav a.active{background:rgba(75,132,242,.17);color:#8db7ff}
+
+/* Make account pages obey the same site-wide theme variables. */
+body.dark-mode .messages-page,body.dark-mode .notifications-page,body.dark-mode .reviews-page,body.dark-mode .saved-page,body.dark-mode .settings-page,body.dark-mode .profile-editor-page,body.dark-mode .public-profile-page{background:#0c1628!important;color:#edf4ff!important}
+body.dark-mode .messages-app,body.dark-mode .conversation-sidebar,body.dark-mode .chat-panel,body.dark-mode .profile-panel,
+body.dark-mode .notifications-hero,body.dark-mode .notification-summary-grid article,body.dark-mode .notifications-toolbar,body.dark-mode .notification-card,body.dark-mode .notification-sidebar-card,
+body.dark-mode .reviews-hero,body.dark-mode .review-summary-card,body.dark-mode .reviews-toolbar,body.dark-mode .review-card,body.dark-mode .reviews-sidebar-card,
+body.dark-mode .saved-hero,body.dark-mode .saved-summary-grid article,body.dark-mode .saved-controls,body.dark-mode .saved-toolbar,body.dark-mode .saved-card,body.dark-mode .saved-sidebar-card,
+body.dark-mode .settings-hero,body.dark-mode .settings-sidebar,body.dark-mode .settings-panel,body.dark-mode .settings-user-card,
+body.dark-mode .profile-editor-heading,body.dark-mode .editor-card,body.dark-mode .editor-preview-card,
+body.dark-mode .profile-hero-card,body.dark-mode .public-section-card,body.dark-mode .profile-sidebar-card{background:#111d31!important;color:#edf4ff!important;border-color:#2d3e59!important}
+body.dark-mode .messages-page h1,body.dark-mode .messages-page h2,body.dark-mode .messages-page strong,
+body.dark-mode .notifications-page h1,body.dark-mode .notifications-page h2,body.dark-mode .notifications-page strong,
+body.dark-mode .reviews-page h1,body.dark-mode .reviews-page h2,body.dark-mode .reviews-page strong,
+body.dark-mode .saved-page h1,body.dark-mode .saved-page h2,body.dark-mode .saved-page strong,
+body.dark-mode .settings-page h1,body.dark-mode .settings-page h2,body.dark-mode .settings-page h3,body.dark-mode .settings-page strong,
+body.dark-mode .profile-editor-page h1,body.dark-mode .profile-editor-page h2,body.dark-mode .profile-editor-page h3,
+body.dark-mode .public-profile-page h1,body.dark-mode .public-profile-page h2,body.dark-mode .public-profile-page h3{color:#edf4ff!important}
+body.dark-mode .messages-page p,body.dark-mode .messages-page small,body.dark-mode .messages-page span,
+body.dark-mode .notifications-page p,body.dark-mode .notifications-page small,
+body.dark-mode .reviews-page p,body.dark-mode .reviews-page small,
+body.dark-mode .saved-page p,body.dark-mode .saved-page small,
+body.dark-mode .settings-page p,body.dark-mode .settings-page small,
+body.dark-mode .profile-editor-page p,body.dark-mode .profile-editor-page small,
+body.dark-mode .public-profile-page p,body.dark-mode .public-profile-page small{color:#aebdd1}
+body.dark-mode .messages-page input,body.dark-mode .messages-page textarea,body.dark-mode .messages-page select,
+body.dark-mode .notifications-page input,body.dark-mode .notifications-page textarea,body.dark-mode .notifications-page select,
+body.dark-mode .reviews-page input,body.dark-mode .reviews-page textarea,body.dark-mode .reviews-page select,
+body.dark-mode .saved-page input,body.dark-mode .saved-page textarea,body.dark-mode .saved-page select,
+body.dark-mode .settings-page input,body.dark-mode .settings-page textarea,body.dark-mode .settings-page select,
+body.dark-mode .profile-editor-page input,body.dark-mode .profile-editor-page textarea,body.dark-mode .profile-editor-page select{background:#0d192b!important;color:#edf4ff!important;border-color:#30415d!important}
+
+@media(max-width:900px){.account-section-nav{top:68px}.account-section-nav-inner{width:calc(100% - 18px)}}
+
+\n\n/* ACCOUNT DATA + THEME CONSISTENCY FIX */\n.notifications-page,.reviews-page,.saved-page{min-height:calc(100vh - 130px)}\n.notifications-layout,.reviews-layout{align-items:start}\n.notification-list,.reviews-list{min-height:0!important}\n.notification-card,.review-card{min-height:0!important}\n\nbody.dark-mode .notifications-page,body.dark-mode .reviews-page,body.dark-mode .saved-page{background:#0c1628!important;color:#edf4ff!important}\nbody.dark-mode .notifications-hero,body.dark-mode .notification-summary-grid article,body.dark-mode .notifications-toolbar,body.dark-mode .notification-card,body.dark-mode .notification-preferences-card,\nbody.dark-mode .reviews-hero,body.dark-mode .review-summary-card,body.dark-mode .reviews-toolbar,body.dark-mode .review-card,body.dark-mode .review-side-card,\nbody.dark-mode .saved-hero,body.dark-mode .saved-summary-grid article,body.dark-mode .saved-tabs-shell,body.dark-mode .saved-controls,body.dark-mode .saved-card,body.dark-mode .saved-side-card{background:#111d31!important;border-color:#30415d!important;color:#edf4ff!important}\nbody.dark-mode .notification-card h2,body.dark-mode .notification-card strong,body.dark-mode .review-card h2,body.dark-mode .review-card strong,body.dark-mode .saved-card h2,body.dark-mode .saved-card strong{color:#edf4ff!important}\nbody.dark-mode .notification-card p,body.dark-mode .notification-card small,body.dark-mode .review-card p,body.dark-mode .review-card small,body.dark-mode .saved-card p,body.dark-mode .saved-card small{color:#aab8cc!important}\nbody.dark-mode .review-search-box,body.dark-mode .reviews-toolbar label,body.dark-mode .saved-search-box,body.dark-mode .saved-controls label{background:#16243a!important;border-color:#30415d!important;color:#edf4ff!important}\nbody.dark-mode .review-search-box input,body.dark-mode .reviews-toolbar select,body.dark-mode .saved-search-box input,body.dark-mode .saved-controls select{background:#0d192b!important;color:#edf4ff!important;border-color:#30415d!important}\nbody.dark-mode .saved-card .private-note,body.dark-mode .saved-private-note{background:#292412!important;border-color:#8c762e!important;color:#eadb9f!important}\nbody.dark-mode .saved-side-card li,body.dark-mode .saved-how-item{background:#16243a!important;color:#dce7f7!important}\nbody.dark-mode .account-section-nav{background:#111d31!important;border-color:#30415d!important}\nbody.dark-mode .account-section-nav a{color:#b7c5d9!important}\nbody.dark-mode .account-section-nav a.active,body.dark-mode .account-section-nav a:hover{background:#1b2d4a!important;color:#82adff!important}\n\n/* prevent broad legacy rules from bleaching text */\nbody.dark-mode .saved-card .profile-name,body.dark-mode .saved-card .profile-location,body.dark-mode .saved-card .profile-headline{color:inherit!important}\n

@@ -96,11 +96,20 @@ const el = {
 let selectedRating = 0;
 let selectedTags = new Set();
 
+try {
+  const existing = JSON.parse(localStorage.getItem("ntdReviewsV1") || "null");
+  if (!Array.isArray(existing) || !existing.length) {
+    localStorage.setItem("ntdReviewsV1", JSON.stringify(reviews));
+  }
+} catch {
+  localStorage.setItem("ntdReviewsV1", JSON.stringify(reviews));
+}
+
 bindEvents();
 renderReviews();
 
 function bindEvents() {
-  el.openModal.addEventListener("click", openModal);
+  el.openModal?.addEventListener("click", openModal);
 
   document.querySelectorAll("[data-close-modal]").forEach(button => {
     button.addEventListener("click", closeModal);
@@ -110,7 +119,7 @@ function bindEvents() {
     control.addEventListener(control === el.search ? "input" : "change", renderReviews);
   });
 
-  el.reset.addEventListener("click", resetFilters);
+  el.reset?.addEventListener("click", resetFilters);
 
   el.stars.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", () => {

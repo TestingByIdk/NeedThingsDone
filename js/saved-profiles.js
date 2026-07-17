@@ -131,6 +131,8 @@ const el = {
 
 let savedProfiles = loadSavedProfiles();
 let recentProfiles = loadRecentProfiles();
+// Keep the dashboard count synchronized on first load.
+saveSavedProfiles();
 let activeTab = "saved";
 let activeNoteProfileId = null;
 
@@ -678,10 +680,9 @@ function loadRecentProfiles() {
 }
 
 function saveSavedProfiles() {
-  localStorage.setItem(
-    "ntdSavedProfiles",
-    JSON.stringify(savedProfiles)
-  );
+  const value = JSON.stringify(savedProfiles);
+  localStorage.setItem("ntdSavedProfiles", value);
+  localStorage.setItem("ntdSavedProfilesV1", value);
 }
 
 function saveRecentProfiles() {
