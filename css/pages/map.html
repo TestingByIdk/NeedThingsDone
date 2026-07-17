@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-icon">
+      <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
+    </div>
+    <div>
+      <div class="logo">NeedThings<span>Done</span></div>
+      <p>From need to done.</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a href="shop.html">Shop</a>
+    <a href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a class="active" href="map.html">Map</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+
+<section class="map-hero">
+  <div class="map-pill">🗺 Explore what’s near you</div>
+  <h1>Find businesses, individuals, shops, and deals around Ottawa.</h1>
+  <p>
+    Use filters to explore nearby listings. Later, NeedThingsDone will use your location
+    to show the closest partnered businesses and shops near you.
+  </p>
+</section>
+
+<section class="map-demo-layout">
+
+  <aside class="map-filters">
+    <h3>Filters</h3>
+
+    <button class="map-filter active-map-filter">All</button>
+    <button class="map-filter">Businesses</button>
+    <button class="map-filter">Individuals</button>
+    <button class="map-filter">Shop</button>
+    <button class="map-filter">Cafés</button>
+    <button class="map-filter">Parts</button>
+    <button class="map-filter">Deals</button>
+
+    <div class="location-box">
+      <div>📍</div>
+      <h4>Location Demo</h4>
+      <p>
+        Real location detection will be added later with maps and database support.
+      </p>
+    </div>
+  </aside>
+
+  <main class="fake-map-area">
+    <div class="map-topbar">
+      <input type="text" placeholder="Search Ottawa, café, auto repair, parts..." />
+      <button>Use My Location</button>
+    </div>
+
+    <div class="fake-map">
+      <div class="map-label">Ottawa Demo Map</div>
+
+      <button class="map-pin pin-blue" style="top: 30%; left: 38%;">
+        🏢
+        <div class="pin-popup">
+          <h4>Capital Auto Repair</h4>
+          <p>Auto Repair • Business</p>
+          <span>⭐ 4.8 • 2.1 km away</span>
+          <a href="#">See Full Page</a>
+        </div>
+      </button>
+
+      <button class="map-pin pin-green" style="top: 55%; left: 58%;">
+        ☕
+        <div class="pin-popup">
+          <h4>Ottawa Sweet Café</h4>
+          <p>Café • Bakery • Shop</p>
+          <span>⭐ 4.7 • 1.4 km away</span>
+          <a href="#">See Full Page</a>
+        </div>
+      </button>
+
+      <button class="map-pin pin-purple" style="top: 42%; left: 70%;">
+        👤
+        <div class="pin-popup">
+          <h4>Local Tech Helper</h4>
+          <p>Computer Help • Individual</p>
+          <span>⭐ 5.0 • 3.6 km away</span>
+          <a href="#">See Full Page</a>
+        </div>
+      </button>
+
+      <button class="map-pin pin-orange" style="top: 68%; left: 31%;">
+        🏷️
+        <div class="pin-popup">
+          <h4>Parts Deal</h4>
+          <p>Computer Parts • Deal</p>
+          <span>15% off this week</span>
+          <a href="#">See Full Page</a>
+        </div>
+      </button>
+    </div>
+  </main>
+
+  <aside class="map-results">
+    <h3>Nearby Results</h3>
+
+    <div class="map-result-card">
+      <strong>Capital Auto Repair</strong>
+      <p>🏢 Auto Repair • Business</p>
+      <span>⭐ 4.8 • 2.1 km away</span>
+    </div>
+
+    <div class="map-result-card">
+      <strong>Ottawa Sweet Café</strong>
+      <p>☕ Café • Bakery • Shop</p>
+      <span>⭐ 4.7 • 1.4 km away</span>
+    </div>
+
+    <div class="map-result-card">
+      <strong>Local Tech Helper</strong>
+      <p>👤 Computer Help • Individual</p>
+      <span>⭐ 5.0 • 3.6 km away</span>
+    </div>
+  </aside>
+
+</section>
+
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
+
+</body>
+</html>

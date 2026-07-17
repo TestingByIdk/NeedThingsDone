@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  (()=>{try{const a=JSON.parse(localStorage.getItem("ntdAccountSettingsV1")||"null")?.theme;const p=a||localStorage.getItem("ntdTheme")||localStorage.getItem("theme")||localStorage.getItem("ntdThemePreference")||"light";const d=p==="dark"||(p==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.classList.toggle("dark-mode",d);document.addEventListener("DOMContentLoaded",()=>document.body.classList.toggle("dark-mode",d));}catch{}})();
+  </script>
+
+  <title>Public Profile - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/public-profile.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+  <header class="navbar account-main-navbar">
+  <div class="brand">
+    <div class="brand-icon"><img src="../assets/images/otto.png" class="otto otto-small" alt="Otto"></div>
+    <div><div class="logo">NeedThings<span>Done</span></div><p>From need to done.</p></div>
+  </div>
+  <nav aria-label="Main navigation">
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a href="shop.html">Shop</a>
+    <a href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a href="map.html">Map</a>
+  </nav>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+<nav class="account-section-nav" aria-label="Account navigation">
+  <div class="account-section-nav-inner"><a class="" href="dashboard.html"><span>🏠</span>Overview</a><a class="" href="dashboard-profile-editor.html"><span>👤</span>My Profile</a><a class="" href="messages.html"><span>💬</span>Messages</a><a class="" href="notifications.html"><span>🔔</span>Notifications</a><a class="" href="reviews.html"><span>⭐</span>Reviews</a><a class="" href="saved-profiles.html"><span>🔖</span>Saved Items</a><a class="" href="account-settings.html"><span>⚙️</span>Account Settings</a></div>
+</nav>
+
+  <main class="public-profile-page">
+    <section class="profile-hero-card">
+      <div class="profile-hero-main">
+        <div class="public-profile-avatar" id="publicAvatar">👤</div>
+        <div class="profile-identity">
+          <div class="identity-topline">
+            <span class="profile-type-pill" id="publicType">Individual</span>
+            <span class="activity-pill"><span class="activity-dot"></span>Active profile</span>
+          </div>
+          <h1 id="publicName">Profile name</h1>
+          <p class="public-headline" id="publicHeadline">Local help you can feel confident choosing.</p>
+          <div class="public-profile-tags" id="publicProfileTags"></div>
+          <p class="public-location" id="publicLocation">📍 Location</p>
+        </div>
+      </div>
+      <div class="profile-hero-actions">
+        <button id="messageProfile" type="button" class="primary-btn" hidden>💬 Message</button>
+        <a id="websiteButton" class="secondary-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>🌐 Website</a>
+        <a id="documentButton" class="secondary-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>📄 Resume / Flyer</a>
+        <a id="phoneButton" class="secondary-btn" href="#" hidden>📞 Call</a>
+      </div>
+    </section>
+
+    <nav class="profile-section-nav" aria-label="Profile sections">
+      <a href="#trust">Trust</a><a href="#about">About</a><a href="#services">Services</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+    </nav>
+
+    <div class="public-profile-layout">
+      <div class="public-profile-main">
+        <section class="public-section-card" id="trust">
+          <div class="section-title-row">
+            <div><p class="section-eyebrow">Trust at a glance</p><h2>Why people may choose this profile</h2></div>
+            <span class="future-data-pill">Live trust data coming later</span>
+          </div>
+          <div class="trust-overview-grid">
+            <div class="trust-metric"><span>⭐</span><strong>New</strong><p>No reviews yet</p></div>
+            <div class="trust-metric"><span>💬</span><strong id="responseText">Not measured</strong><p>Response time</p></div>
+            <div class="trust-metric"><span>🏷️</span><strong id="tagCountMetric">0</strong><p>Self-described tags</p></div>
+            <div class="trust-metric"><span>📅</span><strong>2026</strong><p>Member since</p></div>
+          </div>
+          <div class="reputation-preview">
+            <div class="reputation-column positive">
+              <h3>Positive tags</h3>
+              <div class="reputation-tag-list"><span>✓ Friendly <small>Future reviews</small></span><span>✓ Reliable <small>Future reviews</small></span><span>✓ Great Communication <small>Future reviews</small></span></div>
+            </div>
+            <div class="reputation-column negative">
+              <h3>Negative tags stay visible</h3>
+              <div class="reputation-tag-list"><span>⚠ Slow Replies <small>No reports yet</small></span><span>⚠ Unexpected Fees <small>No reports yet</small></span></div>
+              <p>Legitimate negative tags will not be hidden by profile owners.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="public-section-card otto-public-card" id="ottoPublicSection" hidden>
+          <div class="otto-public-icon"><img src="../assets/images/otto.png" alt="Otto"></div>
+          <div><p class="section-eyebrow">Otto’s work-style result</p><h2><span id="publicWorkStyleIcon">🧩</span> <span id="publicWorkStyleName">Problem Solver</span></h2><p id="publicWorkStyleDescription"></p></div>
+        </section>
+
+        <section class="public-section-card" id="about">
+          <div class="section-title-row"><div><p class="section-eyebrow">About</p><h2 id="aboutHeading">About this profile</h2></div></div>
+          <p class="public-about-text" id="publicAbout"></p>
+          <div class="quick-detail-grid" id="quickDetails"></div>
+        </section>
+
+        <section class="public-section-card" id="services">
+          <div class="section-title-row"><div><p class="section-eyebrow">What they offer</p><h2 id="servicesHeading">Services and skills</h2></div></div>
+          <div class="public-service-grid" id="publicServices"></div>
+        </section>
+
+        <section class="public-section-card" id="publicDocumentSection" hidden>
+          <div class="section-title-row">
+            <div><p class="section-eyebrow">Learn more</p><h2>Resume, portfolio, or flyer</h2></div>
+            <a id="publicDocumentLink" href="#" target="_blank" rel="noopener noreferrer">Open document →</a>
+          </div>
+          <div class="document-public-preview"><div class="document-public-icon">📄</div><div><h3>Public document link</h3><p>This document opens in the visitor’s browser. Embedded previews can be added later with the backend.</p></div></div>
+        </section>
+
+        <section class="public-section-card" id="reviews">
+          <div class="section-title-row"><div><p class="section-eyebrow">Community reputation</p><h2>Reviews</h2></div><button class="secondary-btn" type="button" disabled>Write a review</button></div>
+          <div class="reviews-empty-state"><span>⭐</span><h3>No reviews yet</h3><p>Reviews, owner replies, trusted-reviewer badges, positive tags, and permanent negative tags will appear here once the review system is connected.</p></div>
+          <div class="future-review-example"><div><strong>Future review tools</strong><p>Reply publicly, report a review, view moderation status, and see whether an issue was resolved.</p></div><div class="future-review-badges"><span>🏅 Trusted Reviewer</span><span>🛠 Resolves Problems</span><span>🟡 Under Review</span></div></div>
+        </section>
+
+        <section class="public-section-card trust-timeline-card">
+          <div class="section-title-row"><div><p class="section-eyebrow">Trust timeline</p><h2>Reputation over time</h2></div></div>
+          <div class="trust-timeline">
+            <div class="timeline-item active"><span></span><div><strong>Profile created</strong><p>Joined NeedThingsDone in 2026.</p></div></div>
+            <div class="timeline-item future"><span></span><div><strong>First review</strong><p>This milestone will appear after the first customer review.</p></div></div>
+            <div class="timeline-item future"><span></span><div><strong>First verified tag</strong><p>A tag becomes verified after enough legitimate reviewers confirm it.</p></div></div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="public-profile-sidebar">
+        <section class="sidebar-card contact-sidebar-card" id="contact">
+          <p class="section-eyebrow">Contact</p><h2>Ready to reach out?</h2>
+          <div class="sidebar-contact-list" id="sidebarContactList"></div>
+          <p class="contact-safety-note">Keep early conversations on NeedThingsDone when messaging is available. Never send sensitive information through a public form.</p>
+        </section>
+        <section class="sidebar-card profile-badges-card"><p class="section-eyebrow">Badges</p><h2>Profile badges</h2><div class="badge-placeholder-list"><span>🌱 New Member</span><span>🐙 Completed Otto Setup</span><span>🏅 More badges coming later</span></div></section>
+        <section class="sidebar-card share-profile-card"><img src="../assets/images/otto.png" alt="Otto"><h2>Know someone who needs help?</h2><p>Share this profile with them.</p><button id="copyProfileLink" type="button" class="secondary-btn">Copy profile link</button><p class="copy-message" id="copyMessage" aria-live="polite"></p></section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="public-profile-footer"><p>Built in Canada 🇨🇦 · © 2026 NeedThingsDone</p></footer>
+  <script src="../js/script.js"></script>
+<script src="../js/public-profile.js"></script>
+</body>
+</html>

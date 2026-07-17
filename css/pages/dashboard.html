@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  (()=>{try{const a=JSON.parse(localStorage.getItem("ntdAccountSettingsV1")||"null")?.theme;const p=a||localStorage.getItem("ntdTheme")||localStorage.getItem("theme")||localStorage.getItem("ntdThemePreference")||"light";const d=p==="dark"||(p==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.classList.toggle("dark-mode",d);document.addEventListener("DOMContentLoaded",()=>document.body.classList.toggle("dark-mode",d));}catch{}})();
+  </script>
+
+  <title>Dashboard - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+<header class="navbar account-main-navbar">
+  <div class="brand">
+    <div class="brand-icon"><img src="../assets/images/otto.png" class="otto otto-small" alt="Otto"></div>
+    <div><div class="logo">NeedThings<span>Done</span></div><p>From need to done.</p></div>
+  </div>
+  <nav aria-label="Main navigation">
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a href="shop.html">Shop</a>
+    <a href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a href="map.html">Map</a>
+  </nav>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+<nav class="account-section-nav" aria-label="Account navigation">
+  <div class="account-section-nav-inner"><a class="active" href="dashboard.html"><span>🏠</span>Overview</a><a class="" href="dashboard-profile-editor.html"><span>👤</span>My Profile</a><a class="" href="messages.html"><span>💬</span>Messages</a><a class="" href="notifications.html"><span>🔔</span>Notifications</a><a class="" href="reviews.html"><span>⭐</span>Reviews</a><a class="" href="saved-profiles.html"><span>🔖</span>Saved Items</a><a class="" href="account-settings.html"><span>⚙️</span>Account Settings</a></div>
+</nav>
+<div class="dashboard-shell">
+  <aside class="dashboard-sidebar" id="dashboardSidebar">
+    <div class="sidebar-profile-mini"><div class="sidebar-avatar" id="sidebarAvatar">👤</div><div><strong id="sidebarName">Your Account</strong><span id="sidebarType">Member</span></div></div>
+    <nav class="dashboard-nav">
+      <button class="dashboard-nav-item active" data-section="overview"><span>🏠</span>Overview</button>
+      <a class="dashboard-nav-item" href="dashboard-profile-editor.html"><span>👤</span>My Profile</a>
+      <a class="dashboard-nav-item" href="messages.html"><span>💬</span>Messages <b id="messageNavBadge">0</b></a>
+      <a class="dashboard-nav-item" href="notifications.html"><span>🔔</span>Notifications</a>
+      <a class="dashboard-nav-item" href="reviews.html"><span>⭐</span>Reviews</a>
+      <a class="dashboard-nav-item" href="saved-profiles.html"><span>🔖</span>Saved Items</a>
+      <a class="dashboard-nav-item" href="account-settings.html"><span>⚙️</span>Account Settings</a>
+    </nav>
+    <div class="sidebar-bottom-card"><img src="../assets/images/otto.png" alt="Otto"><strong id="ottoSideTitle">Otto’s tip</strong><p id="ottoSideTip">Complete your profile so people know how you can help.</p></div>
+  </aside>
+  <div class="dashboard-overlay" id="dashboardOverlay"></div>
+  <main class="dashboard-main">
+    <section class="dashboard-section active" id="overviewSection">
+      <div class="dashboard-welcome"><div><p class="dashboard-eyebrow" id="timeGreeting">Your home base</p><h1>Welcome back, <span id="welcomeName">there</span> 👋</h1><p id="welcomeSubtitle">Here is what is happening with your NeedThingsDone account.</p></div><img src="../assets/images/otto.png" alt="Otto"></div>
+
+      <section class="dashboard-alert" id="profileAlert"><div><strong>Finish setting up your profile</strong><p>A complete profile helps people trust and find you.</p></div><a class="primary-btn" href="dashboard-profile-editor.html">Continue setup</a></section>
+
+      <section class="dashboard-stats-grid">
+        <a class="dashboard-stat-card" href="messages.html"><div class="dashboard-stat-icon">💬</div><div><small>Unread messages</small><strong id="messageCount">0</strong><span>Open conversations</span></div></a>
+        <a class="dashboard-stat-card" href="notifications.html"><div class="dashboard-stat-icon">🔔</div><div><small>Notifications</small><strong id="notificationCount">0</strong><span>Recent updates</span></div></a>
+        <a class="dashboard-stat-card" href="reviews.html"><div class="dashboard-stat-icon">⭐</div><div><small>Reviews</small><strong id="reviewCount">0</strong><span id="ratingText">No rating yet</span></div></a>
+        <a class="dashboard-stat-card" href="saved-profiles.html"><div class="dashboard-stat-icon">🔖</div><div><small>Saved items</small><strong id="savedCount">0</strong><span>Profiles and posts</span></div></a>
+      </section>
+
+      <div class="dashboard-two-column dashboard-main-grid">
+        <section class="dashboard-card">
+          <div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">Shortcuts</p><h2>Quick actions</h2></div></div>
+          <div class="quick-actions-grid" id="quickActions">
+            <a href="individual-search.html"><span>🔎</span><strong>Find help</strong><small>Search local individuals</small></a>
+            <a href="businesses.html"><span>🏢</span><strong>Browse businesses</strong><small>Discover local services</small></a>
+            <a href="community.html"><span>💬</span><strong>Ask the community</strong><small>Post a local question</small></a>
+            <a href="saved-profiles.html"><span>🔖</span><strong>Saved items</strong><small>Return to saved profiles</small></a>
+            <a href="dashboard-profile-editor.html" data-owner-action><span>✏️</span><strong>Edit profile</strong><small>Update public details</small></a>
+            <button id="shareProfileAction" type="button" data-owner-action><span>🔗</span><strong>Share profile</strong><small>Copy your profile link</small></button>
+          </div><p class="dashboard-action-message" id="shareMessage"></p>
+        </section>
+        <section class="dashboard-card profile-completion-card">
+          <div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">Profile strength</p><h2><span id="profileStrengthText">0%</span> complete</h2></div></div>
+          <div class="dashboard-strength-track"><div id="dashboardStrengthFill"></div></div>
+          <div class="profile-progress-items" id="profileProgressItems"></div>
+          <a class="dashboard-text-link" href="dashboard-profile-editor.html">Improve profile →</a>
+        </section>
+      </div>
+
+      <div class="dashboard-two-column">
+        <section class="dashboard-card"><div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">For you</p><h2>Nearby discoveries</h2></div><a href="map.html">Open map</a></div><div class="discovery-list" id="discoveryList"></div></section>
+        <section class="dashboard-card"><div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">What’s happening</p><h2>Recent activity</h2></div></div><div class="activity-list" id="activityList"></div></section>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Account - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
+</head>
+<body class="auth-body">
+<header class="auth-topbar">
+  <a class="auth-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <span><strong>NeedThings<span>Done</span></strong><small>From need to done.</small></span>
+  </a>
+  <div class="auth-top-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a href="../index.html">Back to site</a>
+  </div>
+</header>
+<main class="auth-shell">
+<section class="auth-card auth-choice-card auth-onboarding-choice">
+  <div class="auth-card-heading">
+    <img src="../assets/images/otto.png" class="auth-choice-otto" alt="Otto">
+    <div class="auth-pill">Step 2 of 8</div>
+    <h1>How would you like to join?</h1>
+    <p>Log in, create a full profile, or make a simple visitor account for messaging and reviews.</p>
+  </div>
+  <div class="auth-choice-grid auth-login-choice-grid">
+    <a class="auth-choice-link" href="login.html">
+      <span>👋</span><strong>Yes, log me in</strong><small>Continue with an account you already created.</small>
+    </a>
+    <a class="auth-choice-link" href="signup.html">
+      <span>✨</span><strong>Create a full account</strong><small>Build an Individual, Shop, Business, or Multi-Location profile with Otto.</small>
+    </a>
+    <a class="auth-choice-link auth-visitor-choice" href="visitor-signup.html">
+      <span>👋</span>
+      <strong>Continue as a visitor <b>Free</b></strong>
+      <small>Use your name and email to message profiles and leave reviews. No public profile setup.</small>
+    </a>
+  </div>
+  <a class="auth-back-link" href="welcome.html">← Back to welcome</a>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Welcome - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
+</head>
+<body>
+
+<div class="progress-bar">
+    <div class="progress-line">
+        <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="progress-steps">
+        <div class="step active">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+        <div class="step">4</div>
+        <div class="step">5</div>
+        <div class="step">6</div>
+        <div class="step">7</div>
+        <div class="step">8</div>
+    </div>
+</div>
+
+<section class="welcome-container">
+
+    <div class="otto-big">
+    <img src="../assets/images/otto.png" class="otto otto-large" alt="Otto">
+    </div>
+
+    <h1>Welcome to NeedThingsDone</h1>  
+
+    <p class="subtitle">
+        Hi! I'm Otto.
+    </p>
+
+    <p class="description">
+        I'll guide you through creating your account and building your profile.
+        Whether you're joining as an Individual, Shop, or Business,
+        I'll help every step of the way.
+    </p>
+
+    <div class="welcome-buttons">
+  <a href="account-choice.html" class="primary-btn">
+    Start With Otto →
+  </a>
+</div>
+
+</section>
+</body>
+</html>

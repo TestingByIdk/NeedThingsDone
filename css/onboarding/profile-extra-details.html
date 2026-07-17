@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Extra Details - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+
+  <link rel="stylesheet" href="../css/onboarding-final.css">
+</head>
+
+<body>
+  <main class="ntd-onboarding profile-extra-page">
+
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-green"></div>
+
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 86%;"></div>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step done">1</div>
+        <div class="step done">2</div>
+        <div class="step done">3</div>
+        <div class="step done">4</div>
+        <div class="step done">5</div>
+        <div class="step done">6</div>
+        <div class="step active">7</div>
+        <div class="step">8</div>
+      </div>
+    </div>
+
+    <section class="extra-wrap">
+
+      <div class="otto-big">
+        <img
+          src="../assets/images/otto.png"
+          class="otto otto-large"
+          alt="Otto"
+        >
+      </div>
+
+      <p class="otto-text" id="extraOttoText">
+        Let’s add a few final details.
+      </p>
+
+      <h1 id="extraHeading">Complete your profile</h1>
+
+      <p class="onboarding-desc extra-description">
+        These details help people understand what you offer.
+      </p>
+
+      <form class="extra-card" id="extraDetailsForm">
+
+        <div id="dynamicFields" class="extra-grid"></div>
+
+        <section class="contact-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Contact preferences</p>
+              <h2>How should people reach you?</h2>
+            </div>
+
+            <span class="optional-pill">Optional</span>
+          </div>
+
+          <div class="extra-grid">
+            <div class="form-field">
+              <label for="contactEmail">Public contact email</label>
+              <input
+                id="contactEmail"
+                type="email"
+                placeholder="hello@example.com"
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="contactPhone">Public phone number</label>
+              <input
+                id="contactPhone"
+                type="tel"
+                placeholder="613-555-0123"
+              >
+            </div>
+
+            <div class="form-field full-field">
+              <label
+    id="websiteLabel"
+    for="website"
+>
+    Website
+</label>
+
+<p
+    id="websiteHelp"
+    class="field-help"
+>
+    Add your website.
+</p>
+              <input
+                id="website"
+                type="url"
+                placeholder="https://example.com"
+              >
+            </div>
+          </div>
+
+          <div class="contact-options">
+            <label class="choice-toggle">
+              <input
+                id="allowMessages"
+                type="checkbox"
+                checked
+              >
+
+              <span class="choice-toggle-box"></span>
+
+              <span>
+                <strong>Allow NeedThingsDone messages</strong>
+                <small>
+                  People can contact you through the website.
+                </small>
+              </span>
+            </label>
+
+            <label class="choice-toggle">
+              <input
+                id="showPhone"
+                type="checkbox"
+              >
+
+              <span class="choice-toggle-box"></span>
+
+              <span>
+                <strong>Show my phone publicly</strong>
+                <small>
+                  Your phone number will appear on your profile.
+                </small>
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <p
+          class="form-message"
+          id="extraMessage"
+          aria-live="polite"
+        ></p>
+
+        <div class="details-actions extra-actions">
+          <a
+            href="profile-services.html"
+            class="secondary-btn"
+          >
+            ← Back
+          </a>
+
+          <button
+            type="submit"
+            class="primary-btn"
+          >
+            Review Profile →
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+  </main>
+
+  <script src="../js/profile-extra-details.js"></script>
+  <script src="../js/onboarding-controls.js"></script>
+</body>
+</html>

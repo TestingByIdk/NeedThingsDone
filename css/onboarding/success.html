@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Account Ready - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
+</head>
+<body class="auth-body">
+<header class="auth-topbar">
+  <a class="auth-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <span><strong>NeedThings<span>Done</span></strong><small>From need to done.</small></span>
+  </a>
+  <div class="auth-top-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a href="../index.html">Back to site</a>
+  </div>
+</header>
+<main class="auth-shell">
+<section class="auth-card auth-form-card auth-center-card">
+  <div class="auth-success-icon">✓</div><h1>Your account is ready</h1>
+  <p id="successMessage">Confirming your email and preparing your account…</p>
+  <div id="successDetails" class="auth-account-summary"><span>Email</span><strong id="successEmail">Checking…</strong><span>Next step</span><strong id="successNextStep">Preparing…</strong></div>
+  <a id="successContinue" class="auth-primary" href="#" aria-disabled="true">Preparing your account…</a>
+  <a class="auth-secondary" href="../index.html">Back to site</a>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

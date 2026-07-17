@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-icon">
+      <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
+    </div>
+    <div>
+      <div class="logo">NeedThings<span>Done</span></div>
+      <p>From need to done.</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a class="active" href="shop.html">Shop</a>
+    <a href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a href="map.html">Map</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+
+<section class="shop-market-hero">
+  <div class="shop-pill">🛍 Local marketplace</div>
+  <h1>Shop local products, parts, treats, and handmade goods.</h1>
+  <p>
+    Discover cafés, bakeries, local stores, creators, parts sellers,
+    featured products, and deals from your community.
+  </p>
+
+  <div class="market-search">
+    <input type="text" placeholder="Search pastries, parts, crafts, products..." />
+    <input type="text" placeholder="City or location" />
+    <button>Search Shop</button>
+  </div>
+</section>
+
+<section class="explore-area" id="exploreArea">
+  <div class="explore-panel">
+    <div class="explore-top">
+      <div>
+        <p class="explore-mini">Now browsing</p>
+        <h2><span id="exploreEmoji">☕</span> <span id="exploreTitle">Cafés & Bakeries</span></h2>
+      </div>
+
+      <button class="close-explore" id="closeExplore">×</button>
+    </div>
+
+    <div class="explore-filters" id="exploreFilters"></div>
+
+    <div class="explore-list" id="exploreContent"></div>
+  </div>
+</section>
+
+<section class="shop-aisles">
+  <h2>Browse Shop Aisles</h2>
+
+  <div class="aisle-row">
+
+    <div class="aisle-card">
+      <button class="explore-btn" data-category="parts">More →</button>
+
+      <span>🛠️</span>
+      <h3>Parts</h3>
+
+      <p>
+        Computer parts, auto parts,
+        tools, repair items, and supplies.
+      </p>
+    </div>
+
+    <div class="aisle-card">
+      <button class="explore-btn" data-category="crafts">More →</button>
+
+      <span>🎨</span>
+      <h3>Arts & Crafts</h3>
+
+      <p>
+        Handmade items, art, gifts,
+        custom pieces, and creative goods.
+      </p>
+    </div>
+
+    <div class="aisle-card">
+      <button class="explore-btn" data-category="cafes">More →</button>
+
+      <span>☕</span>
+      <h3>Cafés & Bakeries</h3>
+
+      <p>
+        Pastries, coffee, baked goods,
+        local treats, and sweet finds.
+      </p>
+    </div>
+
+    <div class="aisle-card">
+      <button class="explore-btn" data-category="stores">More →</button>
+
+      <span>🏪</span>
+      <h3>Local Stores</h3>
+
+      <p>
+        Independent shops, specialty products,
+        and local sellers.
+      </p>
+    </div>
+
+    <div class="aisle-card">
+      <button class="explore-btn" data-category="deals">More →</button>
+
+      <span>🏷️</span>
+      <h3>Deals</h3>
+
+      <p>
+        Discounts, promos, limited-time offers,
+        and local savings.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="product-shelf">
+  <div class="shelf-header">
+    <div>
+      <p class="shop-mini-title">Featured shelf</p>
+      <h2>Featured Products</h2>
+    </div>
+    <a href="#" class="shop-main-btn">List Your Product</a>
+  </div>
+
+  <div class="empty-product-shelf">
+    <div class="shelf-emoji">🛍️</div>
+    <h3>No products listed yet.</h3>
+    <p>
+      This shelf will show products from local shops, cafés, creators,
+      and partnered sellers once listings are added.
+    </p>
+  </div>
+</section>
+
+<section class="seller-strip">
+
+    <div class="seller-icon">
+    <img src="../assets/images/otto.png" alt="Otto">
+</div>
+
+    <div class="seller-content">
+        <span class="seller-badge">SELL LOCALLY</span>
+
+        <h2>Start Selling on NeedThingsDone</h2>
+
+        <p>
+            Reach local customers, promote your products, list exclusive deals,
+            and grow your business across Canada.
+        </p>
+    </div>
+
+    <a href="#" class="green-btn">
+        Start Selling
+    </a>
+
+</section>
+<script>window.NTD_ASSETS = "../assets/images";</script>
+<script src="../js/script.js"></script>
+
+</body>
+</html>
