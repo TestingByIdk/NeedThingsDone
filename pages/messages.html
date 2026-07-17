@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Messages - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/messages.css">
+</head>
+
+<body>
+  <header class="messages-topbar">
+    <a class="messages-brand" href="../index.html">
+      <img src="../assets/images/otto.png" alt="Otto">
+
+      <div>
+        <strong>NeedThingsDone</strong>
+        <span>From need to done.</span>
+      </div>
+    </a>
+
+    <div class="messages-topbar-actions">
+      <a class="secondary-btn" href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a class="secondary-btn" href="public-profile.html">
+        Public Profile
+      </a>
+    </div>
+  </header>
+
+  <main class="messages-page">
+
+    <section class="messages-heading">
+      <div>
+        <p class="messages-eyebrow">Conversations</p>
+        <h1>Messages</h1>
+
+        <p>
+          Keep conversations organized while you continue browsing NeedThingsDone.
+        </p>
+      </div>
+
+      <div class="messages-status-card">
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>Messaging enabled</strong>
+          <small>Usually replies within 2 hours</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="messages-app">
+
+      <aside class="conversation-sidebar" id="conversationSidebar">
+
+        <div class="conversation-sidebar-heading">
+          <div>
+            <p class="messages-eyebrow">Inbox</p>
+            <h2>Chats</h2>
+          </div>
+
+          <button
+            id="closeConversationList"
+            type="button"
+            aria-label="Close conversations"
+          >
+            ×
+          </button>
+        </div>
+
+        <label class="conversation-search">
+          <span>🔍</span>
+
+          <input
+            id="conversationSearch"
+            type="search"
+            placeholder="Search conversations"
+            autocomplete="off"
+          >
+        </label>
+
+        <div class="conversation-filter-row">
+          <button class="conversation-filter active" type="button" data-filter="all">
+            All
+          </button>
+
+          <button class="conversation-filter" type="button" data-filter="unread">
+            Unread
+          </button>
+
+          <button class="conversation-filter" type="button" data-filter="shops">
+            Shops
+          </button>
+
+          <button class="conversation-filter" type="button" data-filter="individuals">
+            Individuals
+          </button>
+        </div>
+
+        <div id="conversationList" class="conversation-list"></div>
+
+        <div id="conversationEmpty" class="conversation-empty" hidden>
+          <span>💬</span>
+          <p>No conversations match that search.</p>
+        </div>
+
+      </aside>
+
+      <section class="chat-panel">
+
+        <header class="chat-header">
+          <button
+            id="openConversationList"
+            class="mobile-panel-button"
+            type="button"
+          >
+            ☰ Chats
+          </button>
+
+          <div class="chat-profile-mini">
+            <div class="chat-avatar" id="chatAvatar">
+              👤
+            </div>
+
+            <div>
+              <strong id="chatName">Select a conversation</strong>
+
+              <span id="chatStatus">
+                Choose someone from your inbox.
+              </span>
+            </div>
+          </div>
+
+          <div class="chat-header-actions">
+            <button
+              id="openProfilePanel"
+              class="mobile-panel-button"
+              type="button"
+            >
+              Profile
+            </button>
+
+            <button
+              id="conversationMenuButton"
+              class="chat-menu-button"
+              type="button"
+              aria-expanded="false"
+            >
+              ⋯
+            </button>
+
+            <div class="chat-menu" id="chatMenu" hidden>
+              <button id="reportConversation" type="button">
+                🚩 Report conversation
+              </button>
+
+              <button id="blockConversation" type="button">
+                ⛔ Block user
+              </button>
+
+              <button id="archiveConversation" type="button">
+                📦 Archive chat
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="chat-safety-banner">
+          <span>🛡️</span>
+
+          <p>
+            Keep sensitive information private. NeedThingsDone will never ask
+            for passwords, banking codes, or gift cards in chat.
+          </p>
+        </div>
+
+        <div id="chatMessages" class="chat-messages"></div>
+
+        <div id="chatEmptyState" class="chat-empty-state">
+          <img src="../assets/images/otto.png" alt="Otto">
+
+          <h2>Your conversations live here</h2>
+
+          <p>
+            Select a chat from the left to view messages and reply.
+          </p>
+        </div>
+
+        <form id="messageComposer" class="message-composer" hidden>
+          <div class="composer-tools">
+            <button
+              class="attachment-button"
+              type="button"
+              title="Attachments will be connected later"
+            >
+              📎
+            </button>
+
+            <textarea
+              id="messageInput"
+              maxlength="1000"
+              placeholder="Write a message..."
+              rows="1"
+            ></textarea>
+
+            <button
+              id="sendMessage"
+              class="primary-btn send-message-button"
+              type="submit"
+            >
+              Send
+            </button>
+          </div>
+
+          <div class="composer-footer">
+            <span>
+              Email notifications are enabled for new messages.
+            </span>
+
+            <strong id="messageCharacterCount">
+              0/1000
+            </strong>
+          </div>
+        </form>
+
+      </section>
+
+      <aside class="profile-panel" id="profilePanel">
+
+        <div class="profile-panel-heading">
+          <div>
+            <p class="messages-eyebrow">Conversation details</p>
+            <h2>Profile</h2>
+          </div>
+
+          <button
+            id="closeProfilePanel"
+            type="button"
+            aria-label="Close profile details"
+          >
+            ×
+          </button>
+        </div>
+
+        <div id="profilePanelContent" class="profile-panel-content">
+
+          <div class="profile-panel-empty">
+            <span>👤</span>
+
+            <p>
+              Select a conversation to view profile details.
+            </p>
+          </div>
+
+        </div>
+
+      </aside>
+
+      <div class="messages-overlay" id="messagesOverlay"></div>
+
+    </section>
+
+  </main>
+
+  <div class="messages-toast" id="messagesToast" role="status" aria-live="polite"></div>
+
+  <script src="../js/messages.js"></script>
+</body>
+</html>

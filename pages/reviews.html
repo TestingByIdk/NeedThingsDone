@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/reviews.css">
+</head>
+<body>
+<header class="reviews-topbar">
+  <a class="reviews-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <div><strong>NeedThingsDone</strong><span>From need to done.</span></div>
+  </a>
+  <div class="reviews-topbar-actions">
+    <a class="secondary-btn" href="public-profile.html">Back to Profile</a>
+    <button id="openReviewModal" class="primary-btn" type="button">Write a Review</button>
+  </div>
+</header>
+
+<main class="reviews-page">
+  <section class="reviews-hero">
+    <div>
+      <p class="reviews-eyebrow">Community reputation</p>
+      <h1>Reviews and trust history</h1>
+      <p>Read detailed feedback, see positive and negative reputation tags, and follow how issues were handled.</p>
+    </div>
+    <img src="../assets/images/otto.png" alt="Otto">
+  </section>
+
+  <section class="review-summary-grid">
+    <article class="review-summary-card">
+      <p class="reviews-eyebrow">Overall rating</p>
+      <div class="rating-summary-main">
+        <strong>4.7</strong>
+        <div><div class="summary-stars">★★★★★</div><p>Based on 24 reviews</p></div>
+      </div>
+      <div class="rating-bars">
+        <div><span>5★</span><div><i style="width:72%"></i></div><small>17</small></div>
+        <div><span>4★</span><div><i style="width:17%"></i></div><small>4</small></div>
+        <div><span>3★</span><div><i style="width:8%"></i></div><small>2</small></div>
+        <div><span>2★</span><div><i style="width:3%"></i></div><small>1</small></div>
+        <div><span>1★</span><div><i style="width:0%"></i></div><small>0</small></div>
+      </div>
+    </article>
+
+    <article class="review-summary-card">
+      <p class="reviews-eyebrow">Customers often mention</p>
+      <h2>Positive tags</h2>
+      <div class="review-tag-cloud positive">
+        <span>✓ Friendly <small>18</small></span>
+        <span>✓ Reliable <small>15</small></span>
+        <span>✓ Great Communication <small>13</small></span>
+        <span>✓ Fair Pricing <small>9</small></span>
+      </div>
+    </article>
+
+    <article class="review-summary-card warning-card">
+      <p class="reviews-eyebrow">History stays visible</p>
+      <h2>Negative tags</h2>
+      <div class="review-tag-cloud negative">
+        <span>⚠ Slow Replies <small>3</small></span>
+        <span>⚠ Late Arrival <small>2</small></span>
+        <span>⚠ Unexpected Delay <small>1</small></span>
+      </div>
+      <p class="permanent-history-note">Legitimate negative reputation is never hidden by the profile owner.</p>
+    </article>
+  </section>
+
+  <section class="reviews-toolbar">
+    <div class="review-search-box"><span>🔍</span><input id="reviewSearchInput" type="search" placeholder="Search reviews"></div>
+    <label><span>Rating</span><select id="ratingFilter"><option value="all">All ratings</option><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option></select></label>
+    <label><span>Status</span><select id="statusFilter"><option value="all">All reviews</option><option value="replied">Owner replied</option><option value="resolved">Issue resolved</option><option value="reported">Under review</option></select></label>
+    <label><span>Sort</span><select id="reviewSort"><option value="newest">Newest</option><option value="helpful">Most helpful</option><option value="highest">Highest</option><option value="lowest">Lowest</option></select></label>
+  </section>
+
+  <div class="reviews-layout">
+    <section>
+      <div class="reviews-list-heading">
+        <div><p class="reviews-eyebrow">Customer feedback</p><h2 id="visibleReviewCount">4 reviews shown</h2></div>
+        <span class="demo-pill">Demo data</span>
+      </div>
+      <div id="reviewsList" class="reviews-list"></div>
+      <div id="reviewsEmptyState" class="reviews-empty-state" hidden>
+        <img src="../assets/images/otto.png" alt="Otto">
+        <h2>No reviews match</h2>
+        <p>Try changing the filters.</p>
+        <button id="resetReviewFilters" class="primary-btn" type="button">Reset Filters</button>
+      </div>
+    </section>
+
+    <aside class="reviews-sidebar">
+      <section class="reviews-sidebar-card">
+        <p class="reviews-eyebrow">Review quality</p><h2>Trusted reviewers</h2>
+        <p>Detailed, balanced reviewers can earn a trusted badge over time.</p>
+        <div class="trusted-reviewer-points">
+          <span>✓ Detailed feedback</span><span>✓ Balanced history</span><span>✓ Helpful votes</span><span>✓ No repeated abuse</span>
+        </div>
+      </section>
+      <section class="reviews-sidebar-card">
+        <p class="reviews-eyebrow">Accountability</p><h2>Resolving problems</h2>
+        <div class="resolution-stat"><strong>3</strong><span>Issues marked resolved</span></div>
+        <p>Replies and resolutions stay attached to the original review.</p>
+      </section>
+      <section class="reviews-sidebar-card otto-review-card">
+        <img src="../assets/images/otto.png" alt="Otto">
+        <h2>Otto’s summary</h2>
+        <p>Customers most often mention friendliness, reliability, and clear communication. A few mention slower replies during busy periods.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<div class="review-modal" id="reviewModal" hidden>
+  <div class="review-modal-backdrop" data-close-modal></div>
+  <section class="review-modal-card" role="dialog" aria-modal="true">
+    <button class="review-modal-close" type="button" data-close-modal>×</button>
+    <p class="reviews-eyebrow">Share your experience</p><h2>Write a Review</h2>
+    <form id="reviewForm">
+      <fieldset class="review-rating-field"><legend>Overall rating</legend>
+        <div class="star-picker" id="starPicker">
+          <button type="button" data-rating="1">★</button><button type="button" data-rating="2">★</button>
+          <button type="button" data-rating="3">★</button><button type="button" data-rating="4">★</button>
+          <button type="button" data-rating="5">★</button>
+        </div>
+      </fieldset>
+      <label class="review-form-field"><span>Review title</span><input id="reviewTitle" maxlength="80"></label>
+      <label class="review-form-field"><span>Your review</span><textarea id="reviewBody" maxlength="1200"></textarea><small><span>Be specific and respectful.</span><strong id="reviewCharacterCount">0/1200</strong></small></label>
+      <label class="review-form-field"><span>Service used</span><input id="reviewService" maxlength="60"></label>
+      <div class="review-form-grid">
+        <label class="review-form-field"><span>Recommend?</span><select id="recommendChoice"><option value="yes">Yes</option><option value="unsure">Not sure</option><option value="no">No</option></select></label>
+        <label class="review-form-field"><span>Hire again?</span><select id="hireAgainChoice"><option value="yes">Yes</option><option value="unsure">Not sure</option><option value="no">No</option></select></label>
+      </div>
+      <div class="review-form-tags"><p>Choose up to 3 tags</p><div id="reviewTagPicker">
+        <button type="button" data-tag="Friendly">Friendly</button><button type="button" data-tag="Reliable">Reliable</button>
+        <button type="button" data-tag="Helpful">Helpful</button><button type="button" data-tag="Great Communication">Great Communication</button>
+        <button type="button" data-tag="Fair Pricing">Fair Pricing</button><button type="button" data-tag="Slow Replies">Slow Replies</button>
+        <button type="button" data-tag="Late Arrival">Late Arrival</button><button type="button" data-tag="Unexpected Delay">Unexpected Delay</button>
+      </div></div>
+      <p id="reviewFormMessage" class="review-form-message"></p>
+      <div class="review-modal-actions"><button class="secondary-btn" type="button" data-close-modal>Cancel</button><button class="primary-btn" type="submit">Submit Review</button></div>
+    </form>
+  </section>
+</div>
+
+<script src="../js/reviews.js"></script>
+</body>
+</html>

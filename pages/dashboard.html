@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <a class="dashboard-brand" href="../index.html">
+      <img src="../assets/images/otto.png" alt="Otto">
+      <div><strong>NeedThingsDone</strong><span>From need to done.</span></div>
+    </a>
+    <div class="dashboard-topbar-actions">
+      <a class="secondary-btn" href="public-profile.html">View Public Profile</a>
+      <button id="mobileMenuButton" class="dashboard-menu-button" type="button" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <div class="sidebar-profile-mini">
+        <div class="sidebar-avatar" id="sidebarAvatar">👤</div>
+        <div><strong id="sidebarName">Your Profile</strong><span id="sidebarType">Individual</span></div>
+      </div>
+
+      <nav class="dashboard-nav">
+        <button class="dashboard-nav-item active" data-section="overview" type="button"><span>🏠</span>Overview</button>
+        <button class="dashboard-nav-item" data-section="profile" type="button"><span>👤</span>My Profile</button>
+        <button class="dashboard-nav-item" data-section="services" type="button"><span>🛠️</span>Services</button>
+        <button class="dashboard-nav-item" id="messagesNavItem" data-section="messages" type="button" hidden><span>💬</span>Messages</button>
+        <button class="dashboard-nav-item" data-section="reviews" type="button"><span>⭐</span>Reviews</button>
+        <button class="dashboard-nav-item" data-section="saved" type="button"><span>🔖</span>Saved Profiles</button>
+        <button class="dashboard-nav-item" data-section="settings" type="button"><span>⚙️</span>Settings</button>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <img src="../assets/images/otto.png" alt="Otto">
+        <strong>Need help?</strong>
+        <p>Otto will eventually guide you through your account.</p>
+      </div>
+    </aside>
+
+    <div class="dashboard-overlay" id="dashboardOverlay"></div>
+
+    <main class="dashboard-main">
+      <section class="dashboard-section active" id="overviewSection">
+        <div class="dashboard-welcome">
+          <div>
+            <p class="dashboard-eyebrow">Your home base</p>
+            <h1>Welcome back, <span id="welcomeName">there</span>.</h1>
+            <p>Manage your profile, track activity, and see what needs attention.</p>
+          </div>
+          <img src="../assets/images/otto.png" alt="Otto">
+        </div>
+
+        <section class="profile-progress-card">
+          <div class="profile-progress-heading">
+            <div>
+              <p class="dashboard-eyebrow">Profile strength</p>
+              <h2>Your profile is <span id="profileStrengthText">0%</span> complete</h2>
+            </div>
+            <a class="primary-btn" href="../onboarding/profile-extra-details.html">Improve Profile</a>
+          </div>
+          <div class="dashboard-strength-track"><div id="dashboardStrengthFill"></div></div>
+          <div class="profile-progress-items" id="profileProgressItems"></div>
+        </section>
+
+        <section class="dashboard-stats-grid">
+          <article class="dashboard-stat-card"><div class="dashboard-stat-icon">👀</div><div><small>Profile views</small><strong>0</strong><span>Backend data coming later</span></div></article>
+          <article class="dashboard-stat-card"><div class="dashboard-stat-icon">⭐</div><div><small>Rating</small><strong>New</strong><span>No reviews yet</span></div></article>
+          <article class="dashboard-stat-card" id="messageStatCard" hidden><div class="dashboard-stat-icon">💬</div><div><small>Messages</small><strong>0</strong><span>No conversations yet</span></div></article>
+          <article class="dashboard-stat-card"><div class="dashboard-stat-icon">🔖</div><div><small>Profile saves</small><strong>0</strong><span>Backend data coming later</span></div></article>
+          <article class="dashboard-stat-card"><div class="dashboard-stat-icon">📄</div><div><small>Document opens</small><strong>0</strong><span id="documentOpenLabel">No linked document</span></div></article>
+        </section>
+
+        <div class="dashboard-two-column">
+          <section class="dashboard-card">
+            <div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">Shortcuts</p><h2>Quick actions</h2></div></div>
+            <div class="quick-actions-grid">
+              <a href="../onboarding/profile-extra-details.html"><span>✏️</span><strong>Edit Profile</strong><small>Update public details</small></a>
+              <a href="public-profile.html"><span>👁️</span><strong>View Public Page</strong><small>See what visitors see</small></a>
+              <a href="individual-search.html"><span>🔍</span><strong>Preview Search Listing</strong><small>Check your result card</small></a>
+              <button id="shareProfileAction" type="button"><span>🔗</span><strong>Share Profile</strong><small>Copy your public link</small></button>
+              <a href="../onboarding/profile-services.html"><span>🛠️</span><strong>Manage Services</strong><small>Edit skills or categories</small></a>
+              <button id="messagesQuickAction" type="button" hidden><span>💬</span><strong>Messages</strong><small>Open conversations</small></button>
+            </div>
+            <p class="dashboard-action-message" id="shareMessage"></p>
+          </section>
+
+          <section class="dashboard-card otto-dashboard-card">
+            <div class="otto-dashboard-heading">
+              <img src="../assets/images/otto.png" alt="Otto">
+              <div><p class="dashboard-eyebrow">Otto’s corner</p><h2 id="ottoGreeting">A quick suggestion</h2></div>
+            </div>
+            <p id="ottoDashboardTip">Complete your profile to help visitors understand what you offer.</p>
+            <a id="ottoTipAction" href="../onboarding/profile-extra-details.html">Work on this →</a>
+          </section>
+        </div>
+
+        <div class="dashboard-two-column">
+          <section class="dashboard-card">
+            <div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">What’s happening</p><h2>Recent activity</h2></div><span class="coming-soon-pill">Demo</span></div>
+            <div class="activity-list">
+              <article><span>👤</span><div><strong>Your public profile is ready</strong><p>It is currently saved in this browser.</p></div><time>Today</time></article>
+              <article><span>🐙</span><div><strong>Otto work style completed</strong><p id="activityWorkStyle">Your work-style result is saved.</p></div><time>Today</time></article>
+              <article class="activity-placeholder"><span>⭐</span><div><strong>Reviews will appear here</strong><p>New reviews, replies, and moderation updates will be listed.</p></div><time>Later</time></article>
+            </div>
+          </section>
+
+          <section class="dashboard-card">
+            <div class="dashboard-card-heading"><div><p class="dashboard-eyebrow">Your public identity</p><h2>Profile summary</h2></div></div>
+            <div class="dashboard-profile-summary">
+              <div class="summary-avatar" id="summaryAvatar">👤</div>
+              <div><h3 id="summaryName">Profile name</h3><p id="summaryLocation">📍 Location</p></div>
+            </div>
+            <div class="dashboard-profile-tags" id="dashboardProfileTags"></div>
+            <div class="summary-service-list" id="summaryServiceList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="dashboard-section" id="profileSection"><div class="placeholder-section-card"><span>👤</span><h1>My Profile</h1><p>This will become the full account-side profile editor.</p><a class="primary-btn" href="../onboarding/profile-extra-details.html">Edit Profile Now</a></div></section>
+      <section class="dashboard-section" id="servicesSection"><div class="placeholder-section-card"><span>🛠️</span><h1>Services</h1><p>Manage skills, services, categories, and pricing here.</p><a class="primary-btn" href="../onboarding/profile-services.html">Manage Services</a></div></section>
+      <section class="dashboard-section" id="messagesSection"><div class="placeholder-section-card"><span>💬</span><h1>Messages</h1><p>Conversations will appear after the messaging backend is connected.</p></div></section>
+      <section class="dashboard-section" id="reviewsSection"><div class="placeholder-section-card"><span>⭐</span><h1>Reviews</h1><p>View reviews, reply publicly, report abuse, and follow moderation here.</p></div></section>
+      <section class="dashboard-section" id="savedSection"><div class="placeholder-section-card"><span>🔖</span><h1>Saved Profiles</h1><p>Profiles saved by this account will appear here.</p></div></section>
+      <section class="dashboard-section" id="settingsSection"><div class="placeholder-section-card"><span>⚙️</span><h1>Settings</h1><p>Account, privacy, notifications, and visibility settings will live here.</p></div></section>
+    </main>
+  </div>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

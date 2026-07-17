@@ -1,20 +1,29 @@
-NEEDTHINGSDONE — INDIVIDUAL SEARCH RESULTS
+NEEDTHINGSDONE — COMPLETE NOTIFICATIONS SYSTEM
 
 Copy:
-- pages/individual-search.html
-- js/individual-search.js
-- css/individual-search.css
+- pages/notifications.html
+- js/notifications.js
+- css/notifications.css
 
-Open pages/individual-search.html with Live Server.
+Open:
+pages/notifications.html
 
-Desktop:
-- Amazon-style filters on the left.
-- Main Filters button collapses/reopens the sidebar.
-- Every filter category can open/close independently.
+Included:
+- bell dropdown
+- unread counter
+- full notification page
+- All, Unread, Messages, Reviews, and Account filters
+- newest, oldest, and priority sorting
+- mark individual notification read or unread
+- mark all as read
+- clear read notifications
+- remove notification
+- priority labels
+- notification summary cards
+- email preference toggles saved in localStorage
+- direct links to messages, reviews, dashboard, and profiles
+- empty state
+- responsive layout
 
-Mobile:
-- Filters become a slide-out drawer.
-- Tapping the overlay or X closes it.
-
-The page currently uses sample data in individual-search.js.
-Later, replace the profiles array with database results.
+Current notifications are demo data in js/notifications.js.
+The backend will later create real notifications and synchronize read state.

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/dashboard-profile-editor.css">
+</head>
+<body>
+<header class="dashboard-topbar">
+  <a class="dashboard-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <div><strong>NeedThingsDone</strong><span>From need to done.</span></div>
+  </a>
+  <div class="dashboard-topbar-actions">
+    <a class="secondary-btn" href="public-profile.html">View Public Profile</a>
+    <a class="secondary-btn" href="dashboard.html">Dashboard</a>
+  </div>
+</header>
+
+<main class="profile-editor-page">
+  <section class="profile-editor-heading">
+    <div>
+      <p class="editor-eyebrow">Account editor</p>
+      <h1>My Profile</h1>
+      <p>Update what visitors see without repeating onboarding.</p>
+    </div>
+    <div class="editor-strength-card">
+      <span>Profile strength</span>
+      <strong id="editorStrengthText">0%</strong>
+      <div class="editor-strength-track"><div id="editorStrengthFill"></div></div>
+    </div>
+  </section>
+
+  <div class="profile-editor-layout">
+    <form id="profileEditorForm" class="profile-editor-form" novalidate>
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">👤</div>
+          <div><p class="editor-eyebrow">Identity</p><h2>Basic information</h2></div>
+        </div>
+        <div class="editor-grid two-columns">
+          <label class="editor-field"><span>Display name</span><input id="displayName" type="text" maxlength="80" required></label>
+          <label class="editor-field"><span>Short headline</span><input id="shortDescription" type="text" maxlength="120"></label>
+          <label class="editor-field"><span>City</span><input id="city" type="text" maxlength="60"></label>
+          <label class="editor-field"><span>Province or territory</span>
+            <select id="province">
+              <option value="">Choose one</option>
+              <option>Alberta</option><option>British Columbia</option><option>Manitoba</option>
+              <option>New Brunswick</option><option>Newfoundland and Labrador</option>
+              <option>Northwest Territories</option><option>Nova Scotia</option><option>Nunavut</option>
+              <option>Ontario</option><option>Prince Edward Island</option><option>Quebec</option>
+              <option>Saskatchewan</option><option>Yukon</option>
+            </select>
+          </label>
+        </div>
+        <div class="future-photo-note">
+          <div class="future-photo-avatar" id="futurePhotoAvatar">👤</div>
+          <div><strong>Profile pictures will come with the backend.</strong><p>For now, profiles use the account-type icon.</p></div>
+        </div>
+      </section>
+
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">👋</div>
+          <div><p class="editor-eyebrow">Introduction</p><h2>About me</h2></div>
+        </div>
+        <label class="editor-field full-width">
+          <span>Public introduction</span>
+          <textarea id="longDescription" maxlength="500"></textarea>
+          <small>Visitors see this near the top of your public profile. <strong id="aboutCharacterCount">0/500</strong></small>
+        </label>
+      </section>
+
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">🛠️</div>
+          <div><p class="editor-eyebrow">What you offer</p><h2>Services and skills</h2></div>
+        </div>
+        <div class="editor-tag-list" id="serviceTagList"></div>
+        <div class="add-item-row">
+          <input id="newServiceInput" type="text" maxlength="40" placeholder="Add a service">
+          <button id="addServiceButton" class="secondary-btn" type="button">Add Service</button>
+        </div>
+        <p class="editor-help-text">Keep services clear and searchable. Maximum 10.</p>
+      </section>
+
+      <section class="editor-card" id="pricingCard">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">💲</div>
+          <div><p class="editor-eyebrow">Pricing</p><h2>Starting price</h2></div>
+        </div>
+        <div class="pricing-editor-row">
+          <span>$</span>
+          <input id="startingPrice" type="number" min="0" max="100000" step="0.01">
+          <select id="priceType">
+            <option value="per hour">Per hour</option>
+            <option value="per job">Per job</option>
+            <option value="starting at">Starting at</option>
+            <option value="contact for price">Contact for price</option>
+          </select>
+        </div>
+        <p class="editor-help-text">“Contact for price” hides the number from visitors.</p>
+      </section>
+
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">🐙</div>
+          <div><p class="editor-eyebrow">Otto profile</p><h2>Work style and tags</h2></div>
+        </div>
+        <div class="work-style-editor">
+          <span id="editorWorkStyleIcon">🧩</span>
+          <div><strong id="editorWorkStyleName">No work style yet</strong><p id="editorWorkStyleDescription">Complete Otto’s questions to receive a work-style result.</p></div>
+          <a href="../onboarding/meet-otto.html" class="secondary-btn">Retake Questions</a>
+        </div>
+        <div class="editor-tag-list personality" id="profileTagList"></div>
+        <p class="editor-help-text">Self-described tags are editable through Otto. Verified review tags will be separate.</p>
+      </section>
+
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">📞</div>
+          <div><p class="editor-eyebrow">Reach you</p><h2>Contact and website</h2></div>
+        </div>
+        <div class="editor-grid two-columns">
+          <label class="editor-field"><span>Contact email</span><input id="contactEmail" type="email"></label>
+          <label class="editor-field"><span>Phone number</span><input id="contactPhone" type="tel" maxlength="30"></label>
+          <label class="editor-field full-span"><span>Website or public page</span><input id="website" type="url"></label>
+        </div>
+        <div class="editor-toggle-list">
+          <label class="editor-toggle">
+            <input id="showPhone" type="checkbox"><span class="toggle-track"></span>
+            <div><strong>Show phone publicly</strong><small>Visitors will see your phone number.</small></div>
+          </label>
+        </div>
+      </section>
+
+      <section class="editor-card" id="documentCard">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">📄</div>
+          <div><p class="editor-eyebrow">Public document</p><h2>Resume, portfolio, or flyer</h2></div>
+        </div>
+        <label class="editor-field full-width">
+          <span>Public document URL</span>
+          <input id="documentLink" type="url">
+          <small>NeedThingsDone stores only the public URL for now.</small>
+        </label>
+      </section>
+
+      <section class="editor-card" id="messagingCard" hidden>
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">💬</div>
+          <div><p class="editor-eyebrow">Conversations</p><h2>Messaging</h2></div>
+        </div>
+        <div class="editor-toggle-list">
+          <label class="editor-toggle">
+            <input id="allowMessages" type="checkbox"><span class="toggle-track"></span>
+            <div><strong>Allow NeedThingsDone messages</strong><small>Visitors can start a conversation.</small></div>
+          </label>
+          <label class="editor-toggle">
+            <input id="messageEmailNotifications" type="checkbox"><span class="toggle-track"></span>
+            <div><strong>Email me about new messages</strong><small>This connects when accounts and email are live.</small></div>
+          </label>
+        </div>
+      </section>
+
+      <section class="editor-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">👁️</div>
+          <div><p class="editor-eyebrow">Control</p><h2>Profile visibility</h2></div>
+        </div>
+        <div class="editor-toggle-list">
+          <label class="editor-toggle"><input id="showPricing" type="checkbox" checked><span class="toggle-track"></span><div><strong>Show pricing</strong><small>Display your starting price.</small></div></label>
+          <label class="editor-toggle"><input id="showWebsite" type="checkbox" checked><span class="toggle-track"></span><div><strong>Show website</strong><small>Display your public website.</small></div></label>
+          <label class="editor-toggle" id="showDocumentToggleRow"><input id="showDocument" type="checkbox" checked><span class="toggle-track"></span><div><strong>Show public document</strong><small>Display your resume, portfolio, or flyer.</small></div></label>
+          <label class="editor-toggle"><input id="showInSearch" type="checkbox" checked><span class="toggle-track"></span><div><strong>Appear in search</strong><small>Allow visitors to discover you.</small></div></label>
+          <label class="editor-toggle"><input id="vacationMode" type="checkbox"><span class="toggle-track"></span><div><strong>Vacation mode</strong><small>Temporarily hide availability.</small></div></label>
+        </div>
+      </section>
+
+      <section class="editor-card analytics-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">📈</div>
+          <div><p class="editor-eyebrow">Last 30 days</p><h2>Analytics</h2></div>
+        </div>
+        <div class="editor-analytics-grid">
+          <div><strong>0</strong><span>Profile views</span></div>
+          <div><strong>0</strong><span>Website clicks</span></div>
+          <div><strong>0</strong><span>Document opens</span></div>
+          <div id="messageAnalyticsCard"><strong>0</strong><span>Messages</span></div>
+        </div>
+        <p class="editor-help-text">Real analytics will appear after the backend begins recording events.</p>
+      </section>
+
+      <section class="editor-card danger-card">
+        <div class="editor-card-heading">
+          <div class="editor-card-icon">⚠️</div>
+          <div><p class="editor-eyebrow">Account control</p><h2>Danger zone</h2></div>
+        </div>
+        <div class="danger-actions">
+          <button type="button" class="secondary-btn" disabled>Export Data</button>
+          <button type="button" class="danger-outline-button" disabled>Hide Account</button>
+          <button type="button" class="danger-button" disabled>Delete Profile</button>
+        </div>
+      </section>
+    </form>
+
+    <aside class="profile-preview-sidebar">
+      <div class="live-preview-card">
+        <div class="live-preview-heading">
+          <div><p class="editor-eyebrow">Live preview</p><h2>Public profile</h2></div>
+          <span>Updates instantly</span>
+        </div>
+
+        <div class="preview-identity">
+          <div id="previewAvatar">👤</div>
+          <div><small id="previewType">Individual</small><h3 id="previewName">Your Profile</h3><p id="previewLocation">📍 Location not added</p></div>
+        </div>
+
+        <p class="preview-headline" id="previewHeadline">Your short headline will appear here.</p>
+        <div class="preview-tags" id="previewTags"></div>
+
+        <div class="preview-section">
+          <strong>About</strong>
+          <p id="previewAbout">Your public introduction will appear here.</p>
+        </div>
+
+        <div class="preview-section">
+          <strong>Services</strong>
+          <div class="preview-services" id="previewServices"></div>
+        </div>
+
+        <div class="preview-price" id="previewPrice">Contact for price</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="unsaved-bar" id="unsavedBar" hidden>
+  <div><strong>Unsaved changes</strong><span>Your public profile has not been updated yet.</span></div>
+  <div>
+    <button id="discardChanges" class="secondary-btn" type="button">Discard</button>
+    <button id="saveChanges" class="primary-btn" type="button">Save Changes</button>
+  </div>
+</div>
+
+<div class="editor-toast" id="editorToast" role="status" aria-live="polite"></div>
+<script src="../js/dashboard-profile-editor.js"></script>
+</body>
+</html>

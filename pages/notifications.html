@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Notifications - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/notifications.css">
+</head>
+
+<body>
+  <header class="notifications-topbar">
+    <a class="notifications-brand" href="../index.html">
+      <img src="../assets/images/otto.png" alt="Otto">
+
+      <div>
+        <strong>NeedThingsDone</strong>
+        <span>From need to done.</span>
+      </div>
+    </a>
+
+    <div class="notifications-topbar-actions">
+      <a class="secondary-btn" href="dashboard.html">
+        Dashboard
+      </a>
+
+      <button
+        id="openBellMenu"
+        class="notification-bell-button"
+        type="button"
+        aria-expanded="false"
+      >
+        🔔
+        <span id="bellUnreadCount">4</span>
+      </button>
+
+      <div class="bell-menu" id="bellMenu" hidden>
+        <div class="bell-menu-heading">
+          <div>
+            <strong>Notifications</strong>
+            <span id="bellMenuCount">4 unread</span>
+          </div>
+
+          <button id="markBellRead" type="button">
+            Mark all read
+          </button>
+        </div>
+
+        <div id="bellMenuList" class="bell-menu-list"></div>
+
+        <a href="notifications.html">
+          View all notifications →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="notifications-page">
+
+    <section class="notifications-hero">
+      <div>
+        <p class="notifications-eyebrow">Stay updated</p>
+        <h1>Notifications</h1>
+
+        <p>
+          Messages, reviews, account milestones, moderation updates, and other
+          important activity will appear here.
+        </p>
+      </div>
+
+      <img src="../assets/images/otto.png" alt="Otto">
+    </section>
+
+    <section class="notification-summary-grid">
+      <article>
+        <span>🔔</span>
+        <div>
+          <small>Unread</small>
+          <strong id="unreadSummary">4</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>💬</span>
+        <div>
+          <small>Messages</small>
+          <strong id="messageSummary">2</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>⭐</span>
+        <div>
+          <small>Reviews</small>
+          <strong id="reviewSummary">2</strong>
+        </div>
+      </article>
+
+      <article>
+        <span>🛡️</span>
+        <div>
+          <small>Account alerts</small>
+          <strong id="accountSummary">1</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="notifications-toolbar">
+      <div class="notification-tabs">
+        <button class="notification-tab active" type="button" data-filter="all">
+          All
+        </button>
+
+        <button class="notification-tab" type="button" data-filter="unread">
+          Unread
+        </button>
+
+        <button class="notification-tab" type="button" data-filter="messages">
+          Messages
+        </button>
+
+        <button class="notification-tab" type="button" data-filter="reviews">
+          Reviews
+        </button>
+
+        <button class="notification-tab" type="button" data-filter="account">
+          Account
+        </button>
+      </div>
+
+      <div class="notification-toolbar-actions">
+        <button id="markAllRead" class="secondary-btn" type="button">
+          Mark all as read
+        </button>
+
+        <button id="clearRead" class="secondary-btn" type="button">
+          Clear read
+        </button>
+      </div>
+    </section>
+
+    <div class="notifications-layout">
+
+      <section class="notifications-main">
+        <div class="notifications-list-heading">
+          <div>
+            <p class="notifications-eyebrow">Recent activity</p>
+            <h2 id="visibleNotificationCount">8 notifications</h2>
+          </div>
+
+          <label class="notification-sort">
+            <span>Sort by</span>
+
+            <select id="notificationSort">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="priority">Priority first</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="notificationList" class="notification-list"></div>
+
+        <div id="notificationEmptyState" class="notification-empty-state" hidden>
+          <img src="../assets/images/otto.png" alt="Otto">
+
+          <h2>No notifications here</h2>
+
+          <p>
+            New activity will appear as soon as something changes.
+          </p>
+
+          <button id="resetNotificationFilters" class="primary-btn" type="button">
+            Show all notifications
+          </button>
+        </div>
+      </section>
+
+      <aside class="notification-sidebar">
+
+        <section class="notification-sidebar-card">
+          <p class="notifications-eyebrow">Preferences</p>
+          <h2>Notification settings</h2>
+
+          <div class="notification-toggle-list">
+            <label>
+              <input id="emailMessages" type="checkbox" checked>
+              <span></span>
+
+              <div>
+                <strong>Message emails</strong>
+                <small>Get an email when someone sends a message.</small>
+              </div>
+            </label>
+
+            <label>
+              <input id="emailReviews" type="checkbox" checked>
+              <span></span>
+
+              <div>
+                <strong>Review emails</strong>
+                <small>Get an email for reviews and replies.</small>
+              </div>
+            </label>
+
+            <label>
+              <input id="emailAccount" type="checkbox" checked>
+              <span></span>
+
+              <div>
+                <strong>Account alerts</strong>
+                <small>Security and moderation notices.</small>
+              </div>
+            </label>
+
+            <label>
+              <input id="emailMarketing" type="checkbox">
+              <span></span>
+
+              <div>
+                <strong>Tips and updates</strong>
+                <small>Optional NeedThingsDone news.</small>
+              </div>
+            </label>
+          </div>
+
+          <p class="notification-settings-note">
+            These preferences are saved locally until accounts and email are connected.
+          </p>
+        </section>
+
+        <section class="notification-sidebar-card">
+          <p class="notifications-eyebrow">Priority guide</p>
+          <h2>What the labels mean</h2>
+
+          <div class="priority-guide">
+            <span class="priority-badge high">High priority</span>
+            <p>Security, moderation, or account action is needed.</p>
+
+            <span class="priority-badge normal">Normal</span>
+            <p>Messages, reviews, and regular activity.</p>
+
+            <span class="priority-badge milestone">Milestone</span>
+            <p>Badges, profile goals, and achievements.</p>
+          </div>
+        </section>
+
+        <section class="notification-sidebar-card otto-notification-card">
+          <img src="../assets/images/otto.png" alt="Otto">
+
+          <h2>Otto’s tip</h2>
+
+          <p>
+            Keep message and review notifications enabled so customers do not
+            wait too long for a response.
+          </p>
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <div class="notification-toast" id="notificationToast" role="status" aria-live="polite"></div>
+
+  <script src="../js/notifications.js"></script>
+</body>
+</html>
