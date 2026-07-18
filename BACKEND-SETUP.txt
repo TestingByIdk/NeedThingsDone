@@ -1,0 +1,48 @@
+NEEDTHINGSDONE — FIRST BACKEND SETUP
+====================================
+
+What this update connects:
+- Real Supabase user profiles
+- Real one-to-one conversations
+- Real messages stored in Supabase
+- Unread message counts
+- Automatic in-site notifications when a message is sent
+- Realtime message refresh
+- Dashboard counts loaded from Supabase
+
+IMPORTANT: Your public Supabase publishable key is already in backend/supabase.js.
+That key is designed to be used by the website. Do NOT put your secret service-role key in GitHub.
+
+STEP 1 — INSTALL THE DATABASE
+1. Open your Supabase project.
+2. Click SQL Editor.
+3. Click New query.
+4. Open this project file:
+   supabase/01-messaging-backend.sql
+5. Copy the entire file into Supabase.
+6. Click Run.
+7. You should see “Success. No rows returned.”
+
+STEP 2 — DEPLOY THE WEBSITE
+Upload/replace the project files in GitHub and wait for GitHub Pages to finish deploying.
+
+STEP 3 — TEST WITH TWO ACCOUNTS
+Messaging needs two real accounts.
+1. Sign in with account A in a normal browser window.
+2. Sign in with account B in an incognito window (or another browser).
+3. In Supabase > Authentication > Users, copy account B's UUID.
+4. While signed in as account A, open:
+   https://www.needthingsdone.ca/pages/messages.html?recipient=PASTE_ACCOUNT_B_UUID_HERE
+5. Send a message.
+6. Open Messages as account B. The chat and unread count should appear.
+
+WHAT IS NOT CONNECTED YET
+- Starting a chat from public Business/Individual profile buttons (the backend supports it; those buttons need recipient UUIDs)
+- Email alerts through Resend for each new message
+- Attachments
+- Blocking/reporting
+- Reviews and saved listings
+
+NEXT RECOMMENDED UPDATE
+Connect every “Message” button on public profiles to:
+pages/messages.html?recipient=THE_PROFILE_OWNER_UUID

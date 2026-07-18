@@ -40,6 +40,7 @@
       return;
     }
 
+    await loadBackendData();
     renderIdentity();
     renderCounts();
     renderAccountType();
@@ -90,6 +91,44 @@
     }
   }
 
+  async function loadBackendData() {
+    if (!window.supabaseClient || !state.user) return;
+
+    try {
+      const metadata = state.user.user_metadata || {};
+      const profilePayload = {
+        id: state.user.id,
+        display_name: state.details.displayName || metadata.full_name || metadata.display_name || state.user.email?.split("@")[0] || "NeedThingsDone member",
+        account_type: state.profileType || metadata.account_type || "visitor",
+        headline: state.extra.longDescription ? String(state.extra.longDescription).slice(0, 140) : null,
+        city: state.details.city || null,
+        province: state.details.province || null,
+        updated_at: new Date().toISOString()
+      };
+      await window.supabaseClient.from("profiles").upsert(profilePayload, { onConflict: "id" });
+
+      const [conversationResult, notificationResult] = await Promise.all([
+        window.supabaseClient.rpc("get_my_conversations"),
+        window.supabaseClient.from("notifications").select("id, title, body, link, read_at, created_at").order("created_at", { ascending: false }).limit(20)
+      ]);
+
+      if (!conversationResult.error) {
+        state.messages = (conversationResult.data || []).map((item) => ({
+          unread: Number(item.unread_count || 0) > 0,
+          unreadCount: Number(item.unread_count || 0),
+          name: item.other_display_name,
+          lastMessage: item.last_message,
+          createdAt: item.last_message_at
+        }));
+      }
+      if (!notificationResult.error) {
+        state.notifications = (notificationResult.data || []).map((item) => ({ ...item, unread: !item.read_at }));
+      }
+    } catch (error) {
+      console.warn("Dashboard backend is not installed yet or could not be reached:", error);
+    }
+  }
+
   function renderIdentity() {
     const metadata = state.user?.user_metadata || {};
     const fullName = state.details.displayName || metadata.full_name || [metadata.first_name, metadata.last_name].filter(Boolean).join(" ") || state.user?.email?.split("@")[0] || "there";
@@ -106,7 +145,7 @@
     const notifications = Array.isArray(state.notifications) ? state.notifications : [];
     const reviews = Array.isArray(state.reviews) ? state.reviews : [];
     const saved = Array.isArray(state.saved) ? state.saved : [];
-    const unreadMessages = messages.filter((item) => item?.unread === true || item?.read === false).length;
+    const unreadMessages = messages.reduce((total, item) => total + (Number(item?.unreadCount) || ((item?.unread === true || item?.read === false) ? 1 : 0)), 0);
     const unreadNotifications = notifications.filter((item) => item?.unread === true || item?.read === false).length;
 
     setText("messageCount", unreadMessages);
@@ -197,6 +236,10 @@
     if (state.services.length) activity.push(["🛠️", "Services updated", `${state.services.length} service${state.services.length === 1 ? "" : "s"} added to your profile.`, "Recent"]);
     if (state.tags.length) activity.push(["🏷️", "Profile tags saved", `${state.tags.length} discovery tag${state.tags.length === 1 ? " is" : "s are"} ready.`, "Recent"]);
     if (Array.isArray(state.saved) && state.saved.length) activity.push(["🔖", "Saved items ready", `${state.saved.length} saved item${state.saved.length === 1 ? "" : "s"} in your collection.`, "Recent"]);
+    const newestNotification = state.notifications?.[0];
+    if (newestNotification?.title) activity.unshift(["🔔", newestNotification.title, newestNotification.body || "You have a new account update.", "Recent"]);
+    const newestConversation = state.messages?.find((item) => item.lastMessage);
+    if (newestConversation) activity.unshift(["💬", `Message from ${newestConversation.name || "a member"}`, newestConversation.lastMessage, "Recent"]);
     if (!activity.length) activity.push(["✨", "Your dashboard is ready", "Start exploring NeedThingsDone or update your account settings.", "Now"]);
 
     $("activityList").innerHTML = activity.slice(0, 4).map(([icon, title, description, time]) => `

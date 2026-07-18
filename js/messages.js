@@ -1,763 +1,239 @@
-const conversations = [
-  {
-    id: "otto",
-    name: "Otto Assistant",
-    type: "assistant",
-    avatar: "🐙",
-    headline: "NeedThingsDone helper",
-    location: "NeedThingsDone",
-    online: true,
-    unread: 0,
-    lastMessage: "Need help understanding your dashboard?",
-    lastTime: "Now",
-    responseTime: "Replies instantly",
-    messagingNotice: "Otto is an automated helper for NeedThingsDone.",
-    tags: ["Helpful", "Platform Guide"],
-    services: ["Profile Help", "Website Guidance"],
-    messages: [
-      {
-        sender: "them",
-        text: "Hi! I’m Otto. I can help explain how your NeedThingsDone account works.",
-        time: "8:30 PM"
-      },
-      {
-        sender: "them",
-        text: "Your real customer conversations will stay separate from this chat.",
-        time: "8:30 PM"
-      }
-    ]
-  },
-  {
-    id: "mia",
-    name: "Mia Tremblay",
-    type: "individual",
-    avatar: "👤",
-    headline: "Looking for computer repair help",
-    location: "Ottawa, Ontario",
-    online: true,
-    unread: 2,
-    lastMessage: "Would tomorrow evening work?",
-    lastTime: "6m",
-    responseTime: "Usually replies within 1 hour",
-    messagingNotice: "This person contacted you from your public profile.",
-    tags: ["Friendly", "Detailed"],
-    services: ["Computer Repair"],
-    messages: [
-      {
-        sender: "them",
-        text: "Hi! I found your profile while searching for computer repair.",
-        time: "7:42 PM"
-      },
-      {
-        sender: "them",
-        text: "My laptop keeps freezing whenever I open a game. Would you be able to take a look?",
-        time: "7:43 PM"
-      },
-      {
-        sender: "me",
-        text: "Sure. I can help diagnose it. Do you know whether it started after an update or new program?",
-        time: "7:51 PM"
-      },
-      {
-        sender: "them",
-        text: "It started after a Windows update last week.",
-        time: "8:01 PM"
-      },
-      {
-        sender: "them",
-        text: "Would tomorrow evening work?",
-        time: "8:02 PM"
-      }
-    ]
-  },
-  {
-    id: "maple-shop",
-    name: "Maple Corner Shop",
-    type: "shop",
-    avatar: "🛍️",
-    headline: "Local crafts and custom gifts",
-    location: "Orléans, Ontario",
-    online: false,
-    unread: 0,
-    lastMessage: "Thanks! We’ll send the link shortly.",
-    lastTime: "2h",
-    responseTime: "Usually replies within 6 hours",
-    messagingNotice: "This shop uses NeedThingsDone messages.",
-    tags: ["Local Shop", "Custom Orders"],
-    services: ["Arts & Crafts", "Custom Gifts"],
-    messages: [
-      {
-        sender: "me",
-        text: "Hi! Do you make custom birthday cards?",
-        time: "3:14 PM"
-      },
-      {
-        sender: "them",
-        text: "Yes! We can personalize the design, colours, and message.",
-        time: "3:38 PM"
-      },
-      {
-        sender: "me",
-        text: "Perfect. Could you send me the order page?",
-        time: "3:44 PM"
-      },
-      {
-        sender: "them",
-        text: "Thanks! We’ll send the link shortly.",
-        time: "4:02 PM"
-      }
-    ]
-  },
-  {
-    id: "jordan",
-    name: "Jordan Lee",
-    type: "individual",
-    avatar: "👤",
-    headline: "Dog walking and pet care",
-    location: "Nepean, Ontario",
-    online: false,
-    unread: 0,
-    lastMessage: "No worries, thanks for letting me know.",
-    lastTime: "Yesterday",
-    responseTime: "Usually replies within 3 hours",
-    messagingNotice: "You started this conversation from Jordan’s profile.",
-    tags: ["Reliable", "Friendly"],
-    services: ["Dog Walking", "Pet Care"],
-    messages: [
-      {
-        sender: "me",
-        text: "Are you available this Saturday afternoon?",
-        time: "Yesterday, 11:20 AM"
-      },
-      {
-        sender: "them",
-        text: "I’m booked that afternoon, unfortunately.",
-        time: "Yesterday, 12:08 PM"
-      },
-      {
-        sender: "me",
-        text: "No worries, thanks for letting me know.",
-        time: "Yesterday, 12:12 PM"
-      }
-    ]
+(() => {
+  "use strict";
+
+  const $ = (id) => document.getElementById(id);
+  const state = { user: null, conversations: [], activeId: null, filter: "all", channel: null };
+  const el = {};
+
+  document.addEventListener("DOMContentLoaded", init);
+
+  async function init() {
+    Object.assign(el, {
+      sidebar: $("conversationSidebar"), list: $("conversationList"), emptyList: $("conversationEmpty"),
+      search: $("conversationSearch"), filters: [...document.querySelectorAll(".conversation-filter")],
+      openList: $("openConversationList"), closeList: $("closeConversationList"),
+      profilePanel: $("profilePanel"), openProfile: $("openProfilePanel"), closeProfile: $("closeProfilePanel"),
+      overlay: $("messagesOverlay"), avatar: $("chatAvatar"), name: $("chatName"), status: $("chatStatus"),
+      messages: $("chatMessages"), emptyChat: $("chatEmptyState"), composer: $("messageComposer"),
+      input: $("messageInput"), count: $("messageCharacterCount"), menuButton: $("conversationMenuButton"),
+      menu: $("chatMenu"), profileContent: $("profilePanelContent"), toast: $("messagesToast"),
+      report: $("reportConversation"), block: $("blockConversation"), archive: $("archiveConversation")
+    });
+
+    bindEvents();
+    if (!window.supabaseClient) return fail("Supabase did not load. Refresh the page and try again.");
+
+    const { data: { session }, error } = await window.supabaseClient.auth.getSession();
+    if (error || !session?.user) {
+      location.replace("../onboarding/login.html?next=../pages/messages.html");
+      return;
+    }
+    state.user = session.user;
+
+    await maybeCreateConversationFromUrl();
+    await loadConversations();
+    subscribeRealtime();
   }
-];
 
-const $ = id => document.getElementById(id);
-
-const el = {
-  sidebar: $("conversationSidebar"),
-  list: $("conversationList"),
-  emptyList: $("conversationEmpty"),
-  search: $("conversationSearch"),
-  filterButtons: document.querySelectorAll(".conversation-filter"),
-  openList: $("openConversationList"),
-  closeList: $("closeConversationList"),
-  profilePanel: $("profilePanel"),
-  openProfile: $("openProfilePanel"),
-  closeProfile: $("closeProfilePanel"),
-  overlay: $("messagesOverlay"),
-  chatAvatar: $("chatAvatar"),
-  chatName: $("chatName"),
-  chatStatus: $("chatStatus"),
-  chatMessages: $("chatMessages"),
-  chatEmpty: $("chatEmptyState"),
-  composer: $("messageComposer"),
-  messageInput: $("messageInput"),
-  characterCount: $("messageCharacterCount"),
-  menuButton: $("conversationMenuButton"),
-  menu: $("chatMenu"),
-  profileContent: $("profilePanelContent"),
-  report: $("reportConversation"),
-  block: $("blockConversation"),
-  archive: $("archiveConversation"),
-  toast: $("messagesToast")
-};
-
-let activeConversationId = null;
-let activeFilter = "all";
-let archivedConversationIds = new Set();
-
-initialize();
-
-function initialize() {
-  bindEvents();
-  renderConversationList();
-}
-
-function bindEvents() {
-  el.search.addEventListener("input", renderConversationList);
-
-  el.filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      activeFilter = button.dataset.filter;
-
-      el.filterButtons.forEach(item => {
-        item.classList.toggle(
-          "active",
-          item === button
-        );
-      });
-
+  function bindEvents() {
+    el.search?.addEventListener("input", renderConversationList);
+    el.filters.forEach((button) => button.addEventListener("click", () => {
+      state.filter = button.dataset.filter || "all";
+      el.filters.forEach((item) => item.classList.toggle("active", item === button));
       renderConversationList();
+    }));
+    el.openList?.addEventListener("click", () => openPanel("conversations"));
+    el.closeList?.addEventListener("click", closePanels);
+    el.openProfile?.addEventListener("click", () => openPanel("profile"));
+    el.closeProfile?.addEventListener("click", closePanels);
+    el.overlay?.addEventListener("click", closePanels);
+    el.input?.addEventListener("input", () => {
+      el.count.textContent = `${el.input.value.length}/1000`;
+      el.input.style.height = "auto";
+      el.input.style.height = `${Math.min(el.input.scrollHeight, 160)}px`;
     });
-  });
+    el.composer?.addEventListener("submit", sendMessage);
+    el.menuButton?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      el.menu.hidden = !el.menu.hidden;
+      el.menuButton.setAttribute("aria-expanded", String(!el.menu.hidden));
+    });
+    document.addEventListener("click", () => { if (el.menu) el.menu.hidden = true; });
+    el.report?.addEventListener("click", () => showToast("Reporting will be connected to moderation next."));
+    el.block?.addEventListener("click", () => showToast("Blocking will be added with moderation tools."));
+    el.archive?.addEventListener("click", archiveConversation);
+  }
 
-  el.openList.addEventListener(
-    "click",
-    () => openMobilePanel("conversations")
-  );
+  async function maybeCreateConversationFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const recipientId = params.get("recipient");
+    if (!recipientId || recipientId === state.user.id) return;
 
-  el.closeList.addEventListener(
-    "click",
-    closeMobilePanels
-  );
+    const { data, error } = await window.supabaseClient.rpc("get_or_create_direct_conversation", { other_user_id: recipientId });
+    if (error) return showToast(`Could not start conversation: ${error.message}`);
+    state.activeId = data;
+    history.replaceState({}, "", "messages.html");
+  }
 
-  el.openProfile.addEventListener(
-    "click",
-    () => openMobilePanel("profile")
-  );
+  async function loadConversations() {
+    setLoading(true);
+    const { data, error } = await window.supabaseClient.rpc("get_my_conversations");
+    setLoading(false);
+    if (error) return fail(`Could not load messages: ${error.message}`);
 
-  el.closeProfile.addEventListener(
-    "click",
-    closeMobilePanels
-  );
+    state.conversations = (data || []).map((row) => ({
+      id: row.conversation_id,
+      name: row.other_display_name || "NeedThingsDone member",
+      avatar: row.other_avatar_url || "👤",
+      type: row.other_account_type || "individual",
+      headline: row.other_headline || "NeedThingsDone member",
+      location: row.other_location || "Canada",
+      unread: Number(row.unread_count || 0),
+      lastMessage: row.last_message || "Conversation started",
+      lastTime: formatRelative(row.last_message_at || row.created_at),
+      lastMessageAt: row.last_message_at || row.created_at,
+      archived: Boolean(row.archived)
+    }));
 
-  el.overlay.addEventListener(
-    "click",
-    closeMobilePanels
-  );
+    renderConversationList();
+    const initial = state.activeId || state.conversations[0]?.id;
+    if (initial) await openConversation(initial);
+  }
 
-  el.messageInput.addEventListener(
-    "input",
-    handleMessageInput
-  );
-
-  el.composer.addEventListener(
-    "submit",
-    sendMessage
-  );
-
-  el.menuButton.addEventListener(
-    "click",
-    toggleConversationMenu
-  );
-
-  document.addEventListener(
-    "click",
-    event => {
-      if (
-        !el.menu.contains(event.target) &&
-        event.target !== el.menuButton
-      ) {
-        closeConversationMenu();
-      }
-    }
-  );
-
-  el.report.addEventListener(
-    "click",
-    () => {
-      showToast(
-        "The report workflow will connect to admin moderation later."
-      );
-
-      closeConversationMenu();
-    }
-  );
-
-  el.block.addEventListener(
-    "click",
-    () => {
-      showToast(
-        "Blocking will require a signed-in account and confirmation."
-      );
-
-      closeConversationMenu();
-    }
-  );
-
-  el.archive.addEventListener(
-    "click",
-    archiveActiveConversation
-  );
-}
-
-function renderConversationList() {
-  const query =
-    el.search.value.trim().toLowerCase();
-
-  const filtered =
-    conversations.filter(conversation => {
-      if (
-        archivedConversationIds.has(
-          conversation.id
-        )
-      ) {
-        return false;
-      }
-
-      const matchesQuery =
-        !query ||
-        [
-          conversation.name,
-          conversation.headline,
-          conversation.lastMessage,
-          ...conversation.tags,
-          ...conversation.services
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(query);
-
-      if (!matchesQuery) {
-        return false;
-      }
-
-      if (activeFilter === "unread") {
-        return conversation.unread > 0;
-      }
-
-      if (activeFilter === "shops") {
-        return conversation.type === "shop";
-      }
-
-      if (activeFilter === "individuals") {
-        return conversation.type === "individual";
-      }
-
-      return true;
+  function renderConversationList() {
+    const query = (el.search?.value || "").trim().toLowerCase();
+    const filtered = state.conversations.filter((item) => {
+      if (item.archived) return false;
+      if (state.filter === "unread" && item.unread < 1) return false;
+      if (state.filter === "shops" && item.type !== "shop") return false;
+      if (state.filter === "individuals" && item.type !== "individual") return false;
+      return !query || `${item.name} ${item.headline} ${item.lastMessage}`.toLowerCase().includes(query);
     });
 
-  el.list.innerHTML = "";
-
-  filtered.forEach(conversation => {
-    el.list.appendChild(
-      createConversationButton(conversation)
-    );
-  });
-
-  el.emptyList.hidden =
-    filtered.length > 0;
-}
-
-function createConversationButton(conversation) {
-  const button =
-    document.createElement("button");
-
-  button.type = "button";
-
-  button.className =
-    "conversation-item";
-
-  button.classList.toggle(
-    "active",
-    conversation.id === activeConversationId
-  );
-
-  button.innerHTML = `
-    <div class="conversation-avatar">
-      ${conversation.avatar}
-
-      ${
-        conversation.online
-          ? '<span class="online-dot"></span>'
-          : ""
-      }
-    </div>
-
-    <div class="conversation-item-main">
-      <div>
-        <strong>
-          ${escapeHTML(conversation.name)}
-        </strong>
-
-        <time>
-          ${escapeHTML(conversation.lastTime)}
-        </time>
-      </div>
-
-      <p>
-        ${escapeHTML(conversation.lastMessage)}
-      </p>
-    </div>
-
-    ${
-      conversation.unread > 0
-        ? `
-          <span class="unread-badge">
-            ${conversation.unread}
-          </span>
-        `
-        : ""
-    }
-  `;
-
-  button.addEventListener(
-    "click",
-    () => {
-      selectConversation(
-        conversation.id
-      );
-    }
-  );
-
-  return button;
-}
-
-function selectConversation(id) {
-  activeConversationId = id;
-
-  const conversation =
-    getActiveConversation();
-
-  if (!conversation) {
-    return;
+    el.list.innerHTML = filtered.map((item) => `
+      <button type="button" class="conversation-item ${item.id === state.activeId ? "active" : ""}" data-id="${item.id}">
+        <div class="conversation-avatar">${renderAvatar(item.avatar)}</div>
+        <div class="conversation-copy"><div><strong>${escapeHTML(item.name)}</strong><time>${escapeHTML(item.lastTime)}</time></div>
+        <p>${escapeHTML(item.lastMessage)}</p></div>
+        ${item.unread ? `<span class="conversation-unread">${item.unread > 99 ? "99+" : item.unread}</span>` : ""}
+      </button>`).join("");
+    el.emptyList.hidden = filtered.length > 0;
+    el.list.querySelectorAll("[data-id]").forEach((button) => button.addEventListener("click", () => openConversation(button.dataset.id)));
   }
 
-  conversation.unread = 0;
+  async function openConversation(id) {
+    state.activeId = id;
+    renderConversationList();
+    closePanels();
+    const conversation = state.conversations.find((item) => item.id === id);
+    if (!conversation) return;
 
-  renderConversationList();
-  renderChat(conversation);
-  renderProfilePanel(conversation);
+    el.avatar.innerHTML = renderAvatar(conversation.avatar);
+    el.name.textContent = conversation.name;
+    el.status.textContent = conversation.headline;
+    el.emptyChat.hidden = true;
+    el.composer.hidden = false;
+    renderProfile(conversation);
 
-  el.chatEmpty.hidden = true;
-  el.composer.hidden = false;
+    const { data, error } = await window.supabaseClient
+      .from("messages")
+      .select("id, sender_id, body, created_at, read_at")
+      .eq("conversation_id", id)
+      .order("created_at", { ascending: true });
+    if (error) return showToast(`Could not load this chat: ${error.message}`);
 
-  if (window.innerWidth <= 900) {
-    closeMobilePanels();
-  }
-}
-
-function renderChat(conversation) {
-  el.chatAvatar.textContent =
-    conversation.avatar;
-
-  el.chatName.textContent =
-    conversation.name;
-
-  el.chatStatus.textContent =
-    conversation.online
-      ? `Online · ${conversation.responseTime}`
-      : conversation.responseTime;
-
-  el.chatMessages.innerHTML = "";
-
-  const notice =
-    document.createElement("div");
-
-  notice.className =
-    "conversation-start-notice";
-
-  notice.innerHTML = `
-    <strong>
-      ${escapeHTML(conversation.messagingNotice)}
-    </strong>
-
-    <span>
-      Keep the conversation respectful and focused on the service.
-    </span>
-  `;
-
-  el.chatMessages.appendChild(notice);
-
-  conversation.messages.forEach(message => {
-    el.chatMessages.appendChild(
-      createMessageBubble(message)
-    );
-  });
-
-  requestAnimationFrame(() => {
-    el.chatMessages.scrollTop =
-      el.chatMessages.scrollHeight;
-  });
-}
-
-function createMessageBubble(message) {
-  const wrapper =
-    document.createElement("div");
-
-  wrapper.className =
-    message.sender === "me"
-      ? "message-row mine"
-      : "message-row theirs";
-
-  wrapper.innerHTML = `
-    <div class="message-bubble">
-      <p>
-        ${escapeHTML(message.text)}
-      </p>
-
-      <time>
-        ${escapeHTML(message.time)}
-      </time>
-    </div>
-  `;
-
-  return wrapper;
-}
-
-function renderProfilePanel(conversation) {
-  const typeLabel =
-    conversation.type === "shop"
-      ? "Shop"
-      : conversation.type === "assistant"
-        ? "Assistant"
-        : "Individual";
-
-  el.profileContent.innerHTML = `
-    <div class="profile-panel-avatar">
-      ${conversation.avatar}
-    </div>
-
-    <p class="profile-panel-type">
-      ${typeLabel}
-    </p>
-
-    <h3>
-      ${escapeHTML(conversation.name)}
-    </h3>
-
-    <p class="profile-panel-headline">
-      ${escapeHTML(conversation.headline)}
-    </p>
-
-    <p class="profile-panel-location">
-      📍 ${escapeHTML(conversation.location)}
-    </p>
-
-    <div class="profile-panel-response">
-      <span>
-        ${conversation.online ? "🟢" : "🟡"}
-      </span>
-
-      <div>
-        <strong>
-          Response time
-        </strong>
-
-        <p>
-          ${escapeHTML(conversation.responseTime)}
-        </p>
-      </div>
-    </div>
-
-    <section class="profile-panel-section">
-      <strong>Profile tags</strong>
-
-      <div class="profile-panel-tags">
-        ${conversation.tags
-          .map(tag =>
-            `<span>${escapeHTML(tag)}</span>`
-          )
-          .join("")}
-      </div>
-    </section>
-
-    <section class="profile-panel-section">
-      <strong>Services</strong>
-
-      <div class="profile-panel-services">
-        ${conversation.services
-          .map(service =>
-            `<span>${escapeHTML(service)}</span>`
-          )
-          .join("")}
-      </div>
-    </section>
-
-    <a
-      class="secondary-btn profile-panel-link"
-      href="public-profile.html?profile=${encodeURIComponent(conversation.id)}"
-    >
-      View Public Profile
-    </a>
-
-    <p class="profile-panel-reminder">
-      You can leave this conversation and continue browsing while waiting for a reply.
-    </p>
-  `;
-}
-
-function handleMessageInput() {
-  el.characterCount.textContent =
-    `${el.messageInput.value.length}/1000`;
-
-  autoResizeTextarea();
-}
-
-function autoResizeTextarea() {
-  el.messageInput.style.height = "auto";
-
-  el.messageInput.style.height =
-    `${Math.min(
-      el.messageInput.scrollHeight,
-      150
-    )}px`;
-}
-
-function sendMessage(event) {
-  event.preventDefault();
-
-  const conversation =
-    getActiveConversation();
-
-  const value =
-    el.messageInput.value.trim();
-
-  if (!conversation || !value) {
-    return;
+    renderMessages(data || []);
+    await window.supabaseClient.rpc("mark_conversation_read", { target_conversation_id: id });
+    conversation.unread = 0;
+    renderConversationList();
   }
 
-  conversation.messages.push({
-    sender: "me",
-    text: value,
-    time: "Just now"
-  });
-
-  conversation.lastMessage = value;
-  conversation.lastTime = "Now";
-
-  el.messageInput.value = "";
-  el.characterCount.textContent =
-    "0/1000";
-
-  autoResizeTextarea();
-  renderConversationList();
-  renderChat(conversation);
-}
-
-function toggleConversationMenu() {
-  const willOpen =
-    el.menu.hidden;
-
-  el.menu.hidden = !willOpen;
-
-  el.menuButton.setAttribute(
-    "aria-expanded",
-    String(willOpen)
-  );
-}
-
-function closeConversationMenu() {
-  el.menu.hidden = true;
-
-  el.menuButton.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-}
-
-function archiveActiveConversation() {
-  const conversation =
-    getActiveConversation();
-
-  if (!conversation) {
-    return;
+  function renderMessages(messages) {
+    el.messages.innerHTML = messages.map((message) => {
+      const mine = message.sender_id === state.user.id;
+      return `<article class="chat-message ${mine ? "sent" : "received"}">
+        <div><p>${escapeHTML(message.body)}</p><time>${formatTime(message.created_at)}</time></div>
+      </article>`;
+    }).join("");
+    if (!messages.length) el.messages.innerHTML = `<div class="conversation-empty"><span>👋</span><p>Say hello to begin this conversation.</p></div>`;
+    requestAnimationFrame(() => { el.messages.scrollTop = el.messages.scrollHeight; });
   }
 
-  archivedConversationIds.add(
-    conversation.id
-  );
+  async function sendMessage(event) {
+    event.preventDefault();
+    const body = el.input.value.trim();
+    if (!body || !state.activeId) return;
+    const button = $("sendMessage");
+    button.disabled = true;
 
-  activeConversationId = null;
+    const { error } = await window.supabaseClient.from("messages").insert({
+      conversation_id: state.activeId,
+      sender_id: state.user.id,
+      body
+    });
+    button.disabled = false;
+    if (error) return showToast(`Message not sent: ${error.message}`);
 
-  el.chatAvatar.textContent = "👤";
-  el.chatName.textContent =
-    "Select a conversation";
-  el.chatStatus.textContent =
-    "Choose someone from your inbox.";
-
-  el.chatMessages.innerHTML = "";
-  el.chatEmpty.hidden = false;
-  el.composer.hidden = true;
-
-  el.profileContent.innerHTML = `
-    <div class="profile-panel-empty">
-      <span>👤</span>
-
-      <p>
-        Select a conversation to view profile details.
-      </p>
-    </div>
-  `;
-
-  renderConversationList();
-
-  showToast(
-    "Conversation archived locally for this demo."
-  );
-
-  closeConversationMenu();
-}
-
-function openMobilePanel(panel) {
-  if (panel === "conversations") {
-    el.sidebar.classList.add("mobile-open");
+    el.input.value = "";
+    el.count.textContent = "0/1000";
+    el.input.style.height = "auto";
+    await openConversation(state.activeId);
+    await loadConversationsSilently();
   }
 
-  if (panel === "profile") {
-    el.profilePanel.classList.add(
-      "mobile-open"
-    );
+  async function loadConversationsSilently() {
+    const current = state.activeId;
+    const { data } = await window.supabaseClient.rpc("get_my_conversations");
+    if (!data) return;
+    state.conversations = data.map((row) => ({
+      id: row.conversation_id, name: row.other_display_name || "NeedThingsDone member", avatar: row.other_avatar_url || "👤",
+      type: row.other_account_type || "individual", headline: row.other_headline || "NeedThingsDone member",
+      location: row.other_location || "Canada", unread: Number(row.unread_count || 0), lastMessage: row.last_message || "Conversation started",
+      lastTime: formatRelative(row.last_message_at || row.created_at), lastMessageAt: row.last_message_at || row.created_at, archived: Boolean(row.archived)
+    }));
+    state.activeId = current;
+    renderConversationList();
   }
 
-  el.overlay.classList.add("active");
+  function subscribeRealtime() {
+    state.channel = window.supabaseClient.channel(`messages-${state.user.id}`)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, async (payload) => {
+        const message = payload.new;
+        const belongs = state.conversations.some((item) => item.id === message.conversation_id) || message.conversation_id === state.activeId;
+        if (!belongs) { await loadConversationsSilently(); return; }
+        await loadConversationsSilently();
+        if (message.conversation_id === state.activeId) await openConversation(state.activeId);
+        else showToast("You received a new message.");
+      }).subscribe();
+  }
 
-  document.body.classList.add(
-    "messages-panel-open"
-  );
-}
+  async function archiveConversation() {
+    if (!state.activeId) return;
+    const { error } = await window.supabaseClient.rpc("archive_conversation", { target_conversation_id: state.activeId });
+    if (error) return showToast(error.message);
+    state.conversations = state.conversations.map((item) => item.id === state.activeId ? { ...item, archived: true } : item);
+    state.activeId = null;
+    renderConversationList();
+    el.composer.hidden = true;
+    el.emptyChat.hidden = false;
+    showToast("Conversation archived.");
+  }
 
-function closeMobilePanels() {
-  el.sidebar.classList.remove(
-    "mobile-open"
-  );
+  function renderProfile(item) {
+    el.profileContent.innerHTML = `<div class="profile-panel-card"><div class="profile-large-avatar">${renderAvatar(item.avatar)}</div>
+      <h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.headline)}</p>
+      <div class="profile-detail-list"><div><span>📍</span><p>${escapeHTML(item.location)}</p></div><div><span>🛡️</span><p>Keep payments and sensitive details outside chat until you trust the recipient.</p></div></div></div>`;
+  }
 
-  el.profilePanel.classList.remove(
-    "mobile-open"
-  );
-
-  el.overlay.classList.remove("active");
-
-  document.body.classList.remove(
-    "messages-panel-open"
-  );
-}
-
-function getActiveConversation() {
-  return conversations.find(
-    conversation =>
-      conversation.id === activeConversationId
-  );
-}
-
-function showToast(message) {
-  el.toast.textContent = message;
-
-  el.toast.classList.add("visible");
-
-  clearTimeout(showToast.timeout);
-
-  showToast.timeout =
-    setTimeout(() => {
-      el.toast.classList.remove("visible");
-    }, 2600);
-}
-
-function escapeHTML(value) {
-  return String(value).replace(
-    /[&<>"']/g,
-    character => {
-      const replacements = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      };
-
-      return replacements[character];
-    }
-  );
-}
+  function renderAvatar(value) {
+    return /^https?:\/\//i.test(String(value)) ? `<img src="${escapeHTML(value)}" alt="">` : escapeHTML(value || "👤");
+  }
+  function openPanel(which) { closePanels(); document.body.classList.add("messages-panel-open"); el.overlay.classList.add("active"); (which === "profile" ? el.profilePanel : el.sidebar).classList.add("mobile-open"); }
+  function closePanels() { document.body.classList.remove("messages-panel-open"); el.overlay?.classList.remove("active"); el.sidebar?.classList.remove("mobile-open"); el.profilePanel?.classList.remove("mobile-open"); }
+  function setLoading(loading) { if (el.emptyList) { el.emptyList.hidden = !loading; el.emptyList.innerHTML = loading ? "<span>⏳</span><p>Loading conversations…</p>" : "<span>💬</span><p>No conversations yet.</p>"; } }
+  function fail(message) { showToast(message); if (el.emptyList) { el.emptyList.hidden = false; el.emptyList.innerHTML = `<span>⚠️</span><p>${escapeHTML(message)}</p>`; } }
+  function showToast(message) { if (!el.toast) return; el.toast.textContent = message; el.toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => el.toast.classList.remove("show"), 3500); }
+  function formatTime(value) { return new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(new Date(value)); }
+  function formatRelative(value) { const date = new Date(value); const diff = Date.now() - date.getTime(); if (diff < 60000) return "Now"; if (diff < 3600000) return `${Math.floor(diff / 60000)}m`; if (diff < 86400000) return `${Math.floor(diff / 3600000)}h`; return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" }).format(date); }
+  function escapeHTML(value) { return String(value ?? "").replace(/[&<>'"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[c])); }
+})();
