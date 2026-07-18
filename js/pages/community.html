@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community - NeedThingsDone</title>
+
+  <!-- Your existing global website styles -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Community-only styles -->
+  <link rel="stylesheet" href="../css/community.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-icon">
+      <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
+    </div>
+
+    <div>
+      <div class="logo">NeedThings<span>Done</span></div>
+      <p>From need to done.</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="individuals.html">Individuals</a>
+    <a href="shop.html">Shop</a>
+    <a class="active" href="community.html">Community</a>
+    <a href="news.html">News</a>
+    <a href="map.html">Map</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a class="login-btn" href="../onboarding/login.html">Log In</a>
+    <a class="signup-btn" href="../onboarding/welcome.html">Sign Up</a>
+  </div>
+</header>
+
+<section class="forum-hero">
+  <div>
+    <div class="forum-pill">💬 Community forum</div>
+    <h1>Ask questions. Share advice. Help your community.</h1>
+    <p>
+      A local discussion space where people can ask for recommendations,
+      compare options, and get help from businesses, individuals, and neighbours.
+    </p>
+  </div>
+
+  <button id="openPostModal" class="forum-post-btn" type="button">+ Start a Discussion</button>
+</section>
+
+<section class="community-summary" aria-label="Community summary">
+  <article>
+    <strong id="postCount">0</strong>
+    <span>Discussions</span>
+  </article>
+  <article>
+    <strong id="openCount">0</strong>
+    <span>Open questions</span>
+  </article>
+  <article>
+    <strong id="solvedCount">0</strong>
+    <span>Solved questions</span>
+  </article>
+  <article>
+    <strong id="helpfulCount">0</strong>
+    <span>Helpful votes</span>
+  </article>
+</section>
+
+<section class="forum-layout">
+
+  <aside class="forum-sidebar">
+    <h3>Topics</h3>
+
+    <button class="forum-topic active-topic" type="button" data-category="All">🔥 All posts</button>
+    <button class="forum-topic" type="button" data-category="Recommendations">⭐ Recommendations</button>
+    <button class="forum-topic" type="button" data-category="Help Needed">🧰 Help Needed</button>
+    <button class="forum-topic" type="button" data-category="Questions">❓ Questions</button>
+    <button class="forum-topic" type="button" data-category="Local News">📰 Local News</button>
+    <button class="forum-topic" type="button" data-category="General">💬 General</button>
+
+    <div class="forum-otto-box">
+      <img src="../assets/images/otto.png" class="otto otto-small" alt="Otto">
+      <h4>Otto Tip</h4>
+      <p>
+        Clear questions get better answers. Add your city, budget, and what you need done.
+      </p>
+    </div>
+  </aside>
+
+  <main class="forum-feed">
+    <div class="forum-search-bar">
+      <input id="communitySearch" type="search" placeholder="Search community questions..." autocomplete="off">
+      <button id="communitySearchButton" type="button">Search</button>
+    </div>
+
+    <div class="forum-controls">
+      <div class="forum-sort" aria-label="Sort posts">
+        <button class="active-sort" type="button" data-sort="newest">Newest</button>
+        <button type="button" data-sort="popular">Most Helpful</button>
+        <button type="button" data-sort="unanswered">Unanswered</button>
+        <button type="button" data-sort="solved">Solved</button>
+      </div>
+
+      <select id="locationFilter" aria-label="Filter by location">
+        <option value="All">All locations</option>
+        <option value="Ottawa">Ottawa</option>
+        <option value="Orléans">Orléans</option>
+        <option value="Rockland">Rockland</option>
+        <option value="Gatineau">Gatineau</option>
+      </select>
+    </div>
+
+    <div id="communityFeed" class="community-post-list" aria-live="polite"></div>
+  </main>
+</section>
+
+<div id="postModal" class="community-modal" hidden>
+  <div class="community-modal-backdrop" data-close-modal></div>
+
+  <section class="community-modal-card" role="dialog" aria-modal="true" aria-labelledby="postModalTitle">
+    <button class="community-modal-close" type="button" data-close-modal aria-label="Close">×</button>
+
+    <h2 id="postModalTitle">Start a Discussion</h2>
+    <p>Ask for help, share a recommendation, or start a local conversation.</p>
+
+    <form id="createPostForm">
+      <label>
+        Discussion title
+        <input id="postTitle" maxlength="120" required placeholder="Example: Who is a good plumber near Ottawa?">
+      </label>
+
+      <label>
+        Details
+        <textarea id="postBody" maxlength="1200" required placeholder="Add useful details, such as your location, budget, and timeline."></textarea>
+      </label>
+
+      <div class="community-form-grid">
+        <label>
+          Topic
+          <select id="postCategory" required>
+            <option value="Help Needed">Help Needed</option>
+            <option value="Recommendations">Recommendations</option>
+            <option value="Questions">Questions</option>
+            <option value="Local News">Local News</option>
+            <option value="General">General</option>
+          </select>
+        </label>
+
+        <label>
+          Location
+          <select id="postLocation" required>
+            <option value="Ottawa">Ottawa</option>
+            <option value="Orléans">Orléans</option>
+            <option value="Rockland">Rockland</option>
+            <option value="Gatineau">Gatineau</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="community-modal-actions">
+        <button class="community-secondary-button" type="button" data-close-modal>Cancel</button>
+        <button class="community-primary-button" type="submit">Publish Discussion</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<div id="commentsModal" class="community-modal" hidden>
+  <div class="community-modal-backdrop" data-close-comments></div>
+
+  <section class="community-modal-card community-comments-card" role="dialog" aria-modal="true" aria-labelledby="commentsTitle">
+    <button class="community-modal-close" type="button" data-close-comments aria-label="Close">×</button>
+    <div id="commentsContent"></div>
+  </section>
+</div>
+
+<script>window.NTD_ASSETS = "../assets/images";</script>
+
+<!-- Your existing global website JavaScript -->
+<script src="../js/script.js"></script>
+
+<!-- Community-only JavaScript -->
+<script src="../js/community.js"></script>
+</body>
+</html>

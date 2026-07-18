@@ -1,0 +1,637 @@
+/* ============================================================
+   NEEDTHINGSDONE ONBOARDING / AUTH VISUAL AUDIT
+   Loaded last on every onboarding page.
+   ============================================================ */
+
+/* ---------- Shared sizing and spacing ---------- */
+.auth-body,
+.ntd-onboarding,
+.meet-otto-page {
+  overflow-x: hidden;
+}
+
+.auth-topbar {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 76px;
+}
+
+.auth-shell {
+  width: min(1120px, calc(100% - 32px));
+  padding: 44px 0 80px;
+}
+
+.auth-form-card { max-width: 540px; }
+.auth-wide-card { max-width: 720px; }
+.auth-center-card { max-width: 600px; }
+
+.auth-card {
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.auth-form { gap: 17px; }
+.auth-primary,
+.auth-secondary,
+.auth-provider {
+  min-height: 52px;
+  font-size: 1rem;
+}
+
+.auth-primary:disabled,
+.auth-secondary:disabled,
+.auth-provider:disabled {
+  cursor: not-allowed;
+}
+
+.ntd-onboarding {
+  min-height: 100vh;
+  padding-top: 1px;
+}
+
+.ntd-onboarding .progress-bar {
+  position: relative;
+  z-index: 20;
+  width: min(1080px, calc(100% - 32px));
+  margin: 30px auto 0;
+  padding: 0 10px;
+}
+
+.ntd-onboarding .progress-steps {
+  width: 100%;
+}
+
+.ntd-onboarding :is(
+  .profile-select-wrap,
+  .details-wrap,
+  .services-wrap,
+  .extra-wrap,
+  .preview-wrap,
+  .review-wrap
+) {
+  width: min(1240px, calc(100% - 36px));
+  margin: 34px auto 80px;
+  padding: 0;
+}
+
+.ntd-onboarding :is(.otto-big,.otto-header) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ntd-onboarding .otto-big img,
+.ntd-onboarding .otto-header img {
+  display: block;
+  margin-inline: auto;
+}
+
+.ntd-onboarding .otto-big {
+  margin-bottom: 24px;
+}
+
+.ntd-onboarding .otto-text {
+  max-width: 980px;
+  margin: 14px auto 8px;
+  text-align: center;
+  line-height: 1.08;
+}
+
+.ntd-onboarding .onboarding-desc,
+.ntd-onboarding .preview-subtitle,
+.ntd-onboarding .review-description {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  text-align: center;
+  line-height: 1.65;
+}
+
+.profile-grid.tier-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.profile-card.tier-card {
+  min-width: 0;
+  min-height: 430px;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.profile-card .tier-top {
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-card h2,
+.profile-card h3 {
+  overflow-wrap: anywhere;
+}
+
+.otto-tip {
+  max-width: 1060px;
+  margin: 42px auto 28px;
+  padding: clamp(26px, 4vw, 42px);
+}
+
+.otto-tip .otto-header {
+  gap: 10px;
+}
+
+.otto-tip-text {
+  width: 100%;
+  text-align: center;
+}
+
+.tip-comparison {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.tip-title {
+  min-width: 150px;
+  text-align: center;
+}
+
+.continue-profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(390px, 100%);
+  min-height: 58px;
+  margin: 30px auto 0;
+}
+
+.details-card,
+.services-card,
+.extra-card,
+.preview-card,
+.public-profile-preview,
+.profile-strength-card,
+.publish-note {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.details-card,
+.services-card,
+.extra-card {
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.details-actions,
+.preview-actions,
+.review-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.details-actions .primary-btn,
+.details-actions .secondary-btn,
+.preview-actions .primary-btn,
+.preview-actions .secondary-btn,
+.review-actions .primary-btn,
+.review-actions .secondary-btn {
+  min-width: 180px;
+  min-height: 52px;
+}
+
+.review-layout {
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- Dark auth pages ---------- */
+body.dark-mode.auth-body {
+  --auth-card: #111e33;
+  --auth-text: #f4f7ff;
+  --auth-muted: #a7b7cd;
+  --auth-border: rgba(145,177,224,.23);
+  --input-bg: #0a1628;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(63,125,239,.17), transparent 31rem),
+    radial-gradient(circle at 88% 10%, rgba(126,84,232,.15), transparent 30rem),
+    linear-gradient(180deg,#0c1729,#07101e 68%,#050b15) !important;
+  color: #f4f7ff;
+}
+
+body.dark-mode .auth-topbar {
+  color: #f4f7ff;
+}
+
+body.dark-mode .auth-brand,
+body.dark-mode .auth-top-actions a {
+  color: #f4f7ff;
+}
+
+body.dark-mode .auth-brand small,
+body.dark-mode .auth-card-heading p,
+body.dark-mode .auth-help,
+body.dark-mode .auth-switch,
+body.dark-mode .auth-center-card > p {
+  color: #a7b7cd !important;
+}
+
+body.dark-mode .auth-card {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(114,83,229,.09), transparent 38%),
+    linear-gradient(145deg,#15263f,#0f1c30) !important;
+  border-color: rgba(145,177,224,.24) !important;
+  box-shadow: 0 28px 70px rgba(0,0,0,.34) !important;
+}
+
+body.dark-mode .auth-icon,
+body.dark-mode .auth-mail-icon,
+body.dark-mode .auth-success-icon {
+  background: #192b47 !important;
+  color: #a8c6ff !important;
+}
+
+body.dark-mode .auth-form input,
+body.dark-mode .auth-password-wrap {
+  background: #091526 !important;
+  color: #f2f6ff !important;
+  border-color: rgba(145,177,224,.25) !important;
+}
+
+body.dark-mode .auth-password-wrap input {
+  background: transparent !important;
+}
+
+body.dark-mode .auth-password-wrap button {
+  color: #92b7ff !important;
+}
+
+body.dark-mode .auth-form input::placeholder {
+  color: #72849f !important;
+}
+
+body.dark-mode .auth-primary {
+  background: linear-gradient(135deg,#3978ef,#7654e7) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 12px 28px rgba(57,120,239,.24);
+}
+
+body.dark-mode .auth-secondary,
+body.dark-mode .auth-provider {
+  background: #172943 !important;
+  border-color: rgba(145,177,224,.24) !important;
+  color: #e9f0fb !important;
+}
+
+body.dark-mode .auth-primary:disabled,
+body.dark-mode .auth-secondary:disabled,
+body.dark-mode .auth-provider:disabled {
+  opacity: 1 !important;
+  background: #17243a !important;
+  color: #6f819d !important;
+  border-color: rgba(145,177,224,.14) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .auth-divider {
+  color: #8fa1bc !important;
+}
+
+body.dark-mode .auth-divider::before,
+body.dark-mode .auth-divider::after {
+  background: rgba(145,177,224,.20) !important;
+}
+
+body.dark-mode .auth-notice {
+  background: rgba(79,139,244,.11) !important;
+  color: #a9c6ff !important;
+  border: 1px solid rgba(100,153,241,.20);
+}
+
+body.dark-mode .auth-notice.success {
+  background: rgba(55,211,139,.10) !important;
+  color: #85ecb8 !important;
+  border-color: rgba(72,218,147,.22) !important;
+}
+
+body.dark-mode .auth-notice.error {
+  background: rgba(255,108,126,.10) !important;
+  color: #ff9bab !important;
+  border-color: rgba(255,121,139,.22) !important;
+}
+
+body.dark-mode .auth-role-picker label span,
+body.dark-mode .auth-choice-link,
+body.dark-mode .auth-choice-grid button {
+  background: #15263f !important;
+  border-color: rgba(145,177,224,.21) !important;
+  color: #f1f5ff !important;
+}
+
+body.dark-mode .auth-role-picker input:checked + span {
+  background: linear-gradient(145deg,rgba(57,120,239,.18),rgba(118,84,231,.10)),#15263f !important;
+  border-color: #6498f7 !important;
+  box-shadow: 0 0 0 4px rgba(84,143,246,.13) !important;
+}
+
+body.dark-mode .auth-role-picker small,
+body.dark-mode .auth-choice-link small,
+body.dark-mode .auth-choice-grid small {
+  color: #a3b3ca !important;
+}
+
+body.dark-mode .auth-switch a,
+body.dark-mode .auth-back-link,
+body.dark-mode .auth-center-card > a:not(.auth-primary):not(.auth-secondary) {
+  color: #78a5ff !important;
+}
+
+/* ---------- Dark onboarding pages ---------- */
+body.dark-mode .ntd-onboarding {
+  background:
+    radial-gradient(circle at 8% 13%, rgba(47,111,232,.16), transparent 30rem),
+    radial-gradient(circle at 91% 12%, rgba(128,84,233,.13), transparent 31rem),
+    linear-gradient(180deg,#0c1729 0%,#08111f 58%,#050b15 100%) !important;
+  color: #eef4ff !important;
+}
+
+body.dark-mode .ntd-onboarding .onboarding-bg {
+  opacity: .15 !important;
+  filter: saturate(.65) blur(1px);
+}
+
+body.dark-mode .ntd-onboarding :is(h1,h2,h3,h4,strong,label,legend) {
+  color: #f4f7ff !important;
+}
+
+body.dark-mode .ntd-onboarding :is(p,small,li,.field-help,.field-optional) {
+  color: #b7c5d9 !important;
+}
+
+body.dark-mode .ntd-onboarding .otto-text {
+  color: #83adff !important;
+}
+
+body.dark-mode .ntd-onboarding .progress-bar {
+  background: rgba(7,15,28,.86) !important;
+  border: 1px solid rgba(145,177,224,.17);
+  border-radius: 18px;
+  padding: 13px 16px;
+  backdrop-filter: blur(14px);
+}
+
+body.dark-mode .ntd-onboarding .progress-line {
+  background: #273b56 !important;
+}
+
+body.dark-mode .ntd-onboarding .progress-fill {
+  background: linear-gradient(90deg,#3978ef,#8a61ed) !important;
+}
+
+body.dark-mode .ntd-onboarding .step {
+  background: #12243b !important;
+  color: #9eb0c8 !important;
+  border-color: #405979 !important;
+}
+
+body.dark-mode .ntd-onboarding .step.done,
+body.dark-mode .ntd-onboarding .step.active {
+  background: linear-gradient(135deg,#3978ef,#7755e5) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 7px 20px rgba(62,121,237,.24);
+}
+
+body.dark-mode :is(
+  .profile-card,.otto-tip,.details-card,.services-card,.extra-card,.preview-card,
+  .public-profile-preview,.profile-strength-card,.publish-note
+) {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(115,83,230,.09), transparent 36%),
+    linear-gradient(145deg,#172943,#101e33) !important;
+  border-color: rgba(145,177,224,.22) !important;
+  color: #edf4ff !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,.20) !important;
+}
+
+body.dark-mode .profile-card:hover {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(115,83,230,.15), transparent 40%),
+    linear-gradient(145deg,#1d3352,#14253d) !important;
+  border-color: rgba(102,156,245,.46) !important;
+}
+
+body.dark-mode .profile-card.selected {
+  border-color: #679aff !important;
+  box-shadow: 0 0 0 4px rgba(83,143,246,.13),0 18px 44px rgba(0,0,0,.24) !important;
+}
+
+body.dark-mode :is(.profile-icon,.preview-icon,.profile-avatar,.document-preview-icon) {
+  background: #1b2e49 !important;
+  color: #eef4ff !important;
+}
+
+body.dark-mode :is(.tier-price,.tip-title,.selection-counter,.custom-count,.optional-pill,.section-label) {
+  background: rgba(84,140,241,.13) !important;
+  color: #aac7ff !important;
+  border-color: rgba(104,157,244,.22) !important;
+}
+
+body.dark-mode .tip-note {
+  background: rgba(255,195,83,.10) !important;
+  color: #f5d99d !important;
+  border-color: rgba(255,201,96,.22) !important;
+}
+
+body.dark-mode :is(.details-card,.services-card,.extra-card) :is(input,textarea,select) {
+  background: #0a1628 !important;
+  color: #edf4ff !important;
+  border-color: rgba(145,177,224,.24) !important;
+}
+
+body.dark-mode :is(.details-card,.services-card,.extra-card) :is(input,textarea)::placeholder {
+  color: #7385a1 !important;
+}
+
+body.dark-mode :is(.service-option,.service-options button,.custom-service-area,.custom-input-wrap,.choice-toggle-box) {
+  background: #172a45 !important;
+  color: #dce6f4 !important;
+  border-color: rgba(145,177,224,.22) !important;
+}
+
+body.dark-mode :is(.service-option,.service-options button):hover {
+  background: #1d3453 !important;
+  border-color: rgba(104,157,244,.42) !important;
+}
+
+body.dark-mode :is(.service-option,.service-options button).selected {
+  background: linear-gradient(135deg,rgba(57,120,239,.23),rgba(119,85,229,.14)) !important;
+  color: #b8d0ff !important;
+  border-color: #679aff !important;
+}
+
+body.dark-mode .choice-toggle input:checked + .choice-toggle-box {
+  background: linear-gradient(135deg,#3978ef,#7755e5) !important;
+  border-color: transparent !important;
+}
+
+body.dark-mode .preview-card li,
+body.dark-mode #previewList li,
+body.dark-mode .review-detail-grid > div,
+body.dark-mode .document-preview-card,
+body.dark-mode .review-contact-list li,
+body.dark-mode .strength-suggestions li {
+  background: #182b46 !important;
+  color: #dce6f4 !important;
+  border-color: rgba(145,177,224,.20) !important;
+}
+
+body.dark-mode :is(.review-tags,.review-profile-tags,.review-work-style) span {
+  background: rgba(86,142,241,.13) !important;
+  color: #aac7ff !important;
+  border-color: rgba(104,157,244,.22) !important;
+}
+
+body.dark-mode .profile-preview-header {
+  background: radial-gradient(circle at top right,rgba(124,58,237,.15),transparent 34%),linear-gradient(135deg,#1b2e49,#14243b) !important;
+  border-color: rgba(145,177,224,.18) !important;
+}
+
+body.dark-mode .profile-preview-section {
+  border-top-color: rgba(145,177,224,.18) !important;
+}
+
+body.dark-mode .strength-track {
+  background: #263953 !important;
+}
+
+body.dark-mode .strength-fill {
+  background: linear-gradient(90deg,#3978ef,#8a61ed) !important;
+}
+
+body.dark-mode .new-profile-badge {
+  background: rgba(55,211,139,.12) !important;
+  color: #85ecb8 !important;
+}
+
+body.dark-mode .ntd-onboarding .primary-btn,
+body.dark-mode .continue-profile-btn:not(:disabled),
+body.dark-mode .publish-profile-btn {
+  background: linear-gradient(135deg,#3978ef,#7755e5) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 11px 27px rgba(57,120,239,.24) !important;
+}
+
+body.dark-mode .ntd-onboarding .secondary-btn {
+  background: #172a45 !important;
+  color: #dce6f4 !important;
+  border-color: rgba(145,177,224,.22) !important;
+}
+
+body.dark-mode .continue-profile-btn:disabled,
+body.dark-mode .ntd-onboarding .primary-btn:disabled {
+  opacity: 1 !important;
+  background: #18263b !important;
+  color: #6e809b !important;
+  border: 1px solid rgba(145,177,224,.13) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Meet Otto / quiz ---------- */
+body.dark-mode .meet-otto-page {
+  background: transparent !important;
+}
+
+body.dark-mode :is(.otto-quiz-card,.recommendations-panel,.results-card,.recommendation-card) {
+  background: linear-gradient(145deg,#172943,#101e33) !important;
+  color: #eef4ff !important;
+  border-color: rgba(145,177,224,.22) !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,.20) !important;
+}
+
+body.dark-mode :is(.quiz-info-grid div,.answer-option,.result-trait,.recommendation-item) {
+  background: #182b46 !important;
+  color: #edf4ff !important;
+  border-color: rgba(145,177,224,.20) !important;
+}
+
+body.dark-mode .answer-option:hover:not(:disabled) {
+  background: #203955 !important;
+  border-color: rgba(104,157,244,.42) !important;
+}
+
+body.dark-mode .answer-option.selected {
+  background: linear-gradient(135deg,rgba(57,120,239,.23),rgba(119,85,229,.14)) !important;
+  border-color: #679aff !important;
+}
+
+body.dark-mode .answer-radio {
+  background: #101e33 !important;
+  border-color: #5f789c !important;
+}
+
+body.dark-mode .question-progress {
+  background: #263953 !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1050px) {
+  .profile-grid.tier-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .profile-card.tier-card { min-height: 390px; }
+}
+
+@media (max-width: 760px) {
+  .auth-topbar { width: min(100% - 24px, 1180px); }
+  .auth-shell { width: min(100% - 20px, 1120px); padding-top: 22px; }
+  .auth-card { padding: 22px; border-radius: 20px; }
+
+  .ntd-onboarding .progress-bar {
+    width: min(100% - 16px, 1080px);
+    margin-top: 12px;
+    overflow-x: auto;
+  }
+
+  .ntd-onboarding .progress-steps { min-width: 650px; }
+
+  .ntd-onboarding :is(
+    .profile-select-wrap,.details-wrap,.services-wrap,.extra-wrap,.preview-wrap,.review-wrap
+  ) {
+    width: min(100% - 20px, 1240px);
+    margin-top: 22px;
+  }
+
+  .profile-grid.tier-grid { grid-template-columns: 1fr; }
+  .profile-card.tier-card { min-height: 0; padding: 23px; }
+
+  .ntd-onboarding .otto-text {
+    font-size: clamp(2rem, 11vw, 3.5rem) !important;
+  }
+
+  .otto-tip { margin-top: 28px; padding: 24px 18px; }
+  .tip-comparison { gap: 10px; }
+  .tip-title { min-width: 120px; }
+
+  .details-actions,
+  .preview-actions,
+  .review-actions {
+    flex-direction: column-reverse;
+  }
+
+  .details-actions .primary-btn,
+  .details-actions .secondary-btn,
+  .preview-actions .primary-btn,
+  .preview-actions .secondary-btn,
+  .review-actions .primary-btn,
+  .review-actions .secondary-btn {
+    width: 100%;
+  }
+}

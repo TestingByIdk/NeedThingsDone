@@ -1,0 +1,69 @@
+NEEDTHINGSDONE EMAIL SETUP — START HERE
+=======================================
+
+You do NOT need to add your Resend API key to this ZIP.
+Your API key is already safely stored in Supabase under the Custom SMTP settings.
+Never paste it into HTML, JavaScript, GitHub, or an email template.
+
+PART 1 — INSTALL THE EMAILS THAT WORK RIGHT NOW
+------------------------------------------------
+These are the Supabase authentication emails.
+
+1. Open your Supabase project.
+2. Click Authentication in the left menu.
+3. Open Email Templates.
+4. Select Confirm signup.
+5. Open this file from the ZIP:
+   email-templates/supabase-auth/confirm-signup.html
+6. Press Ctrl+A, then Ctrl+C to copy the entire file.
+7. Paste it into the Supabase email body.
+8. Set the subject to:
+   Welcome to NeedThingsDone — Verify your email
+9. Click Save.
+10. Repeat the same steps for the templates below.
+
+SUPABASE TEMPLATE              FILE                         SUBJECT
+Confirm signup                 confirm-signup.html          Welcome to NeedThingsDone — Verify your email
+Magic Link                     magic-link.html              Your secure NeedThingsDone sign-in link
+Reset Password                 reset-password.html          Reset your NeedThingsDone password
+Change Email Address           change-email.html            Confirm your new NeedThingsDone email
+Reauthentication              reauthentication.html        Your NeedThingsDone security code
+Invite User                    invite-user.html              You're invited to NeedThingsDone
+
+IMPORTANT:
+Do not delete or change text like:
+{{ .ConfirmationURL }}
+{{ .Token }}
+
+Supabase replaces those automatically with the real link or security code.
+
+PART 2 — TEST IT
+----------------
+1. Log out of NeedThingsDone.
+2. Create a test account using an email you can access.
+3. Open the verification email.
+4. Confirm that the blue button works and returns to NeedThingsDone.
+5. Test Forgot Password too.
+
+PART 3 — PREVIEW EVERY EMAIL
+-----------------------------
+Open:
+email-templates/preview/index.html
+
+This page lets you open and inspect all email designs in your browser.
+Buttons in the previews may not work because they use template placeholders.
+
+PART 4 — FUTURE AUTOMATIC EMAILS
+---------------------------------
+The transactional templates include new messages, reviews, payment notices,
+published listings, badges, vouchers, and weekly updates.
+
+They are already designed, but they will not send automatically until those
+features are connected to the included Supabase Edge Function.
+
+Starter function:
+supabase/functions/send-transactional-email/index.ts
+
+Do not set this up yet unless the site feature that triggers the email is ready.
+When we reach that stage, the Resend key should be added as a Supabase secret,
+not written into the code.

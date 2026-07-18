@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+  </script>
+  <title>Visitor Account - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+  <link rel="stylesheet" href="../css/onboarding-audit.css">
+</head>
+<body class="auth-body">
+<header class="auth-topbar">
+  <a class="auth-brand" href="../index.html">
+    <img src="../assets/images/otto.png" alt="Otto">
+    <span>
+      <strong>NeedThings<span>Done</span></strong>
+      <small>From need to done.</small>
+    </span>
+  </a>
+  <div class="auth-top-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    <a href="../index.html">Back to site</a>
+  </div>
+</header>
+
+<main class="auth-shell">
+  <section class="auth-card auth-form-card auth-wide-card visitor-signup-card">
+    <div class="auth-card-heading">
+      <div class="auth-icon">👋</div>
+      <div class="auth-pill visitor-free-pill">Free visitor account</div>
+      <h1>Join as a visitor</h1>
+      <p>Create a simple account for messaging people and leaving reviews. No public profile or Otto setup required.</p>
+    </div>
+
+    <div class="visitor-feature-row" aria-label="Visitor account features">
+      <span>💬 Message profiles</span>
+      <span>⭐ Leave reviews</span>
+      <span>🔎 Browse freely</span>
+    </div>
+
+    <div id="authNotice" class="auth-notice" hidden></div>
+
+    <form id="visitorSignupForm" class="auth-form" novalidate>
+      <div class="auth-form-grid">
+        <label>
+          First name
+          <input id="visitorFirstName" type="text" autocomplete="given-name" maxlength="40" required>
+        </label>
+        <label>
+          Last name
+          <input id="visitorLastName" type="text" autocomplete="family-name" maxlength="40" required>
+        </label>
+      </div>
+
+      <label>
+        Email address
+        <input id="visitorEmail" type="email" autocomplete="email" required placeholder="you@example.ca">
+      </label>
+
+      <div class="visitor-email-note">
+        <span>✉️</span>
+        <div>
+          <strong>No password needed</strong>
+          <small>We’ll email you a secure sign-in link. Opening it verifies your account and signs you in.</small>
+        </div>
+      </div>
+
+      <label class="auth-check auth-terms">
+        <input id="visitorAcceptTerms" type="checkbox" required>
+        <span>I agree to the Terms of Service and Privacy Policy.</span>
+      </label>
+
+      <button id="visitorSignupSubmit" class="auth-primary" type="submit">
+        Create free visitor account
+      </button>
+    </form>
+
+    <p class="auth-switch">Want a public profile or business page? <a href="signup.html">Create a full account</a></p>
+    <p class="auth-switch">Already registered? <a href="login.html">Log in</a></p>
+    <p class="auth-switch"><a href="account-choice.html">← Back</a></p>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../backend/supabase.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script>
+(() => {
+  try {
+    const savedSettings = JSON.parse(localStorage.getItem("ntdAccountSettingsV1") || "null");
+    const preference =
+      savedSettings?.theme ||
+      localStorage.getItem("ntdTheme") ||
+      localStorage.getItem("theme") ||
+      localStorage.getItem("ntdThemePreference") ||
+      "light";
+    const dark =
+      preference === "dark" ||
+      (preference === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.classList.toggle("dark-mode", dark);
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.toggle("dark-mode", dark);
+    });
+  } catch {}
+})();
+</script>
+  <title>Review Profile - NeedThingsDone</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+
+  <link rel="stylesheet" href="../css/onboarding-final.css">
+</head>
+
+<body>
+  <main class="ntd-onboarding profile-review-page">
+
+    <div class="onboarding-bg bg-blue"></div>
+    <div class="onboarding-bg bg-green"></div>
+
+    <div class="progress-bar clean-progress">
+      <div class="progress-line">
+        <div class="progress-fill" style="width: 100%;"></div>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step done">1</div>
+        <div class="step done">2</div>
+        <div class="step done">3</div>
+        <div class="step done">4</div>
+        <div class="step done">5</div>
+        <div class="step done">6</div>
+        <div class="step done">7</div>
+        <div class="step active">8</div>
+      </div>
+    </div>
+
+    <section class="review-wrap">
+
+      <div class="otto-big">
+        <img
+          src="../assets/images/otto.png"
+          class="otto otto-large"
+          alt="Otto"
+        >
+      </div>
+
+      <p class="otto-text">
+        Almost done! Review everything before publishing.
+      </p>
+
+      <h1>Your profile preview</h1>
+
+      <p class="onboarding-desc review-description">
+        This is how your information will be organized on NeedThingsDone.
+      </p>
+
+      <div class="review-layout">
+
+        <article class="public-profile-preview">
+
+          <header class="profile-preview-header">
+
+            <div class="profile-avatar" id="reviewAvatar">
+              👤
+            </div>
+
+            <div class="profile-heading-content">
+  <p class="profile-type-label" id="reviewType">
+    Individual
+  </p>
+
+  <h2 id="reviewName">
+    Your profile name
+  </h2>
+
+  <div
+    class="review-profile-tags"
+    id="reviewProfileTags"
+    hidden
+  ></div>
+
+  <p class="profile-location" id="reviewLocation">
+    📍 Location
+  </p>
+</div>
+
+            <span class="new-profile-badge">
+              New profile
+            </span>
+
+          </header>
+
+          <section
+  class="profile-preview-section"
+  id="reviewWorkStyleSection"
+  hidden
+>
+  <div class="preview-section-heading">
+    <h3>Otto’s work-style result</h3>
+
+    <a href="meet-otto.html">
+      Retake
+    </a>
+  </div>
+
+  <div class="review-work-style">
+    <span id="reviewWorkStyleIcon">🧩</span>
+
+    <div>
+      <h4 id="reviewWorkStyleName">
+        Problem Solver
+      </h4>
+
+      <p id="reviewWorkStyleDescription"></p>
+    </div>
+  </div>
+</section>
+
+          <section class="profile-preview-section">
+            <div class="preview-section-heading">
+              <h3>About</h3>
+
+              <a href="profile-extra-details.html">
+                Edit
+              </a>
+            </div>
+
+            <p id="reviewAbout">
+              Your profile description will appear here.
+            </p>
+          </section>
+
+          <section class="profile-preview-section">
+            <div class="preview-section-heading">
+              <h3>Skills and services</h3>
+
+              <a href="profile-services.html">
+                Edit
+              </a>
+            </div>
+
+            <div class="review-tags" id="reviewServices"></div>
+          </section>
+
+          <section
+            class="profile-preview-section"
+            id="reviewDetailsSection"
+          >
+            <div class="preview-section-heading">
+              <h3>Profile details</h3>
+
+              <a href="profile-extra-details.html">
+                Edit
+              </a>
+            </div>
+
+            <div
+              class="review-detail-grid"
+              id="reviewDetails"
+            ></div>
+          </section>
+
+          <section
+            class="profile-preview-section"
+            id="reviewDocumentSection"
+            hidden
+          >
+            <div class="preview-section-heading">
+              <h3>Resume, portfolio, or flyer</h3>
+
+              <a href="profile-extra-details.html">
+                Edit
+              </a>
+            </div>
+
+            <div class="document-preview-card">
+              <div class="document-preview-icon">
+                📄
+              </div>
+
+              <div>
+                <h4>Public document preview</h4>
+
+                <p>
+                  Visitors will be able to open your linked document.
+                </p>
+
+                <a
+                  id="reviewDocumentLink"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View document
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section class="profile-preview-section">
+            <div class="preview-section-heading">
+              <h3>Contact options</h3>
+
+              <a href="profile-extra-details.html">
+                Edit
+              </a>
+            </div>
+
+            <div
+              class="review-contact-list"
+              id="reviewContact"
+            ></div>
+          </section>
+
+        </article>
+
+        <aside class="review-sidebar">
+
+          <section class="profile-strength-card">
+            <p class="review-mini-label">
+              Profile strength
+            </p>
+
+            <div class="strength-heading">
+              <strong id="strengthScore">0%</strong>
+              <span id="strengthLabel">Getting started</span>
+            </div>
+
+            <div class="strength-track">
+              <div
+                class="strength-fill"
+                id="strengthFill"
+              ></div>
+            </div>
+
+            <div
+              class="strength-suggestions"
+              id="strengthSuggestions"
+            ></div>
+          </section>
+
+          <section class="publish-note">
+            <h3>Before publishing</h3>
+
+            <p>
+              You can edit your profile later from your dashboard.
+            </p>
+
+            <p>
+              Profiles will eventually be saved to your account and reviewed
+              before appearing publicly.
+            </p>
+          </section>
+
+        </aside>
+
+      </div>
+
+      <p
+        class="form-message"
+        id="reviewMessage"
+        aria-live="polite"
+      ></p>
+
+      <div class="review-actions">
+        <a href="meet-otto.html" class="secondary-btn">
+  ← Back
+</a>
+
+        <button
+          id="publishProfile"
+          type="button"
+          class="primary-btn publish-profile-btn"
+        >
+          Publish Profile
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="../js/profile-review.js"></script>
+  <script src="../js/onboarding-controls.js"></script>
+</body>
+</html>

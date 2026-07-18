@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Individuals - NeedThingsDone</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/individual-search.css">
+  <link rel="stylesheet" href="../css/premium-dark.css">
+</head>
+<body>
+  <header class="navbar search-navbar">
+    <a class="brand search-brand" href="../index.html">
+      <img src="../assets/images/otto.png" alt="Otto">
+      <div><strong>NeedThingsDone</strong><span>From need to done.</span></div>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="businesses.html">Businesses</a>
+      <a class="active" href="individuals.html">Individuals</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+
+    <a class="secondary-btn" href="../onboarding/choose-profile.html">Create Profile</a>
+  </header>
+
+  <main class="individual-search-page">
+    <section class="search-hero">
+      <div>
+        <p class="eyebrow">Individuals near you</p>
+        <h1>Find someone who can help.</h1>
+        <p>Search by skill, location, availability, price, and profile details.</p>
+      </div>
+      <img src="../assets/images/otto.png" alt="Otto">
+    </section>
+
+    <section class="search-box" aria-label="Search individuals">
+      <label>
+        <span>🔍</span>
+        <input id="queryInput" type="search" placeholder="Computer Repair, Dog Walking..." autocomplete="off">
+      </label>
+
+      <label>
+        <span>📍</span>
+        <input id="locationInput" type="search" placeholder="Ottawa, Ontario" autocomplete="off">
+      </label>
+
+      <button id="searchButton" class="primary-btn" type="button">Search</button>
+    </section>
+
+    <div class="results-toolbar">
+      <button id="filterToggle" class="filter-toggle" type="button" aria-expanded="true" aria-controls="filterSidebar">
+        ☰ Filters
+      </button>
+
+      <p id="resultsCount">0 profiles found</p>
+
+      <label class="sort-box">
+        <span>Sort by</span>
+        <select id="sortSelect">
+          <option value="relevance">Best match</option>
+          <option value="price-low">Lowest price</option>
+          <option value="price-high">Highest price</option>
+          <option value="newest">Newest</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="searchLayout" class="search-layout">
+      <aside id="filterSidebar" class="filter-sidebar">
+        <div class="filter-header">
+          <div><p class="eyebrow">Refine results</p><h2>Filters</h2></div>
+          <button id="closeFilters" type="button" aria-label="Close filters">×</button>
+        </div>
+
+        <button id="clearFilters" class="clear-filters" type="button">Clear all</button>
+
+        <section class="filter-section">
+          <button class="filter-section-toggle" type="button" aria-expanded="true">
+            <span>Service category</span><span>⌃</span>
+          </button>
+          <div class="filter-options">
+            <label><input data-filter="service" value="Computer Repair" type="checkbox">Computer Repair</label>
+            <label><input data-filter="service" value="Tech Support" type="checkbox">Tech Support</label>
+            <label><input data-filter="service" value="Dog Walking" type="checkbox">Dog Walking</label>
+            <label><input data-filter="service" value="Tutoring" type="checkbox">Tutoring</label>
+            <label><input data-filter="service" value="Cleaning" type="checkbox">Cleaning</label>
+            <label><input data-filter="service" value="Website Help" type="checkbox">Website Help</label>
+          </div>
+        </section>
+
+        <section class="filter-section">
+          <button class="filter-section-toggle" type="button" aria-expanded="true">
+            <span>Availability</span><span>⌃</span>
+          </button>
+          <div class="filter-options">
+            <label><input data-filter="availability" value="Weekdays" type="checkbox">Weekdays</label>
+            <label><input data-filter="availability" value="Evenings" type="checkbox">Evenings</label>
+            <label><input data-filter="availability" value="Weekends" type="checkbox">Weekends</label>
+            <label><input data-filter="availability" value="Flexible" type="checkbox">Flexible</label>
+          </div>
+        </section>
+
+        <section class="filter-section">
+          <button class="filter-section-toggle" type="button" aria-expanded="true">
+            <span>Starting price</span><span>⌃</span>
+          </button>
+          <div class="filter-options">
+            <label><input name="price" value="all" type="radio" checked>Any price</label>
+            <label><input name="price" value="under-25" type="radio">Under $25</label>
+            <label><input name="price" value="25-50" type="radio">$25–$50</label>
+            <label><input name="price" value="50-plus" type="radio">$50+</label>
+          </div>
+        </section>
+
+        <section class="filter-section">
+          <button class="filter-section-toggle" type="button" aria-expanded="true">
+            <span>Profile features</span><span>⌃</span>
+          </button>
+          <div class="filter-options">
+            <label><input id="messagingFilter" type="checkbox">Messaging available</label>
+            <label><input id="documentFilter" type="checkbox">Resume or flyer</label>
+            <label><input id="websiteFilter" type="checkbox">Website available</label>
+          </div>
+        </section>
+
+        <section class="filter-section">
+          <button class="filter-section-toggle" type="button" aria-expanded="true">
+            <span>Profile tags</span><span>⌃</span>
+          </button>
+          <div class="filter-options">
+            <label><input data-filter="tag" value="Friendly" type="checkbox">Friendly</label>
+            <label><input data-filter="tag" value="Reliable" type="checkbox">Reliable</label>
+            <label><input data-filter="tag" value="Patient" type="checkbox">Patient</label>
+            <label><input data-filter="tag" value="Professional" type="checkbox">Professional</label>
+            <label><input data-filter="tag" value="Problem Solver" type="checkbox">Problem Solver</label>
+          </div>
+        </section>
+
+        <div class="future-filter">
+          <strong>Coming later</strong>
+          <p>Verified positive and negative reputation tags will become searchable when reviews are connected.</p>
+        </div>
+      </aside>
+
+      <div id="filterOverlay" class="filter-overlay"></div>
+
+      <section class="results-column">
+        <div id="activeFilters" class="active-filters"></div>
+        <div id="resultsGrid" class="results-grid"></div>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <img src="../assets/images/otto.png" alt="Otto">
+          <h2>No matching individuals found</h2>
+          <p>Try removing a filter, searching nearby, or using a broader skill.</p>
+          <button id="resetEmpty" class="primary-btn" type="button">Reset filters</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="search-footer">Built in Canada 🇨🇦 · © 2026 NeedThingsDone</footer>
+  <script src="../js/individual-search.js"></script>
+</body>
+</html>

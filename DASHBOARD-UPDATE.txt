@@ -1,0 +1,20 @@
+NEEDTHINGSDONE VISITOR DASHBOARD UPDATE
+
+Added and repaired:
+- Responsive dashboard command centre
+- Supabase session check and sign-out
+- Visitor/member and owner-specific dashboard states
+- Message, notification, review, and saved-item counters
+- Quick links to Businesses, Individuals, Shop, Map, Community, and Saved Items
+- Profile completion meter for Individuals, Businesses, and Shops
+- Recent activity and nearby discovery sections
+- Mobile slide-out navigation
+- Persistent light/dark theme
+- Empty states that work before database tables are connected
+
+Files changed:
+- pages/dashboard.html
+- css/dashboard.css
+- js/dashboard.js
+
+No secret API keys were added. The existing public Supabase publishable key remains in backend/supabase.js.
