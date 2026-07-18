@@ -1,5 +1,8 @@
 # NeedThingsDone Email Kit
 
+> **Beginner setup:** open `START-HERE-EMAILS.txt` in the main project folder and follow it from top to bottom.
+> Your Resend API key does **not** belong in these files. Keep it in Supabase Custom SMTP.
+
 Clean, professional HTML email templates for Supabase Auth and future transactional emails.
 
 ## Use the Supabase Auth templates now
