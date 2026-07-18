@@ -649,169 +649,49 @@ if (closeExplore) {
 
   renderNotifications();
 
-  // Bottom-left messenger dock.
-  const defaultThreads = [
-    {
-      id: "otto",
-      name: "Otto Assistant",
-      avatar: "🐙",
-      preview: "Hi! I can help you explore NeedThingsDone.",
-      unread: 1,
-      messages: [
-        { from: "them", text: "Hi! I can help you explore NeedThingsDone." },
-        { from: "them", text: "Messages will eventually update instantly with Supabase Realtime." }
-      ]
-    },
-    {
-      id: "sample-business",
-      name: "Sample Local Business",
-      avatar: "🏢",
-      preview: "Thanks for reaching out!",
-      unread: 0,
-      messages: [
-        { from: "them", text: "Thanks for reaching out!" }
-      ]
-    }
-  ];
-
-  let threads = getStoredArray("ntdMessengerThreadsV1");
-  if (!threads.length) {
-    threads = defaultThreads;
-    saveArray("ntdMessengerThreadsV1", threads);
-  }
-
+  // Bottom-left messenger dock, connected to Supabase messaging.
   const messenger = document.createElement("aside");
   messenger.className = "ntd-messenger";
   messenger.innerHTML = `
     <button class="ntd-messenger-tab" id="ntdMessengerTab" type="button" aria-expanded="false">
-      <span>💬</span>
-      <strong>Messages</strong>
-      <b id="ntdMessageBadge" hidden>0</b>
+      <span>💬</span><strong>Messages</strong><b id="ntdMessageBadge" hidden>0</b>
     </button>
     <section class="ntd-messenger-window" id="ntdMessengerWindow" hidden>
-      <header>
-        <div>
-          <strong id="ntdMessengerTitle">Messages</strong>
-          <small id="ntdMessengerSubtitle">Your conversations</small>
-        </div>
-        <div>
-          <button id="ntdMessengerBack" type="button" hidden aria-label="Back to conversations">←</button>
-          <button id="ntdMessengerClose" type="button" aria-label="Minimize messages">−</button>
-        </div>
-      </header>
-      <div class="ntd-thread-list" id="ntdThreadList"></div>
-      <div class="ntd-chat-view" id="ntdChatView" hidden>
-        <div class="ntd-chat-messages" id="ntdChatMessages"></div>
-        <form class="ntd-chat-compose" id="ntdChatForm">
-          <input id="ntdChatInput" type="text" maxlength="500" autocomplete="off" placeholder="Write a message…">
-          <button type="submit" aria-label="Send message">➤</button>
-        </form>
-      </div>
+      <header><div><strong>Messages</strong><small>Your recent conversations</small></div><button id="ntdMessengerClose" type="button" aria-label="Minimize messages">−</button></header>
+      <div class="ntd-thread-list" id="ntdThreadList"><div class="ntd-messenger-loading">Sign in to view messages.</div></div>
       <a class="ntd-messenger-footer" href="${pagePrefix}messages.html">Open full messages →</a>
-    </section>
-  `;
+    </section>`;
   document.body.appendChild(messenger);
 
   const messengerTab = document.getElementById("ntdMessengerTab");
   const messengerWindow = document.getElementById("ntdMessengerWindow");
   const messengerClose = document.getElementById("ntdMessengerClose");
-  const messengerBack = document.getElementById("ntdMessengerBack");
-  const messengerTitle = document.getElementById("ntdMessengerTitle");
-  const messengerSubtitle = document.getElementById("ntdMessengerSubtitle");
   const messageBadge = document.getElementById("ntdMessageBadge");
   const threadList = document.getElementById("ntdThreadList");
-  const chatView = document.getElementById("ntdChatView");
-  const chatMessages = document.getElementById("ntdChatMessages");
-  const chatForm = document.getElementById("ntdChatForm");
-  const chatInput = document.getElementById("ntdChatInput");
-  let activeThreadId = null;
+  let messengerChannel = null;
 
-  const renderThreadList = () => {
-    const unread = threads.reduce((sum, thread) => sum + Number(thread.unread || 0), 0);
-    messageBadge.textContent = unread > 99 ? "99+" : String(unread);
-    messageBadge.hidden = unread === 0;
-
-    threadList.innerHTML = threads.map(thread => `
-      <button class="ntd-thread-row" type="button" data-thread-id="${escapeHtml(thread.id)}">
-        <span class="ntd-thread-avatar">${escapeHtml(thread.avatar || "👤")}</span>
-        <span class="ntd-thread-copy">
-          <strong>${escapeHtml(thread.name)}</strong>
-          <small>${escapeHtml(thread.preview || "Open conversation")}</small>
-        </span>
-        ${thread.unread ? `<b>${Number(thread.unread)}</b>` : ""}
-      </button>
-    `).join("");
-
-    threadList.querySelectorAll("[data-thread-id]").forEach(button => {
-      button.addEventListener("click", () => openThread(button.dataset.threadId));
-    });
+  const escapeMessenger = value => String(value ?? "").replace(/[&<>\"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const messengerTime = value => { if (!value) return ""; const diff=Date.now()-new Date(value).getTime(); if(diff<60000)return"Now"; if(diff<3600000)return`${Math.floor(diff/60000)}m`; if(diff<86400000)return`${Math.floor(diff/3600000)}h`; return new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric"}).format(new Date(value)); };
+  const renderMessengerRows = rows => {
+    const unread=(rows||[]).reduce((sum,row)=>sum+Number(row.unread_count||0),0);
+    messageBadge.textContent=unread>99?"99+":String(unread);messageBadge.hidden=unread===0;
+    if(!rows?.length){threadList.innerHTML='<div class="ntd-messenger-loading">No conversations yet.</div>';return;}
+    threadList.innerHTML=rows.slice(0,6).map(row=>`<a class="ntd-thread-row" href="${pagePrefix}messages.html?conversation=${encodeURIComponent(row.conversation_id)}"><span class="ntd-thread-avatar">${escapeMessenger(row.other_avatar_url||"👤")}</span><span class="ntd-thread-copy"><strong>${escapeMessenger(row.other_display_name||"NeedThingsDone member")}</strong><small>${escapeMessenger(row.last_message||"Conversation started")}</small></span><span class="ntd-thread-meta">${escapeMessenger(messengerTime(row.last_message_at||row.created_at))}${Number(row.unread_count||0)?`<b>${Number(row.unread_count)}</b>`:""}</span></a>`).join("");
   };
-
-  const openThread = id => {
-    const thread = threads.find(item => item.id === id);
-    if (!thread) return;
-
-    activeThreadId = id;
-    thread.unread = 0;
-    saveArray("ntdMessengerThreadsV1", threads);
-    renderThreadList();
-
-    messengerTitle.textContent = thread.name;
-    messengerSubtitle.textContent = "Active conversation";
-    messengerBack.hidden = false;
-    threadList.hidden = true;
-    chatView.hidden = false;
-
-    chatMessages.innerHTML = (thread.messages || []).map(message => `
-      <div class="ntd-chat-bubble ${message.from === "me" ? "is-mine" : ""}">
-        ${escapeHtml(message.text)}
-      </div>
-    `).join("");
-
-    requestAnimationFrame(() => {
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      chatInput.focus();
-    });
+  const refreshMessenger = async () => {
+    if(!window.supabaseClient?.auth)return;
+    const {data:{session}}=await window.supabaseClient.auth.getSession();
+    if(!session){messageBadge.hidden=true;threadList.innerHTML=`<a class="ntd-messenger-login" href="${pagePrefix.replace('pages/','')}onboarding/login.html">Log in to view messages</a>`;return;}
+    const {data,error}=await window.supabaseClient.rpc("get_my_conversations");
+    if(error){console.warn("Messenger dock could not load",error);threadList.innerHTML='<div class="ntd-messenger-loading">Could not load messages.</div>';return;}
+    renderMessengerRows(data||[]);
+    if(!messengerChannel){messengerChannel=window.supabaseClient.channel(`dock-messages-${session.user.id}-${Date.now()}`).on("postgres_changes",{event:"INSERT",schema:"public",table:"messages"},refreshMessenger).subscribe();}
   };
-
-  const showThreads = () => {
-    activeThreadId = null;
-    messengerTitle.textContent = "Messages";
-    messengerSubtitle.textContent = "Your conversations";
-    messengerBack.hidden = true;
-    threadList.hidden = false;
-    chatView.hidden = true;
-  };
-
-  const setMessengerOpen = open => {
-    messengerWindow.hidden = !open;
-    messengerTab.setAttribute("aria-expanded", String(open));
-    if (open) renderThreadList();
-  };
-
-  messengerTab.addEventListener("click", () => setMessengerOpen(messengerWindow.hidden));
-  messengerClose.addEventListener("click", () => setMessengerOpen(false));
-  messengerBack.addEventListener("click", showThreads);
-
-  chatForm.addEventListener("submit", event => {
-    event.preventDefault();
-    const originalText = chatInput.value.trim();
-    const thread = threads.find(item => item.id === activeThreadId);
-    if (!originalText || !thread) return;
-
-    const blockedWords = ["fuck", "shit", "bitch", "asshole", "cunt", "nigger", "faggot"];
-    const filteredText = blockedWords.reduce((result, word) =>
-      result.replace(new RegExp(`\b${word}\b`, "gi"), "•".repeat(word.length)), originalText);
-
-    thread.messages = thread.messages || [];
-    thread.messages.push({ from: "me", text: filteredText });
-    thread.preview = filteredText;
-    saveArray("ntdMessengerThreadsV1", threads);
-    chatInput.value = "";
-    openThread(activeThreadId);
-  });
-
-  renderThreadList();
+  const setMessengerOpen = open => {messengerWindow.hidden=!open;messengerTab.setAttribute("aria-expanded",String(open));if(open)refreshMessenger();};
+  messengerTab.addEventListener("click",()=>setMessengerOpen(messengerWindow.hidden));
+  messengerClose.addEventListener("click",()=>setMessengerOpen(false));
+  window.addEventListener("ntd:messages-updated",refreshMessenger);
+  refreshMessenger();
 
   // Replace login/signup controls with a compact profile menu when signed in.
   const supabaseClient = window.supabaseClient;

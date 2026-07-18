@@ -1789,3 +1789,5 @@ img.otto-inline {
     max-width: 128px !important;
   }
 }
+/* Real messaging dock additions */
+.ntd-thread-row{display:grid!important;grid-template-columns:42px minmax(0,1fr) auto!important;gap:9px;align-items:center;text-decoration:none;color:inherit}.ntd-thread-avatar{width:42px!important;height:42px!important;border-radius:50%!important}.ntd-thread-meta{display:grid;justify-items:end;gap:4px;color:#7b8190;font-size:.68rem}.ntd-thread-meta b,#ntdMessageBadge{display:grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#0866ff;color:#fff;font-size:.65rem}.ntd-messenger-loading,.ntd-messenger-login{padding:30px 18px;display:block;color:#6b7280;text-align:center;text-decoration:none}.ntd-messenger-login{color:#0866ff;font-weight:800}
