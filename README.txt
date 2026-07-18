@@ -196,3 +196,8 @@ VISITOR ACCOUNT UPDATE
 - Verified visitors go directly to the dashboard without Otto profile setup.
 - Visitor accounts are intended for browsing, messaging profiles, and leaving reviews.
 - Added Visitor routing and dashboard identity support.
+
+
+EMAIL KIT
+---------
+Branded Supabase and transactional email templates are in email-templates/. Start with email-templates/README.md.
