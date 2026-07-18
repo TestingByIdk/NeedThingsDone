@@ -650,6 +650,9 @@ if (closeExplore) {
   renderNotifications();
 
   // Bottom-left messenger dock, connected to Supabase messaging.
+  // The full Messages page already has its own conversation UI, so the dock
+  // stays hidden there instead of covering the composer or navigating away.
+  if (!/\/messages\.html$/i.test(window.location.pathname)) {
   const messenger = document.createElement("aside");
   messenger.className = "ntd-messenger";
   messenger.innerHTML = `
@@ -692,15 +695,41 @@ if (closeExplore) {
   messengerClose.addEventListener("click",()=>setMessengerOpen(false));
   window.addEventListener("ntd:messages-updated",refreshMessenger);
   refreshMessenger();
+  }
 
-  // Replace login/signup controls with a compact profile menu when signed in.
+  // Keep the account state synchronized on every page. Supabase stores the
+  // session in localStorage, so every page sees the same login as long as each
+  // page loads the shared Supabase client before this file.
   const supabaseClient = window.supabaseClient;
   if (supabaseClient?.auth) {
-    supabaseClient.auth.getSession().then(({ data }) => {
-      const session = data?.session;
-      if (!session) return;
+    let profileWrap = null;
 
+    const clearProfileMenu = () => {
+      profileWrap?.remove();
+      profileWrap = null;
+    };
+
+    const showSignedOutNavigation = () => {
+      clearProfileMenu();
+      if (!navActions.querySelector(".login-btn")) {
+        const login = document.createElement("a");
+        login.className = "login-btn";
+        login.textContent = "Log In";
+        login.href = `${onboardingPrefix}login.html?returnTo=${encodeURIComponent(relativeCurrentUrl())}`;
+        navActions.appendChild(login);
+      }
+      if (!navActions.querySelector(".signup-btn")) {
+        const signup = document.createElement("a");
+        signup.className = "signup-btn";
+        signup.textContent = "Sign Up";
+        signup.href = `${onboardingPrefix}welcome.html`;
+        navActions.appendChild(signup);
+      }
+    };
+
+    const showSignedInNavigation = session => {
       navActions.querySelectorAll(".login-btn, .signup-btn").forEach(item => item.remove());
+      clearProfileMenu();
 
       const metadata = session.user?.user_metadata || {};
       const displayName =
@@ -709,41 +738,50 @@ if (closeExplore) {
         session.user?.email?.split("@")[0] ||
         "Account";
 
-      const profileWrap = document.createElement("div");
+      profileWrap = document.createElement("div");
       profileWrap.className = "ntd-profile-wrap";
       profileWrap.innerHTML = `
-        <button class="ntd-profile-button" id="ntdProfileButton" type="button" aria-expanded="false">
+        <button class="ntd-profile-button" type="button" aria-expanded="false">
           <span>${escapeHtml(displayName.charAt(0).toUpperCase())}</span>
           <strong>${escapeHtml(displayName)}</strong>
           <small>▾</small>
         </button>
-        <div class="ntd-profile-menu" id="ntdProfileMenu" hidden>
+        <div class="ntd-profile-menu" hidden>
           <a href="${pagePrefix}dashboard.html">Dashboard</a>
           <a href="${pagePrefix}account-settings.html">Account settings</a>
           <a href="${pagePrefix}saved-profiles.html">Saved items</a>
-          <button id="ntdGlobalSignOut" type="button">Log out</button>
-        </div>
-      `;
+          <button type="button">Log out</button>
+        </div>`;
       navActions.appendChild(profileWrap);
 
-      const profileButton = document.getElementById("ntdProfileButton");
-      const profileMenu = document.getElementById("ntdProfileMenu");
-      profileButton.addEventListener("click", event => {
+      const button = profileWrap.querySelector(".ntd-profile-button");
+      const menu = profileWrap.querySelector(".ntd-profile-menu");
+      button.addEventListener("click", event => {
         event.stopPropagation();
-        profileMenu.hidden = !profileMenu.hidden;
-        profileButton.setAttribute("aria-expanded", String(!profileMenu.hidden));
+        menu.hidden = !menu.hidden;
+        button.setAttribute("aria-expanded", String(!menu.hidden));
+      });
+      profileWrap.querySelector("button[type='button']:last-child").addEventListener("click", async () => {
+        await supabaseClient.auth.signOut();
       });
       document.addEventListener("click", event => {
-        if (!event.target.closest(".ntd-profile-wrap")) {
-          profileMenu.hidden = true;
-          profileButton.setAttribute("aria-expanded", "false");
+        if (profileWrap && !event.target.closest(".ntd-profile-wrap")) {
+          menu.hidden = true;
+          button.setAttribute("aria-expanded", "false");
         }
       });
-      document.getElementById("ntdGlobalSignOut").addEventListener("click", async () => {
-        await supabaseClient.auth.signOut();
-        window.location.reload();
-      });
-    });
+    };
+
+    const syncNavigation = async sessionOverride => {
+      const session = sessionOverride === undefined
+        ? (await supabaseClient.auth.getSession()).data?.session
+        : sessionOverride;
+      if (session) showSignedInNavigation(session);
+      else showSignedOutNavigation();
+    };
+
+    syncNavigation();
+    supabaseClient.auth.onAuthStateChange((_event, session) => syncNavigation(session));
   }
 })();
 

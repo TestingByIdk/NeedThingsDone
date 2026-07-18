@@ -1,0 +1,21 @@
+NeedThingsDone messaging + global login update
+==============================================
+
+Fixed in this build:
+- Otto/empty chat screen now disappears when a conversation is selected.
+- The composer stays at the bottom and can no longer be pushed off-screen.
+- Sent messages appear immediately without refreshing.
+- Incoming messages update through Supabase Realtime, with a 2.5-second fallback poll.
+- Conversation previews and unread counts refresh automatically.
+- The bottom-left mini messenger is hidden on the full Messages page.
+- Supabase is now loaded on all main public pages, so login/profile navigation stays synchronized while changing tabs.
+- Login/logout changes update the navbar without requiring a hard refresh.
+
+Deployment:
+1. Replace the files in your GitHub repository with this ZIP.
+2. Commit and wait for GitHub Pages to deploy.
+3. Hard refresh once with Ctrl + Shift + R.
+
+Optional Supabase step for true instant incoming messages:
+Run supabase/03-enable-messaging-realtime.sql in Supabase SQL Editor.
+The chat still updates without refreshing even if you skip it, because the frontend now has a polling fallback.

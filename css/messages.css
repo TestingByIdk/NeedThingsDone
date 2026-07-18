@@ -7,3 +7,12 @@
 html[data-theme="dark"]{--msg-bg:#18191a;--msg-panel:#242526;--msg-text:#e4e6eb;--msg-muted:#b0b3b8;--msg-line:#3a3b3c;--msg-hover:#3a3b3c;--msg-received:#3a3b3c}html[data-theme="dark"] .messages-app,html[data-theme="dark"] .conversation-sidebar,html[data-theme="dark"] .profile-panel,html[data-theme="dark"] .chat-panel,html[data-theme="dark"] .chat-header,html[data-theme="dark"] .chat-messages,html[data-theme="dark"] .message-composer{background:#242526}html[data-theme="dark"] .conversation-search,html[data-theme="dark"] .message-composer textarea{background:#3a3b3c}html[data-theme="dark"] .chat-menu{background:#242526}html[data-theme="dark"] .profile-detail-list>div{background:#3a3b3c}
 @media(max-width:1100px){.messages-app{grid-template-columns:320px minmax(0,1fr)}.profile-panel{position:absolute;right:0;top:0;bottom:0;z-index:90;width:min(320px,88vw);transform:translateX(105%);transition:.2s}.profile-panel.mobile-open{transform:none}.mobile-panel-button#openProfilePanel{display:block}#closeProfilePanel{display:grid;place-items:center}.messages-overlay.active{display:block}}
 @media(max-width:760px){.messages-page{padding:0}.messages-app{height:calc(100vh - 116px);min-height:520px;grid-template-columns:1fr;border-width:1px 0 0;border-radius:0;box-shadow:none}.conversation-sidebar{position:absolute;left:0;top:0;bottom:0;z-index:90;width:min(340px,92vw);transform:translateX(-105%);transition:.2s}.conversation-sidebar.mobile-open{transform:none}.mobile-panel-button#openConversationList{display:block}#closeConversationList{display:grid;place-items:center}.chat-safety-banner{display:none}.chat-message{max-width:82%}.account-main-navbar nav{display:none}}
+
+/* Stability fixes: hidden empty states must not take layout space. */
+.chat-empty-state[hidden],.message-composer[hidden],.conversation-empty[hidden],[hidden]{display:none!important}
+.messages-app{position:relative}
+.chat-panel{height:100%;min-height:0;overflow:hidden}
+.chat-messages{overscroll-behavior:contain}
+.message-composer{position:relative;z-index:4;flex:0 0 auto}
+.send-message-button[aria-busy="true"]::after{content:"…";transform:none}
+@media(min-width:761px){#closeConversationList,#closeProfilePanel{display:none}}
