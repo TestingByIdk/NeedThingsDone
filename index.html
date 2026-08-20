@@ -235,5 +235,164 @@
 <script>window.NTD_ASSETS = "assets/images";</script>
 <script src="js/script.js"></script>
 
+<!-- NeedThingsDone Demo Notice -->
+<div id="demoNotice" class="demo-notice-overlay">
+  <div class="demo-notice-modal">
+    <div class="demo-notice-icon">🚧</div>
+
+    <h2>NeedThingsDone is currently a demo</h2>
+
+    <p>
+      NeedThingsDone is still actively being developed. Some features may be
+      unavailable, incomplete, or not work as expected.
+    </p>
+
+    <p>
+      The design, layout, features, and functionality of the site may also
+      change as development continues.
+    </p>
+
+    <p class="demo-notice-small">
+      Thanks for checking out NeedThingsDone while it's being built!
+    </p>
+
+    <button id="demoNoticeAccept">
+      I Understand
+    </button>
+  </div>
+</div>
+
+<style>
+.demo-notice-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  z-index: 999999;
+}
+
+.demo-notice-modal {
+  width: 100%;
+  max-width: 480px;
+
+  background: #ffffff;
+  color: #111111;
+
+  border-radius: 22px;
+  padding: 32px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  animation: demoNoticeIn 0.25s ease;
+}
+
+.demo-notice-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.demo-notice-modal h2 {
+  margin: 0 0 16px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.demo-notice-modal p {
+  margin: 0 0 14px;
+  line-height: 1.55;
+  color: #555;
+  font-size: 15px;
+}
+
+.demo-notice-modal .demo-notice-small {
+  font-size: 14px;
+  color: #777;
+  margin-top: 20px;
+}
+
+#demoNoticeAccept {
+  width: 100%;
+
+  margin-top: 14px;
+  padding: 14px 20px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #111;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+#demoNoticeAccept:hover {
+  opacity: 0.9;
+}
+
+#demoNoticeAccept:active {
+  transform: scale(0.98);
+}
+
+@keyframes demoNoticeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .demo-notice-modal {
+    background: #1c1c1e;
+    color: #fff;
+  }
+
+  .demo-notice-modal p {
+    color: #c7c7cc;
+  }
+
+  .demo-notice-modal .demo-notice-small {
+    color: #8e8e93;
+  }
+
+  #demoNoticeAccept {
+    background: #fff;
+    color: #111;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const notice = document.getElementById("demoNotice");
+  const acceptButton = document.getElementById("demoNoticeAccept");
+
+  acceptButton.addEventListener("click", () => {
+    notice.style.display = "none";
+  });
+});
+</script>
+
 </body>
 </html>
